@@ -23,4 +23,12 @@ public class Narzedzia {
         }
         return tablicaDoSortowania;
     }
+
+    public static int[] wydzielTabliceJednowymiarowaZkolumny(int[][] tablicaDoSortowania, int kolumnaDoSortowania){
+        int [] tablicaZkolumny = new int[tablicaDoSortowania.length];
+        for (int wiersz = 0; wiersz < tablicaDoSortowania.length; wiersz++) {
+               tablicaZkolumny[wiersz] = tablicaDoSortowania[wiersz][kolumnaDoSortowania];
+        }
+        return tablicaZkolumny;
+    }
 }

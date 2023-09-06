@@ -1,15 +1,15 @@
-package podstawy;
+package asystent;
 
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Loteria {
-    public static void main(String[] args) {
+    public static void zagrajWloterie() {
         int[] tablica = podawanieLiczb();
         int[] wylosowaneLiczby1 = wylosujLiczby();
 
-        System.out.println(Arrays.toString(wylosowaneLiczby1));
+        System.out.println("Wylosowane liczby to: " + Arrays.toString(wylosowaneLiczby1));
         int trafioneLiczby = policzTrafione(tablica, wylosowaneLiczby1);
         policzNagrode(trafioneLiczby);
 
@@ -30,14 +30,14 @@ public class Loteria {
             }
 
             boolean powtorka = czyPowtorka(tablicaLiczb, podanaLiczba);
-            System.out.println(powtorka);
+         //   System.out.println(powtorka);
             if (powtorka){
                 i--;
                 continue;
             }
             tablicaLiczb[i] = podanaLiczba;
         }
-        System.out.println(Arrays.toString(tablicaLiczb));
+        System.out.println("Twoje liczby to: " + Arrays.toString(tablicaLiczb));
         scanner.close();
         return tablicaLiczb;
     }
