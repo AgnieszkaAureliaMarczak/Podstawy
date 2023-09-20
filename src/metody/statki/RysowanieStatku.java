@@ -91,23 +91,7 @@ public class RysowanieStatku {
         return Statki.planszaUzytkownika[wierszIndex][kolumnaIndex] != STATEK;
     }
 
-    static boolean sprawdzCzyMasztNiePrzylegaDoInnegoStatku(int wierszMasztu, int kolumnaMasztu) {
-        for (int wiersz = 0; wiersz < Statki.zbiorWszystkichPoprawnychMasztow.length; wiersz++) {
-            if (wierszMasztu == Statki.zbiorWszystkichPoprawnychMasztow[wiersz][0]) {
-                if (Statki.zbiorWszystkichPoprawnychMasztow[wiersz][1] == kolumnaMasztu + 1 || Statki.zbiorWszystkichPoprawnychMasztow[wiersz][1] == kolumnaMasztu - 1) {
-                    return false;
-                }
-            }
-        }
-        for (int wiersz = 0; wiersz < Statki.zbiorWszystkichPoprawnychMasztow.length; wiersz++) {
-            if (kolumnaMasztu == Statki.zbiorWszystkichPoprawnychMasztow[wiersz][1]) {
-                if (Statki.zbiorWszystkichPoprawnychMasztow[wiersz][0] == wierszMasztu + 1 || Statki.zbiorWszystkichPoprawnychMasztow[wiersz][0] == wierszMasztu - 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+
 
     static boolean sprawdzCzyMasztNiePrzylegaDoInnegoStatku2(int wierszMasztu, int kolumnaMasztu) {
         for (int wiersz = wierszMasztu - 1; wiersz <= wierszMasztu + 1; wiersz++) {

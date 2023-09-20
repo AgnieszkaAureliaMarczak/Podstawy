@@ -1,18 +1,13 @@
 package metody.statki;
 
-import metody.Narzedzia;
-
 public class Statki {
     static String graczPierwszy = "Gracz Pierwszy";
     static String graczDrugi = "Gracz Drugi";
     static String aktualnyGracz = graczPierwszy;
     static char[] zbiorAlfabetyczny = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
     static int[][] planszaUzytkownika = new int[10][10];
-    static int[][] zbiorWszystkichPoprawnychMasztow = new int[20][2];
     static int[][] planszaGraczaPierwszego = new int[10][10];
-    static int[][] zbiorWszystkichPoprawnychMasztowGraczaPierwszego = new int[20][2];
     static int[][] planszaGraczaDrugiego = new int[10][10];
-    static int[][] zbiorWszystkichPoprawnychMasztowGraczaDrugiego = new int[20][2];
     static int liczbaWszystkichMasztow = 20;
     static int liczbaPoprawnieWpisanychMasztow = 0;
     static int wielkoscStatku;
@@ -46,7 +41,6 @@ public class Statki {
                     "że każdy maszt jednego statku musi stykać się z jego kolejnym masztem ścianką boczną \n(nie może łączyć się na ukos)" +
                     " oraz dwa statki nie mogę “dotykać” się żadnym bokiem masztu.\n" +
                     "Zaczynamy grę!");
-            Narzedzia.uzupelnijTabliceDwuwymiarowaLiczba(zbiorWszystkichPoprawnychMasztow, 100);
             uzupelnijPlanszeStatkami();
             if (aktualnyGracz.equals(graczPierwszy)){
                 System.out.println("Twoja plansza jest gotowa. Czas na drugiego gracza.");
@@ -137,7 +131,6 @@ public class Statki {
                 System.out.println("Narysuj statek. Ilosc masztów: " + wielkoscStatku);
                 int[][] wspolrzedneStatku = RysowanieStatku.narysujStatek();
                 wpiszStatekDoPlanszy(wspolrzedneStatku);
-                wpiszStatekDoZbioruPoprawnychMasztow(wspolrzedneStatku);
                 wydrukujPlansze();
             }
             wielkoscStatku--;
@@ -162,23 +155,5 @@ public class Statki {
         }
     }
 
-    public static void wpiszStatekDoZbioruPoprawnychMasztow(int[][] maszty) {
-        for (int wiersz = 0; wiersz < maszty.length; wiersz++) {
-            for (int kolumna = 0; kolumna < maszty[wiersz].length; kolumna++) {
-                zbiorWszystkichPoprawnychMasztow[liczbaPoprawnieWpisanychMasztow][kolumna] = maszty[wiersz][kolumna];
-            }
-            liczbaPoprawnieWpisanychMasztow++;
-        }
-    }
-
-    static void usunNiepoprawnyStatek(int[][] wspolrzedneStatku) {
-        for (int wiersz = 0; wiersz < wspolrzedneStatku.length; wiersz++) {
-            int[] maszt = wspolrzedneStatku[wiersz];
-            int wierszStatku = maszt[0];
-            int kolumnaStatku = maszt[1];
-            planszaUzytkownika[wierszStatku][kolumnaStatku] = PUSTE;
-        }
-        wydrukujPlansze();
-    }
 
 }
