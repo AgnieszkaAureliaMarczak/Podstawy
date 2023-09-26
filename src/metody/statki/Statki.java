@@ -1,15 +1,8 @@
 package metody.statki;
 
 public class Statki {
-    static String graczPierwszy = "Gracz Pierwszy";
-    static String graczDrugi = "Gracz Drugi";
-    static String aktualnyGracz = graczPierwszy;
+
     static char[] zbiorAlfabetyczny = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    static int[][] planszaUzytkownika = new int[10][10];
-    static int[][] planszaGraczaPierwszego = new int[10][10];
-    static int[][] planszaGraczaDrugiego = new int[10][10];
-    static int liczbaWszystkichMasztow = 20;
-    static int liczbaPoprawnieWpisanychMasztow = 0;
     static int wielkoscStatku;
     public static final int PUSTE = 0;
     public static final int STATEK = 1;
@@ -22,42 +15,59 @@ public class Statki {
     public static final char PUDLO_SYMBOL = '*';
     public static final char ROBOCZY_STATEK_SYMBOL = '\u2713';
 
-
     public static void main(String[] args) {
-//        char letter = 'A';
-//        letter++;
-//        System.out.println(letter);
         przygotujObiePlanszeDoGry();
         System.out.println("Zaczynamy gre!");
-        pobierzRuchGracza();
+        do {
+            System.out.println(Gracze.dajNazweAktualnegoGracza() + " twój ruch.");
+                wydrukujPlanszePrzeciwnika();
+            int[] ruchGracza = pobierzRuchGracza();
+            int wierszStatku = ruchGracza[0];
+            int kolumnaStatku = ruchGracza[1];
+            if (sprawdzCzyTrafionyMaszt(ruchGracza)) {
+                Gracze.wpiszSymbolWpolePrzeciwnika(wierszStatku, kolumnaStatku, TRAFIONY);
+                    if (czyCalyStatekTrafiony(wierszStatku, kolumnaStatku,'X')){
+                        System.out.println("Trafiony - zatopiony!");
+                    } else {
+                        System.out.println("Trafiony!");
+                    }
+                if (!Gracze.sprawdzCzyZostalyStatkiDoTrafienia()){
+                    Gracze.wyswietlJesliCzlowiek("Koniec gry! Wygrałeś. Gratulacje!");
+                    Gracze.wyswietlJesliKomputer("Koniec gry! Wygrał " + Gracze.dajNazweAktualnegoGracza());
+                    return;
+                }
+                wydrukujPlanszePrzeciwnika();
+            } else {
+                Gracze.wpiszSymbolWpolePrzeciwnika(wierszStatku, kolumnaStatku, PUDLO);
+                System.out.println("Pudło!");
+                wydrukujPlanszePrzeciwnika();
+            }
+            Gracze.zmienGracza();
+        } while (Gracze.sprawdzCzyZostalyStatkiDoTrafienia());
     }
 
-    static void przygotujObiePlanszeDoGry(){
+    static void przygotujObiePlanszeDoGry() {
         for (int i = 0; i < 2; i++) {
-            System.out.println(aktualnyGracz + ", witaj w grze w statki!\nOto twoja plansza:");
-            wydrukujPlansze();
-            System.out.println("Narysuj swoje statki.\nDo dyspozycji masz:\n- 1 czteromasztowiec\n- 2 trzymasztowce " +
+            Gracze.wyswietlJesliCzlowiek(Gracze.dajNazweAktualnegoGracza() + ", witaj w grze w statki!\nOto twoja plansza:");
+            if (Gracze.czyTuraCzlowieka()) {
+                wydrukujPlansze();
+            }
+            Gracze.wyswietlJesliCzlowiek("Narysuj swoje statki.\nDo dyspozycji masz:\n- 1 czteromasztowiec\n- 2 trzymasztowce " +
                     "\n- 3 dwumasztowce\n- 4 jednomasztowce\nStatki możesz dowolnie ustawić, obrócić i wygiąć z zachowaniem zasady,\n" +
                     "że każdy maszt jednego statku musi stykać się z jego kolejnym masztem ścianką boczną \n(nie może łączyć się na ukos)" +
                     " oraz dwa statki nie mogę “dotykać” się żadnym bokiem masztu.\n" +
                     "Zaczynamy grę!");
-            uzupelnijPlanszeStatkami();
-            if (aktualnyGracz.equals(graczPierwszy)){
-                System.out.println("Twoja plansza jest gotowa. Czas na drugiego gracza.");
+            if (Gracze.czyTuraKomputera()) {
+                uzupelnijPlanszeStatkami();
+            }else{
+                Gracze.uzupelnijPlanszeCzlowiekaDoTestow();
             }
-            aktualnyGracz = aktualnyGracz.equals(graczPierwszy) ? graczDrugi : graczPierwszy;
+            Gracze.wyswietlJesliCzlowiek("Twoja plansza jest gotowa. Czas na drugiego gracza.");
+            Gracze.zmienGracza();
         }
     }
 
-    static int[] pobierzRuchGracza(){
-        int[] pobranyRuch = new int[2];
-        System.out.println(aktualnyGracz + " twój ruch.");
-        int kolumnaMasztu = RysowanieStatku.ustalKolumne();
-        pobranyRuch[1] = kolumnaMasztu;
-        int wierszMasztu = RysowanieStatku.ustalWiersz();
-        pobranyRuch[0] = wierszMasztu;
-        return pobranyRuch;
-    }
+
 
     static void wydrukujPlansze() {
         System.out.print("\t");
@@ -72,7 +82,7 @@ public class Statki {
                 System.out.print(wiersz + "| ");
             }
             for (int kolumna = 1; kolumna < 11; kolumna++) {
-                int pole = planszaUzytkownika[wiersz - 1][kolumna - 1];
+                int pole = Gracze.dajWartoscZpolaAktualnegoGracza(wiersz - 1, kolumna - 1);
                 char poleSymbol = switch (pole) {
                     case PUSTE -> PUSTE_SYMBOL;
                     case STATEK -> STATEK_SYMBOL;
@@ -106,7 +116,7 @@ public class Statki {
                     }
                 }
                 if (pole != ROBOCZY_STATEK) {
-                    pole = planszaUzytkownika[wiersz - 1][kolumna - 1];
+                    pole = Gracze.dajWartoscZpolaAktualnegoGracza(wiersz - 1, kolumna - 1);
                 }
                 char poleSymbol = switch (pole) {
                     case PUSTE -> PUSTE_SYMBOL;
@@ -128,7 +138,7 @@ public class Statki {
         do {
             iloscTakichSamychStatkow = ustalIloscTakichSamychStatkow();
             for (int nrStatku = 0; nrStatku < iloscTakichSamychStatkow; nrStatku++) {
-                System.out.println("Narysuj statek. Ilosc masztów: " + wielkoscStatku);
+                Gracze.wyswietlJesliCzlowiek("Narysuj statek. Ilosc masztów: " + wielkoscStatku);
                 int[][] wspolrzedneStatku = RysowanieStatku.narysujStatek();
                 wpiszStatekDoPlanszy(wspolrzedneStatku);
                 wydrukujPlansze();
@@ -151,9 +161,129 @@ public class Statki {
         for (int maszt = 0; maszt < wspolrzedneStatku.length; maszt++) {
             int wierszMasztu = wspolrzedneStatku[maszt][0];
             int kolumnaMasztu = wspolrzedneStatku[maszt][1];
-            Statki.planszaUzytkownika[wierszMasztu][kolumnaMasztu] = Statki.STATEK;
+            Gracze.wpiszStatekWpole(wierszMasztu, kolumnaMasztu);
         }
     }
 
+    static int[] pobierzRuchGracza() {
+        int[] maszt = RysowanieStatku.dajWierszIkolumneMasztu();
+        int wierszStatku = maszt[0];
+        int kolumnaStatku = maszt[1];
+        if (Gracze.czyTuraCzlowieka()) {
+            if (!RysowanieStatku.czyWplanszy(wierszStatku, kolumnaStatku)) {
+                System.out.println("Podane pole jest poza planszą. Spróbuj jeszcze raz.");
+                return pobierzRuchGracza();
+            }
+        }
+        if (sprawdzCzyPowtorkaRuchu(maszt)) {
+            Gracze.wyswietlJesliCzlowiek("Podane pole już było strzelane. Spróbuj jeszcze raz.");
+            return pobierzRuchGracza();
+        }
+        return maszt;
+    }
+
+    static boolean sprawdzCzyPowtorkaRuchu(int[] pobranyRuch) {
+        int wierszStatku = pobranyRuch[0];
+        int kolumnaStatku = pobranyRuch[1];
+        return (Gracze.dajWartoscZpolaPrzeciwnika(wierszStatku, kolumnaStatku) == TRAFIONY) || (Gracze.dajWartoscZpolaPrzeciwnika(wierszStatku, kolumnaStatku) == PUDLO);
+    }
+
+    static boolean sprawdzCzyTrafionyMaszt(int[] pobranyRuch) {
+        int wierszStatku = pobranyRuch[0];
+        int kolumnaStatku = pobranyRuch[1];
+        return Gracze.dajWartoscZpolaPrzeciwnika(wierszStatku, kolumnaStatku) == STATEK;
+    }
+
+    static void wydrukujPlanszePrzeciwnika() {
+        System.out.print("\t");
+        for (int i = 0; i < zbiorAlfabetyczny.length; i++) {
+            System.out.print(zbiorAlfabetyczny[i] + " | ");
+        }
+        System.out.println();
+        for (int wiersz = 1; wiersz < 11; wiersz++) {
+            if (wiersz <= 9) {
+                System.out.print("0" + wiersz + "| ");
+            } else {
+                System.out.print(wiersz + "| ");
+            }
+            for (int kolumna = 1; kolumna < 11; kolumna++) {
+                int pole = Gracze.dajWartoscZpolaPrzeciwnika(wiersz - 1, kolumna - 1);
+                char poleSymbol = switch (pole) {
+                    case PUSTE, STATEK -> PUSTE_SYMBOL;
+                    case TRAFIONY -> TRAFIONY_SYMBOL;
+                    case PUDLO -> PUDLO_SYMBOL;
+                    default -> 0;
+                };
+                System.out.print(poleSymbol + " | ");
+            }
+            System.out.println();
+        }
+    }
+
+    static boolean sprawdzCzyCalyStatekTrafiony(int wierszMasztu, int kolumnaMasztu) {
+        for (int wiersz = wierszMasztu - 1; wiersz <= wierszMasztu + 1; wiersz++) {
+            for (int kolumna = kolumnaMasztu - 1; kolumna <= kolumnaMasztu + 1; kolumna++) {
+                if (((wiersz == wierszMasztu - 1) || (wiersz == wierszMasztu + 1)) && ((kolumna == kolumnaMasztu - 1) || (kolumna == kolumnaMasztu + 1))) {
+                    continue;
+                }
+                if (wiersz < 0 || wiersz >= Gracze.dajWielkoscAktualnejPlanszy() || kolumna < 0 || kolumna >= Gracze.dajWielkoscAktualnejPlanszy()) {
+                    continue;
+                }
+                if (Gracze.dajWartoscZpolaPrzeciwnika(wiersz, kolumna) == STATEK) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static boolean czyCalyStatekTrafiony(int wierszMasztu, int kolumnaMasztu, char strona){
+        if (Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu) == STATEK) {
+           return false;
+        }
+
+
+        int sasiad1 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu-1, kolumnaMasztu);
+        boolean result = true;
+        if (strona == 'N') {
+            sasiad1 = PUDLO;
+        }
+        if (sasiad1!= PUDLO && sasiad1 != PUSTE) { //&& nie wychodze poza mape
+          result = result &&  czyCalyStatekTrafiony(wierszMasztu-1, kolumnaMasztu, 'S');
+        }
+
+        int sasiad2 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu+1);
+        if (strona == 'E') {
+            sasiad2 = PUDLO;
+        }
+        if (sasiad2!= PUDLO && sasiad2 != PUSTE) { //&& nie wychodze poza mape
+            result = result &&  czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu+1, 'W');
+        }
+
+        int sasiad3 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu+1, kolumnaMasztu);
+        if (strona == 'S') {
+            sasiad3 = PUDLO;
+        }
+        if (sasiad3!= PUDLO && sasiad3 != PUSTE) { //&& nie wychodze poza mape
+            result = result &&  czyCalyStatekTrafiony(wierszMasztu+1, kolumnaMasztu, 'N');
+        }
+
+        int sasiad4 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu-1);
+        if (strona == 'W') {
+            sasiad4 = PUDLO;
+        }
+        if (sasiad4!= PUDLO && sasiad4 != PUSTE) { //&& nie wychodze poza mape
+            result = result &&  czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu-1, 'E');
+        }
+        return result;
+    }
+
+    private int[] dajSasiadow(int wierszMasztu, int kolumnaMasztu){
+        int[] sasiedzi = new int[4];
+        sasiedzi[0] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu - 1, kolumnaMasztu);
+        sasiedzi[1] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu , kolumnaMasztu+1);
+        sasiedzi[2] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu + 1, kolumnaMasztu);
+        sasiedzi[3] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu-1);
+        return sasiedzi;
+    }
 
 }

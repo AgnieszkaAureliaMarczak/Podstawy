@@ -5,7 +5,7 @@ import java.util.Random;
 public class Testy4 {
     static char[][] planszaUzytkownika = new char[10][10];
     public static void main(String[] args) {
-        System.out.println('\u25A9');
+
     }
     static int[][] narysujStatek() {
         int[][] maszty = new int[4][2];
