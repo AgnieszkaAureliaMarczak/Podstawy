@@ -64,7 +64,7 @@ public class RysowanieStatku {
     }
 
     static int[] dajWierszIkolumneMasztu() {
-        int[]maszt = new int[2];
+        int[] maszt = new int[2];
         if (Gracze.czyTuraCzlowieka()) {
             maszt[1] = Gracze.ustalKolumneJesliCzlowiek();
             maszt[0] = Gracze.ustalWierszJesliCzlowiek();

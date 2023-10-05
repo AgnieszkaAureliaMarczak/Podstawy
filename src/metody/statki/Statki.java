@@ -1,5 +1,7 @@
 package metody.statki;
 
+import java.util.Scanner;
+
 public class Statki {
 
     static char[] zbiorAlfabetyczny = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
@@ -19,28 +21,39 @@ public class Statki {
         przygotujObiePlanszeDoGry();
         System.out.println("Zaczynamy gre!");
         do {
+            System.out.println(" ");
             System.out.println(Gracze.dajNazweAktualnegoGracza() + " twój ruch.");
-                wydrukujPlanszePrzeciwnika();
+            wydrukujPlanszePrzeciwnika();
             int[] ruchGracza = pobierzRuchGracza();
             int wierszStatku = ruchGracza[0];
             int kolumnaStatku = ruchGracza[1];
             if (sprawdzCzyTrafionyMaszt(ruchGracza)) {
                 Gracze.wpiszSymbolWpolePrzeciwnika(wierszStatku, kolumnaStatku, TRAFIONY);
-                    if (czyCalyStatekTrafiony(wierszStatku, kolumnaStatku,'X')){
-                        System.out.println("Trafiony - zatopiony!");
-                    } else {
-                        System.out.println("Trafiony!");
-                    }
+                if (czyCalyStatekTrafiony(wierszStatku, kolumnaStatku, 'X')) {
+                    System.out.println("Trafiony - zatopiony!");
+                } else {
+                    System.out.println("Trafiony!");
+                }
                 if (!Gracze.sprawdzCzyZostalyStatkiDoTrafienia()){
                     Gracze.wyswietlJesliCzlowiek("Koniec gry! Wygrałeś. Gratulacje!");
                     Gracze.wyswietlJesliKomputer("Koniec gry! Wygrał " + Gracze.dajNazweAktualnegoGracza());
                     return;
                 }
                 wydrukujPlanszePrzeciwnika();
+                if (Gracze.czyTuraCzlowieka()) {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Wciśnij \"Enter\", żeby kontynuować grę.");
+                    sc.nextLine();
+                }
             } else {
                 Gracze.wpiszSymbolWpolePrzeciwnika(wierszStatku, kolumnaStatku, PUDLO);
                 System.out.println("Pudło!");
                 wydrukujPlanszePrzeciwnika();
+                if (Gracze.czyTuraCzlowieka()) {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Wciśnij \"Enter\", żeby kontynuować grę.");
+                    sc.nextLine();
+                }
             }
             Gracze.zmienGracza();
         } while (Gracze.sprawdzCzyZostalyStatkiDoTrafienia());
@@ -57,17 +70,21 @@ public class Statki {
                     "że każdy maszt jednego statku musi stykać się z jego kolejnym masztem ścianką boczną \n(nie może łączyć się na ukos)" +
                     " oraz dwa statki nie mogę “dotykać” się żadnym bokiem masztu.\n" +
                     "Zaczynamy grę!");
-            if (Gracze.czyTuraKomputera()) {
+            /*if (Gracze.czyTuraKomputera()) {
                 uzupelnijPlanszeStatkami();
-            }else{
+            } else {
                 Gracze.uzupelnijPlanszeCzlowiekaDoTestow();
+            }*/
+            uzupelnijPlanszeStatkami();
+            if (Gracze.czyTuraCzlowieka()) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Twoja plansza jest gotowa. Czas na drugiego gracza.");
+                System.out.println("Wciśnij \"Enter\", żeby kontynuować grę.");
+                sc.nextLine();
             }
-            Gracze.wyswietlJesliCzlowiek("Twoja plansza jest gotowa. Czas na drugiego gracza.");
             Gracze.zmienGracza();
         }
     }
-
-
 
     static void wydrukujPlansze() {
         System.out.print("\t");
@@ -236,54 +253,60 @@ public class Statki {
         }
         return true;
     }
-    public static boolean czyCalyStatekTrafiony(int wierszMasztu, int kolumnaMasztu, char strona){
+
+    public static boolean czyCalyStatekTrafiony(int wierszMasztu, int kolumnaMasztu, char strona) {
         if (Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu) == STATEK) {
-           return false;
+            return false;
         }
-
-
-        int sasiad1 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu-1, kolumnaMasztu);
         boolean result = true;
-        if (strona == 'N') {
-            sasiad1 = PUDLO;
-        }
-        if (sasiad1!= PUDLO && sasiad1 != PUSTE) { //&& nie wychodze poza mape
-          result = result &&  czyCalyStatekTrafiony(wierszMasztu-1, kolumnaMasztu, 'S');
+
+        if ((wierszMasztu - 1 >= 0) && (wierszMasztu - 1 < Gracze.dajWielkoscAktualnejPlanszy()) && (kolumnaMasztu >= 0) && (kolumnaMasztu < Gracze.dajWielkoscAktualnejPlanszy())) {
+            int sasiad1 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu - 1, kolumnaMasztu);
+            if (strona == 'N') {
+                sasiad1 = PUDLO;
+            }
+            if ((sasiad1 != PUDLO) && (sasiad1 != PUSTE)) { //&& nie wychodze poza mape
+                result = result && czyCalyStatekTrafiony(wierszMasztu - 1, kolumnaMasztu, 'S');
+            }
         }
 
-        int sasiad2 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu+1);
-        if (strona == 'E') {
-            sasiad2 = PUDLO;
-        }
-        if (sasiad2!= PUDLO && sasiad2 != PUSTE) { //&& nie wychodze poza mape
-            result = result &&  czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu+1, 'W');
-        }
-
-        int sasiad3 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu+1, kolumnaMasztu);
-        if (strona == 'S') {
-            sasiad3 = PUDLO;
-        }
-        if (sasiad3!= PUDLO && sasiad3 != PUSTE) { //&& nie wychodze poza mape
-            result = result &&  czyCalyStatekTrafiony(wierszMasztu+1, kolumnaMasztu, 'N');
+        if ((wierszMasztu >= 0) && (wierszMasztu < Gracze.dajWielkoscAktualnejPlanszy()) && (kolumnaMasztu + 1 >= 0) && (kolumnaMasztu + 1 < Gracze.dajWielkoscAktualnejPlanszy())) {
+            int sasiad2 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu + 1);
+            if (strona == 'E') {
+                sasiad2 = PUDLO;
+            }
+            if ((sasiad2 != PUDLO) && (sasiad2 != PUSTE)) { //&& nie wychodze poza mape
+                result = result && czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu + 1, 'W');
+            }
         }
 
-        int sasiad4 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu-1);
-        if (strona == 'W') {
-            sasiad4 = PUDLO;
+        if ((wierszMasztu + 1 >= 0) && (wierszMasztu + 1 < Gracze.dajWielkoscAktualnejPlanszy()) && (kolumnaMasztu >= 0) && (kolumnaMasztu < Gracze.dajWielkoscAktualnejPlanszy())) {
+            int sasiad3 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu + 1, kolumnaMasztu);
+            if (strona == 'S') {
+                sasiad3 = PUDLO;
+            }
+            if ((sasiad3 != PUDLO) && (sasiad3 != PUSTE)) { //&& nie wychodze poza mape
+                result = result && czyCalyStatekTrafiony(wierszMasztu + 1, kolumnaMasztu, 'N');
+            }
         }
-        if (sasiad4!= PUDLO && sasiad4 != PUSTE) { //&& nie wychodze poza mape
-            result = result &&  czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu-1, 'E');
+        if ((wierszMasztu >= 0) && (wierszMasztu < Gracze.dajWielkoscAktualnejPlanszy()) && (kolumnaMasztu - 1 >= 0) && (kolumnaMasztu - 1 < Gracze.dajWielkoscAktualnejPlanszy())){
+            int sasiad4 = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu - 1);
+            if (strona == 'W') {
+                sasiad4 = PUDLO;
+            }
+            if ((sasiad4 != PUDLO) && (sasiad4 != PUSTE)) { //&& nie wychodze poza mape
+                result = result && czyCalyStatekTrafiony(wierszMasztu, kolumnaMasztu - 1, 'E');
+            }
         }
         return result;
     }
 
-    private int[] dajSasiadow(int wierszMasztu, int kolumnaMasztu){
+    private int[] dajSasiadow(int wierszMasztu, int kolumnaMasztu) {
         int[] sasiedzi = new int[4];
         sasiedzi[0] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu - 1, kolumnaMasztu);
-        sasiedzi[1] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu , kolumnaMasztu+1);
+        sasiedzi[1] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu + 1);
         sasiedzi[2] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu + 1, kolumnaMasztu);
-        sasiedzi[3] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu-1);
+        sasiedzi[3] = Gracze.dajWartoscZpolaPrzeciwnika(wierszMasztu, kolumnaMasztu - 1);
         return sasiedzi;
     }
-
 }
