@@ -21,7 +21,7 @@ public class Statki {
         przygotujObiePlanszeDoGry();
         System.out.println("Zaczynamy gre!");
         do {
-            System.out.println(" ");
+            System.out.println();
             System.out.println(Gracze.dajNazweAktualnegoGracza() + " twój ruch.");
             wydrukujPlanszePrzeciwnika();
             int[] ruchGracza = pobierzRuchGracza();
