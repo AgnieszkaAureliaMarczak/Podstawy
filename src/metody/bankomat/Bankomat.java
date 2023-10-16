@@ -14,13 +14,33 @@ public class Bankomat {
                 "4. Français");
         Scanner scanner = new Scanner(System.in);
         numerJezyka = scanner.nextInt();
-        System.out.println(numerJezyka);
-        System.out.println("Włóż kartę.");
-        System.out.println("Podaj PIN");
-        int podanyPin = scanner.nextInt();
-        System.out.println(podanyPin);
+        String[] tablicaKomunikatow = switch (numerJezyka) {
+            case 1 -> Polski.polskieKomunikaty;
+            case 2 -> Angielski.angielskieKomunikaty;
+            case 3 -> Niemiecki.niemieckieKomunikaty;
+            case 4 -> Francuski.francuskieKomunikaty;
+            default -> Polski.polskieKomunikaty;
+        };
+        System.out.println(tablicaKomunikatow[0]);
+        System.out.println("____");
+        int iloscNiepoprawnychProbPin = 0;
+        int podanyPin;
+        do {
+            podanyPin = scanner.nextInt();
+            if (podanyPin != dajPinUzytkownika()) {
+                iloscNiepoprawnychProbPin++;
+                if (iloscNiepoprawnychProbPin == 3){
+                    System.out.println(tablicaKomunikatow[2]);
+                    break;
+                }
+                System.out.println(tablicaKomunikatow[1]);
+                System.out.println("____");
+            }
+        } while (podanyPin != dajPinUzytkownika());
+
     }
-    static int dajPinUzytkownika(){
+
+    static int dajPinUzytkownika() {
         return pinUzytkownika;
     }
 }

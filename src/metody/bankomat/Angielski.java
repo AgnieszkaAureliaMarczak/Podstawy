@@ -1,7 +1,6 @@
 package metody.bankomat;
 
 public class Angielski {
-    static void pobierzPreferencje(){
-        System.out.println("");
-    }
+    public static String[] angielskieKomunikaty = {"Insert Card and Enter PIN"};
+
 }
