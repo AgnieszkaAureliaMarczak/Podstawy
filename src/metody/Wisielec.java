@@ -7,18 +7,36 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Wisielec {
-    static String[] polscyAktorzyIAktorki = {
-            "Andrzej Grabowski", "Janusz Gajos", "Anna Przybylska", "Franciszek Pieczka", "Pola Negri", "Borys Szyc", "Joanna Kulig", "Jan Englert", "Joanna Koroniewska",
-            "Anita Sokołowska", "Katarzyna Figura", "Anna Dereszowska", "Małgorzata Kożuchowska", "Adrianna Biedrzyńska", "Barbara Brylska", "Wacław Kowalski", "Artur Żmijewski", "Adam Fidusiewicz",
-            "Jerzy Cnota", "Mieczysław Hryniewicz"};
-    static String[] geografiaSwiata = {"Mauna Kea", "Morze Żółte", "Morze Arafura", "Ramla Bay", "Sognefjorden", "Nanga Parbat", "Orinoko", "Zambezi", "Rzeka Świętego Wawrzyńca",
-            "Rio de Janeiro", "Belo Horizonte", "Kuala Lumpur", "Ponta Delgada", "Dolina Śmierci", "Góry Brooksa", "Cieśnina Maltańska", "Góry Kaledońskie", "Zatoka Botnicka",
-            "Wielka Nizina Węgierska", "Góry Kantabryjskie"};
-    static String[] jedzenie = {"Śledź pod pierzynką", "Sałatka jarzynowa", "Gulasz segedyński", "Ratatouille", "Grzyby marynowane", "Czeburek", "Pierogi ruskie",
-            "Zupa z dyni", "Ciasto drożdżowe", "Omlet biszkoptowy", "Sznycel wiedeński", "Mizeria", "Placek zbójnicki", "Placki ziemniaczane", "Jajka po benedyktyńsku",
-            "Potrawka z królika", "Kiszka ziemniaczana", "Zupa mleczna", "Wodzianka", "Barszcz ukraiński"};
-    static String[] zwierzeta = {};
-    static String[] rosliny = {};
+    static String[] polscyAktorzyIAktorki =
+            {"Andrzej Grabowski", "Janusz Gajos", "Anna Przybylska", "Franciszek Pieczka",
+                    "Pola Negri", "Borys Szyc", "Joanna Kulig", "Jan Englert",
+                    "Joanna Koroniewska", "Anita Sokołowska", "Katarzyna Figura", "Anna Dereszowska",
+                    "Małgorzata Kożuchowska", "Adrianna Biedrzyńska", "Barbara Brylska", "Wacław Kowalski",
+                    "Artur Żmijewski", "Adam Fidusiewicz", "Jerzy Cnota", "Mieczysław Hryniewicz"};
+    static String[] geografiaSwiata =
+            {"Mauna Kea", "Morze Żółte", "Morze Arafura", "Ramla Bay",
+                    "Sognefjorden", "Nanga Parbat", "Orinoko", "Zambezi",
+                    "Rzeka Świętego Wawrzyńca", "Rio de Janeiro", "Belo Horizonte", "Kuala Lumpur",
+                    "Ponta Delgada", "Dolina Śmierci", "Góry Brooksa", "Cieśnina Maltańska",
+                    "Góry Kaledońskie", "Zatoka Botnicka", "Wielka Nizina Węgierska", "Góry Kantabryjskie"};
+    static String[] jedzenie =
+            {"Śledź pod pierzynką", "Sałatka jarzynowa", "Gulasz segedyński", "Ratatouille",
+                    "Grzyby marynowane", "Czeburek", "Pierogi ruskie", "Zupa z dyni",
+                    "Ciasto drożdżowe", "Omlet biszkoptowy", "Sznycel wiedeński", "Mizeria",
+                    "Placek zbójnicki", "Placki ziemniaczane", "Jajka po benedyktyńsku", "Potrawka z królika",
+                    "Kiszka ziemniaczana", "Zupa mleczna", "Wodzianka", "Barszcz ukraiński"};
+    static String[] zwierzeta =
+            {"Zając szarak", "Mysz domowa", "Morświn", "Norka amerykańska",
+                    "Jeleń szlachetny", "Tchórz stepowy", "Mewa kanadyjska", "Koliberek czarnobrody",
+                    "Sikora dwubarwna", "Wrona meksykańska", "Goryl górski", "Hipopotam nilowy",
+                    "Słoń afrykański", "Wydra europejska", "Zebra sawannowa", "Dingo australijski ",
+                    "Wombat tasmański", "Kangur rdzawoszyi", "Dziobak australijski", "Mrówkożer workowaty"};
+    static String[] rosliny =
+            {"Buk pospolity", "Daglezja zielona", "Klon jawor", "Lipa szerokolistna",
+                    "Modrzew europejski", "Robinia akacjowa", "Sosna wejmutka", "Topola osika",
+                    "Wiąz szypułkowy", "Wierzba biała", "Dziewanna fioletowa", "Fiołek ogrodowy",
+                    "Goździk majowy", "Malwa różowa", "Niezapominajka", "Szałwia błyszcząca",
+                    "Begonia królewska", "Filodendron", "Różanecznik indyjski", "Lubczyk ogrodowy"};
     static char[] wylosowaneHaslo;
     static char[] hasloDoOperacji;
     static int iloscNietrafionychProb = 0;
@@ -27,17 +45,17 @@ public class Wisielec {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-       // czytajHasla();
-      //  System.exit(0);
-        przygotujGre();
-      //  zagraj();
 
-     //   System.out.println("Koniec gry.");
+        czytajHasla();
+        System.exit(0);
+        przygotujGre();
+        zagraj();
+        System.out.println("Koniec gry.");
     }
 
     static String[] czytajHasla() {
         try {
-            Scanner skanowanie = new Scanner(new File("hasla.txt"));
+            Scanner skanowanie = new Scanner(new File("aktorzy.txt"));
             while (skanowanie.hasNextLine()) {
                 String hasla = skanowanie.nextLine();
                 System.out.println(hasla);
@@ -47,13 +65,11 @@ public class Wisielec {
         }
         return null;
     }
-
+    
     static void przygotujGre() {
         przygotujTabliceWisielca();
-        System.out.println("Witaj w grze w wisielca!\nZgadnij hasło. Kategoria: Polscy Aktorzy i Aktorki.\nPowodzenia!");
-        System.out.println();
+        wyswietlPowitanie();
         przygotujHaslo();
-        System.out.println(zakodujHaslo());
     }
 
     static void przygotujTabliceWisielca() {
@@ -68,23 +84,46 @@ public class Wisielec {
         Arrays.fill(tablicaWisielca[tablicaWisielca.length - 1], '—');
     }
 
+    static void wyswietlPowitanie() {
+        System.out.println("Witaj w grze w wisielca!\nWybierz kategorię:\n" +
+                "1. Polscy Aktorzy i Aktorki\n" +
+                "2. Geografia Świata\n" +
+                "3. Jedzenie\n" +
+                "4. Zwierzęta\n" +
+                "5. Rośliny\n" +
+                "Wpisz liczbę od 1 do 5.");
+    }
+
     static void przygotujHaslo() {
-        String haslo = losujHaslo();
-        wylosowaneHaslo = haslo.toCharArray();
+        String[] wybranaKategoria = wybierzKategorie();
+        scanner.nextLine();
+        String haslo = losujHaslo(wybranaKategoria);
+        System.out.println(haslo);
+        wylosowaneHaslo = haslo.toLowerCase().toCharArray();
         hasloDoOperacji = new char[wylosowaneHaslo.length];
         wypelnijRoboczeHasloPodkreslnikami();
     }
 
-    static String losujHaslo() {
+    static String[] wybierzKategorie() {
+        int kategoria = scanner.nextInt();
+        return switch (kategoria) {
+            case 1 -> polscyAktorzyIAktorki;
+            case 2 -> geografiaSwiata;
+            case 3 -> jedzenie;
+            case 4 -> zwierzeta;
+            case 5 -> rosliny;
+            default -> new String[0];
+        };
+    }
+
+    static String losujHaslo(String[] kategoria) {
         Random losowanie = new Random();
         int pozycjaHasla = losowanie.nextInt(20);
-        String haslo = polscyAktorzyIAktorki[pozycjaHasla];
-        return haslo.toUpperCase();
+        return kategoria[pozycjaHasla];
     }
 
     static void wypelnijRoboczeHasloPodkreslnikami() {
         for (int i = 0; i < wylosowaneHaslo.length; i++) {
-
            /* hasloDoOperacji[i] = wylosowaneHaslo[i];
             if (wylosowaneHaslo[i] != ' ' && wylosowaneHaslo[i] != '-') {
                 hasloDoOperacji[i] = '_';
@@ -125,23 +164,41 @@ public class Wisielec {
 
     static void wyswietlHasloDoZgadywania() {
         for (char litera : hasloDoOperacji) {
-            System.out.print(litera);
+            System.out.print(Character.toUpperCase(litera));
         }
         System.out.println();
         System.out.println();
     }
 
     static char podajLitere() {
-        System.out.println("Podaj literę (użyj drukowanych liter):");
+        System.out.println("Podaj literę:");
         String podanaLitera = scanner.nextLine();
         return podanaLitera.charAt(0);
     }
 
+    static boolean sprawdzCzyPoprawnaLitera(char podanaLitera) {
+        for (int i = 0; i < wylosowaneHaslo.length; i++) {
+            if (wylosowaneHaslo[i] == podanaLitera) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     static boolean zareagujNaTrafienieUzytkownika(char litera) {
         wpiszPodanaLitere(litera);
+        System.out.println();
         wyswietlHasloDoZgadywania();
         //System.out.println(zakodujHaslo());
         return zgadnijHaslo();
+    }
+
+    static void wpiszPodanaLitere(char podanaLitera) {
+        for (int i = 0; i < wylosowaneHaslo.length; i++) {
+            if (wylosowaneHaslo[i] == podanaLitera) {
+                hasloDoOperacji[i] = podanaLitera;
+            }
+        }
     }
 
     static boolean zgadnijHaslo() {
@@ -161,23 +218,6 @@ public class Wisielec {
         wyswietlTabliceWisielca();
     }
 
-    static boolean sprawdzCzyPoprawnaLitera(char podanaLitera) {
-        for (int i = 0; i < wylosowaneHaslo.length; i++) {
-            if (wylosowaneHaslo[i] == podanaLitera) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static void wpiszPodanaLitere(char podanaLitera) {
-        for (int i = 0; i < wylosowaneHaslo.length; i++) {
-            if (wylosowaneHaslo[i] == podanaLitera) {
-                hasloDoOperacji[i] = podanaLitera;
-            }
-        }
-    }
-
     static boolean czyHasloOdgadniete() {
         for (int i = 0; i < hasloDoOperacji.length; i++) {
             if (hasloDoOperacji[i] == '_') {
@@ -189,7 +229,7 @@ public class Wisielec {
 
     static void wyswietlHaslo() {
         for (char litera : wylosowaneHaslo) {
-            System.out.print(litera);
+            System.out.print(Character.toUpperCase(litera));
         }
         System.out.println();
         System.out.println();
