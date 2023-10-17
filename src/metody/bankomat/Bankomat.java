@@ -97,11 +97,11 @@ public class Bankomat {
         if (operacjaCzyExit == 1) {
             wybierzOperacje();
         } else if (operacjaCzyExit == 2) {
-            System.out.println(tablicaKomunikatow[5]);
+            System.out.println(tablicaKomunikatow[5]);// odbierz karte
             System.exit(0);
         } else {
             System.out.println(tablicaKomunikatow[6]);
-            System.exit(0);
+            System.exit(0);//niepoprawna wartosc
         }
     }
 }

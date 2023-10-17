@@ -13,6 +13,22 @@ public class Polski {
             "Nie wybrano operacji.\nWciśnij 1, żeby powrócić do wyboru operacji lub 2, żeby zakończyć program.",//4
             "Odbierz kartę",//5
             "Podano niepoprawną wartość. Program zakończy się. Odbierz kartę.", //6
+            "Twoje saldo wynosi: ",//7
+            "Wybierz kwotę, podając liczbę od 1 do 6:\n" +
+                    "1. 20\n" +
+                    "2. 50\n" +
+                    "3. 100\n" +
+                    "4. 150\n" +
+                    "5. 200\n" +
+                    "6. Inna kwota",//8
+            "Brak wystarczających środków na koncie. Co chcesz teraz zrobić?\n" +
+                    "1. Wybierz inną kwotę\n" +
+                    "2. Sprawdź saldo\n" +
+                    "3. Zakończ",//9
+            "Maksymalny dzienny limit wypłat to ",//10
+            "Co chcesz teraz zrobić?\n" +
+                    "1. Wybierz inną kwotę\n" +
+                    "2. Zakończ",//11
     };
 }
 
