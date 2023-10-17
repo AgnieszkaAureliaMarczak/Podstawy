@@ -5,7 +5,7 @@ public class Francuski {
             "Le code PIN saisi est incorrect. Saisissez à nouveau votre code PIN.", //1
             "Le code PIN a été mal saisi 3 fois. La carte a été bloquée.\n" +
                     "Récupérez la carte et contactez votre banque pour la débloquer.",//2
-    "Que veux-tu faire? Sélectionnez l'une des options suivantes en saisissant un nombre de 1 à 4 :\n" +
+    "Sélectionnez l'une des options suivantes en saisissant un nombre de 1 à 4 :\n" +
             "1. Retrait d'espèces\n" +
             "2. Retrait sans contact\n" +
             "3. Retrait BLIK\n" +
