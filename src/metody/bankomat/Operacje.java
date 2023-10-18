@@ -18,29 +18,51 @@ public class Operacje {
         int wybranaKwota = scanner.nextInt();
         if (wybranaKwota > dajSaldo()) {
             System.out.println(Bankomat.tablicaKomunikatow[9]);//brak srodkow
-            int coDalej = scanner.nextInt();
-            switch (coDalej) {
-                case 1 -> wyplacGotowke();
-                case 2 -> sprawdzSaldo();
-                case 3 -> System.exit(0);
-                default -> System.out.println(Bankomat.tablicaKomunikatow[6]);//niepoprawna wartosc - koniec programu
-            }
+            pobierzReakcjeNaPrzekroczenieSalda();
         } else if (wybranaKwota > dajDziennyLimitWyplat()) {
             System.out.println(Bankomat.tablicaKomunikatow[10] + dajDziennyLimitWyplat()); // dzienny limit
-            System.out.println(Bankomat.tablicaKomunikatow[11]);//co dalej
-            int coDalej = scanner.nextInt();
-            switch (coDalej) {
-                case 1 -> wyplacGotowke();
-                case 2 -> System.exit(0);
-                default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
-            }
+            pobierzReakcjeNaPrzekroczenieLimitu();
         } else if (wybranaKwota > dostepnaKwota) {
+            System.out.println(Bankomat.tablicaKomunikatow[12] + dostepnaKwota);// dostepna kwota
+            pobierzReakcjeNaPrzekroczenieLimitu();
+        }
 
+    }
+
+    static void pobierzReakcjeNaPrzekroczenieSalda() {
+        int coDalej = scanner.nextInt();
+        switch (coDalej) {
+            case 1 -> wyplacGotowke();
+            case 2 -> {
+                sprawdzSaldo();
+                pobierzReakcjePoSprawdzeniuSalda();
+            }
+            case 3 -> System.exit(0);
+            default -> System.out.println(Bankomat.tablicaKomunikatow[6]);//niepoprawna wartosc - koniec programu
         }
     }
 
-    static int dajDziennyLimitWyplat() {
-        return maksymalnyLimitWyplat;
+    static void sprawdzSaldo() {
+        System.out.println(Bankomat.tablicaKomunikatow[7] + dajSaldo());//saldo wynosi
+    }
+
+    static int dajSaldo() {
+        return saldo;
+    }
+
+    static void pobierzReakcjePoSprawdzeniuSalda() {
+        System.out.println(Bankomat.tablicaKomunikatow[13]); //co dalej
+        int coDalej = scanner.nextInt();
+        switch (coDalej) {
+            case 1 -> wyplacGotowke();
+            case 2 -> wyplacZblizeniowo();
+            case 3 -> wyplacBlikiem();
+            case 4 -> {
+                System.out.println(Bankomat.tablicaKomunikatow[5]);
+                System.exit(0);
+            }
+            default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
+        }
     }
 
     static void wyplacZblizeniowo() {
@@ -51,11 +73,30 @@ public class Operacje {
 
     }
 
-    static void sprawdzSaldo() {
-        System.out.println(Bankomat.tablicaKomunikatow[7] + dajSaldo());//saldo wynosi
+    static int dajDziennyLimitWyplat() {
+        return maksymalnyLimitWyplat;
     }
 
-    static int dajSaldo() {
-        return saldo;
+    static void pobierzReakcjeNaPrzekroczenieLimitu() {
+        System.out.println(Bankomat.tablicaKomunikatow[11]);//co dalej
+        int coDalej = scanner.nextInt();
+        switch (coDalej) {
+            case 1 -> {
+                System.out.println(Bankomat.tablicaKomunikatow[13]);
+                int dalaszaReakcja = scanner.nextInt();
+                switch (dalaszaReakcja) {
+                    case 1 -> wyplacGotowke();
+                    case 2 -> wyplacZblizeniowo();
+                    case 3 -> wyplacBlikiem();
+                    case 4 -> {
+                        System.out.println(Bankomat.tablicaKomunikatow[14]);
+                        System.exit(0);
+                    }
+                    default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
+                }
+            }
+            case 2 -> System.exit(0);
+            default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
+        }
     }
 }

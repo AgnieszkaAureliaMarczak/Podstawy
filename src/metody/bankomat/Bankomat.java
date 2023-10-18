@@ -41,10 +41,7 @@ public class Bankomat {
     static void zweryfikujPinUzytkownika() {
         wyswietlProsbeOPin();
         boolean poprawnyPin = sprawdzPinUzytkownika();
-        if (!poprawnyPin) {
-            System.out.println(tablicaKomunikatow[2]);// blokada karty
-            System.exit(0);
-        }
+        wyswietlKomunikatOBlokadzieKarty(poprawnyPin);
     }
 
     static void wyswietlProsbeOPin() {
@@ -79,6 +76,13 @@ public class Bankomat {
         return pinUzytkownika;
     }
 
+    static void wyswietlKomunikatOBlokadzieKarty(boolean poprawnyPin){
+        if (!poprawnyPin) {
+            System.out.println(tablicaKomunikatow[2]);// blokada karty
+            System.exit(0);
+        }
+    }
+
     static void wybierzOperacje() {
         System.out.println(tablicaKomunikatow[3]); // wybor operacji
         int wyborOperacji = scanner.nextInt();
@@ -86,7 +90,10 @@ public class Bankomat {
             case 1 -> Operacje.wyplacGotowke();
             case 2 -> Operacje.wyplacZblizeniowo();
             case 3 -> Operacje.wyplacBlikiem();
-            case 4 -> Operacje.sprawdzSaldo();
+            case 4 -> {
+                Operacje.sprawdzSaldo();
+                Operacje.pobierzReakcjePoSprawdzeniuSalda();
+            }
             default -> zareagujNaNiewlasciwyWyborOperacji();
         }
     }

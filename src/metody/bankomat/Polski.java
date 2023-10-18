@@ -26,9 +26,15 @@ public class Polski {
                     "2. Sprawdź saldo\n" +
                     "3. Zakończ",//9
             "Maksymalny dzienny limit wypłat to ",//10
-            "Co chcesz teraz zrobić?\n" +
+            "Wybierz jedną z ponizszych opcji:\n" +
                     "1. Wybierz inną kwotę\n" +
                     "2. Zakończ",//11
+            "Dostępna kwota wypłaty to ",//12
+            "Wybierz jedną z ponizszych opcji:\n" +
+                    "1. Wypłata gotówki\n" +
+                    "2. Wypłata zbliżeniowa\n" +
+                    "3. Wypłata BLIK\n" +
+                    "4. Zakończ", //13
     };
 }
 

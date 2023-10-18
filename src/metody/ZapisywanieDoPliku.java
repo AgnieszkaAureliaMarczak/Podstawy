@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -42,8 +43,8 @@ public class ZapisywanieDoPliku {
                     "Begonia królewska", "Filodendron", "Różanecznik indyjski", "Lubczyk ogrodowy"};
 
     public static void main(String[] args) {
-       // czytajHaslaZpliku();
-       // System.out.println(Arrays.toString(aktorzy));
+        czytajHaslaZpliku();
+        System.out.println(Arrays.toString(aktorzy));
         String nazwaPliku = "PUSTE_aktorzy.csv";
         wpiszHaslaDoPliku(nazwaPliku);
     }
@@ -82,6 +83,7 @@ public class ZapisywanieDoPliku {
             fileWriter = new FileWriter(nazwaPliku);
             for (int i = 0; i < polscyAktorzyIAktorki.length; i++) {
                 fileWriter.write(polscyAktorzyIAktorki[i]);
+                System.out.println();
             }
             fileWriter.close();
         } catch (IOException e) {
