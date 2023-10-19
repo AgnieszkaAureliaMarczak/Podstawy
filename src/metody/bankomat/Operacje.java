@@ -4,29 +4,49 @@ import java.util.Scanner;
 
 public class Operacje {
 
-    private static int saldo = 3500;
-    private static int maksymalnyLimitWyplat = 5000;
-    static int iloscBankntow20zl = 200;//4tys
+    private static int saldoUzytkownika = 3500;
+    private static int maksymalnyLimitWyplat = 3000;
+    static int iloscBanknotow20zl = 200;//4tys
     static int iloscBanknotow50zl = 200;//10 tys
     static int iloscBanknotow100zl = 100; //10 tys
     static int iloscBanknotow200zl = 30; //6tys
-    static int dostepnaKwota = iloscBankntow20zl + iloscBanknotow50zl + iloscBanknotow100zl + iloscBanknotow200zl;
+    static int dostepnaKwota = iloscBanknotow20zl + iloscBanknotow50zl + iloscBanknotow100zl + iloscBanknotow200zl;
     static Scanner scanner = new Scanner(System.in);
 
     static void wyplacGotowke() {
         System.out.println(Bankomat.tablicaKomunikatow[8]);//wybor kwoty
         int wybranaKwota = scanner.nextInt();
+        zareagujGdyZaDuzaKwota(wybranaKwota);
+        /*switch (wybranaKwota) {
+            case 1 -> {
+                if (iloscBanknotow20zl > 0){
+                    iloscBanknotow20zl-=1;
+                    System.out.println(Bankomat.tablicaKomunikatow[14]); //wyplata + koniec
+                    System.exit(0);
+                } else if (iloscBanknotow50zl > 0){
+
+                }
+            }
+            case 2 ->
+            case 3 ->
+            case 4 ->
+            case 5 ->
+            case 6 ->
+            default ->
+        }*/
+    }
+
+    static void zareagujGdyZaDuzaKwota(int wybranaKwota) {
         if (wybranaKwota > dajSaldo()) {
             System.out.println(Bankomat.tablicaKomunikatow[9]);//brak srodkow
-            pobierzReakcjeNaPrzekroczenieSalda();
+            Bankomat.wybierzOperacje();
         } else if (wybranaKwota > dajDziennyLimitWyplat()) {
             System.out.println(Bankomat.tablicaKomunikatow[10] + dajDziennyLimitWyplat()); // dzienny limit
-            pobierzReakcjeNaPrzekroczenieLimitu();
+            Bankomat.wybierzOperacje();
         } else if (wybranaKwota > dostepnaKwota) {
             System.out.println(Bankomat.tablicaKomunikatow[12] + dostepnaKwota);// dostepna kwota
-            pobierzReakcjeNaPrzekroczenieLimitu();
+            Bankomat.wybierzOperacje();
         }
-
     }
 
     static void pobierzReakcjeNaPrzekroczenieSalda() {
@@ -37,7 +57,7 @@ public class Operacje {
                 sprawdzSaldo();
                 pobierzReakcjePoSprawdzeniuSalda();
             }
-            case 3 -> System.exit(0);
+            case 3 -> Bankomat.zakoncz();
             default -> System.out.println(Bankomat.tablicaKomunikatow[6]);//niepoprawna wartosc - koniec programu
         }
     }
@@ -47,7 +67,7 @@ public class Operacje {
     }
 
     static int dajSaldo() {
-        return saldo;
+        return saldoUzytkownika;
     }
 
     static void pobierzReakcjePoSprawdzeniuSalda() {
@@ -57,10 +77,7 @@ public class Operacje {
             case 1 -> wyplacGotowke();
             case 2 -> wyplacZblizeniowo();
             case 3 -> wyplacBlikiem();
-            case 4 -> {
-                System.out.println(Bankomat.tablicaKomunikatow[5]);
-                System.exit(0);
-            }
+            case 4 -> Bankomat.zakoncz();
             default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
         }
     }
@@ -88,14 +105,11 @@ public class Operacje {
                     case 1 -> wyplacGotowke();
                     case 2 -> wyplacZblizeniowo();
                     case 3 -> wyplacBlikiem();
-                    case 4 -> {
-                        System.out.println(Bankomat.tablicaKomunikatow[14]);
-                        System.exit(0);
-                    }
+                    case 4 -> Bankomat.zakoncz();
                     default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
                 }
             }
-            case 2 -> System.exit(0);
+            case 2 -> Bankomat.zakoncz();
             default -> System.out.println(Bankomat.tablicaKomunikatow[6]);
         }
     }

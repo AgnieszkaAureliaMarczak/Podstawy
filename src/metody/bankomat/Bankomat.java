@@ -10,7 +10,7 @@ public class Bankomat {
 
     public static void main(String[] args) {
         przygotujBankomatDoObslugi();
-        zweryfikujPinUzytkownika();
+        wykonajOperacjeZwiazaneZpinem();
         wybierzOperacje();
     }
 
@@ -31,17 +31,17 @@ public class Bankomat {
         numerJezyka = scanner.nextInt();
         return tablicaKomunikatow = switch (numerJezyka) {
             case 1 -> Polski.polskieKomunikaty;
-            case 2 -> Angielski.angielskieKomunikaty;
+            case 2 -> Angielski.englishMessages;
             case 3 -> Niemiecki.niemieckieKomunikaty;
             case 4 -> Francuski.francuskieKomunikaty;
             default -> Polski.polskieKomunikaty;
         };
     }
 
-    static void zweryfikujPinUzytkownika() {
+    static void wykonajOperacjeZwiazaneZpinem() {
         wyswietlProsbeOPin();
-        boolean poprawnyPin = sprawdzPinUzytkownika();
-        wyswietlKomunikatOBlokadzieKarty(poprawnyPin);
+        boolean poprawnyPin = pobierzIsprawdzPinUzytkownika();
+        zareagujNaNiewlasciwyPin(poprawnyPin);
     }
 
     static void wyswietlProsbeOPin() {
@@ -49,13 +49,13 @@ public class Bankomat {
         System.out.println("____");
     }
 
-    static boolean sprawdzPinUzytkownika() {
+    static boolean pobierzIsprawdzPinUzytkownika() {
         boolean czyPoprawnyPin = true;
         int podanyPin;
         int iloscNiepoprawnychProbPin = 0;
         do {
             podanyPin = pobierzPinOdUzytkownika();
-            if (podanyPin != dajPoprawnyPinUzytkownika()) {
+            if (podanyPin != pinUzytkownika) {
                 iloscNiepoprawnychProbPin++;
                 if (iloscNiepoprawnychProbPin == 3) {
                     czyPoprawnyPin = false;
@@ -64,7 +64,7 @@ public class Bankomat {
                 System.out.println(tablicaKomunikatow[1]); // niepoprawny PIN
                 System.out.println("____");
             }
-        } while (podanyPin != dajPoprawnyPinUzytkownika());
+        } while (podanyPin != pinUzytkownika);
         return czyPoprawnyPin;
     }
 
@@ -72,11 +72,7 @@ public class Bankomat {
         return scanner.nextInt();
     }
 
-    static int dajPoprawnyPinUzytkownika() {
-        return pinUzytkownika;
-    }
-
-    static void wyswietlKomunikatOBlokadzieKarty(boolean poprawnyPin){
+    static void zareagujNaNiewlasciwyPin(boolean poprawnyPin) {
         if (!poprawnyPin) {
             System.out.println(tablicaKomunikatow[2]);// blokada karty
             System.exit(0);
@@ -84,18 +80,18 @@ public class Bankomat {
     }
 
     static void wybierzOperacje() {
-        System.out.println(tablicaKomunikatow[3]); // wybor operacji
-        int wyborOperacji = scanner.nextInt();
-        switch (wyborOperacji) {
-            case 1 -> Operacje.wyplacGotowke();
-            case 2 -> Operacje.wyplacZblizeniowo();
-            case 3 -> Operacje.wyplacBlikiem();
-            case 4 -> {
-                Operacje.sprawdzSaldo();
-                Operacje.pobierzReakcjePoSprawdzeniuSalda();
+        do {
+            System.out.println(tablicaKomunikatow[3]); // wybor operacji
+            int wyborOperacji = scanner.nextInt();
+            switch (wyborOperacji) {
+                case 1 -> Operacje.wyplacGotowke();
+                case 2 -> Operacje.wyplacZblizeniowo();
+                case 3 -> Operacje.wyplacBlikiem();
+                case 4 -> Operacje.sprawdzSaldo();
+                case 5 -> zakoncz();
+                default -> zareagujNaNiewlasciwyWyborOperacji();
             }
-            default -> zareagujNaNiewlasciwyWyborOperacji();
-        }
+        } while (true);
     }
 
     static void zareagujNaNiewlasciwyWyborOperacji() {
@@ -104,11 +100,15 @@ public class Bankomat {
         if (operacjaCzyExit == 1) {
             wybierzOperacje();
         } else if (operacjaCzyExit == 2) {
-            System.out.println(tablicaKomunikatow[5]);// odbierz karte
-            System.exit(0);
+            zakoncz();
         } else {
             System.out.println(tablicaKomunikatow[6]);
             System.exit(0);//niepoprawna wartosc
         }
+    }
+
+    static void zakoncz() {
+        System.out.println(tablicaKomunikatow[5]);
+        System.exit(0);
     }
 }

@@ -40,10 +40,9 @@ public class ZapisywanieDoPliku {
 
     public static void main(String[] args) {
         //czytajHaslaZpliku();
-        czytajHasla();
-        /*System.out.println(Arrays.toString(aktorzy));
+       // czytajHasla();
         String nazwaPliku = "PUSTE_aktorzy.csv";
-        wpiszHaslaDoPliku(nazwaPliku);*/
+        wpiszHaslaDoPliku(nazwaPliku);
     }
 
     static String[] czytajHasla() {
