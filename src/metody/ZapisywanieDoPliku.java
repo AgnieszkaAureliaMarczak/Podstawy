@@ -1,10 +1,6 @@
 package metody;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -43,18 +39,21 @@ public class ZapisywanieDoPliku {
                     "Begonia królewska", "Filodendron", "Różanecznik indyjski", "Lubczyk ogrodowy"};
 
     public static void main(String[] args) {
-        czytajHaslaZpliku();
-        System.out.println(Arrays.toString(aktorzy));
+        //czytajHaslaZpliku();
+        czytajHasla();
+        /*System.out.println(Arrays.toString(aktorzy));
         String nazwaPliku = "PUSTE_aktorzy.csv";
-        wpiszHaslaDoPliku(nazwaPliku);
+        wpiszHaslaDoPliku(nazwaPliku);*/
     }
 
     static String[] czytajHasla() {
         try {
-            Scanner skanowanie = new Scanner(new File("aktorzy.txt"));
+            Scanner skanowanie = new Scanner(new File("aktorzy.csv"));
             while (skanowanie.hasNextLine()) {
-                String hasla = skanowanie.nextLine();
-                System.out.println(hasla);
+                String line = skanowanie.nextLine();
+                String[] elements = line.split(",");
+                System.out.println(elements[0]);
+                System.out.println(elements[1]);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");
@@ -64,7 +63,7 @@ public class ZapisywanieDoPliku {
 
     static void czytajHaslaZpliku() {
         try {
-            Pattern znakRozdzielajacy = Pattern.compile(",|\n");
+            Pattern znakRozdzielajacy = Pattern.compile(",\\s");
             Scanner scanner = new Scanner(new File("aktorzy.csv")).useDelimiter(znakRozdzielajacy);
             int pozycjaWtablicy = 0;
             while (scanner.hasNext()) {
@@ -80,12 +79,14 @@ public class ZapisywanieDoPliku {
     static void wpiszHaslaDoPliku(String nazwaPliku) {
         FileWriter fileWriter;
         try {
+            PrintWriter printWriter = new PrintWriter(nazwaPliku);
             fileWriter = new FileWriter(nazwaPliku);
             for (int i = 0; i < polscyAktorzyIAktorki.length; i++) {
-                fileWriter.write(polscyAktorzyIAktorki[i]);
-                System.out.println();
+                fileWriter.write(polscyAktorzyIAktorki[i] + "\n");
+                printWriter.println(polscyAktorzyIAktorki[i]);
             }
             fileWriter.close();
+            printWriter.close();
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
         }

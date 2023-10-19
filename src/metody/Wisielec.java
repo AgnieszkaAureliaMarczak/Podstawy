@@ -37,6 +37,8 @@ public class Wisielec {
                     "Wiąz szypułkowy", "Wierzba biała", "Dziewanna fioletowa", "Fiołek ogrodowy",
                     "Goździk majowy", "Malwa różowa", "Niezapominajka", "Szałwia błyszcząca",
                     "Begonia królewska", "Filodendron", "Różanecznik indyjski", "Lubczyk ogrodowy"};
+    static String[][] kategorie = {polscyAktorzyIAktorki,geografiaSwiata,jedzenie,zwierzeta,rosliny};
+    static String [] haslaZpliku = new String[20];
     static char[] wylosowaneHaslo;
     static char[] hasloDoOperacji;
     static int iloscNietrafionychProb = 0;
@@ -47,6 +49,7 @@ public class Wisielec {
     public static void main(String[] args) {
 
         czytajHasla();
+        System.out.println(Arrays.toString(haslaZpliku));
         System.exit(0);
         przygotujGre();
         zagraj();
@@ -55,10 +58,13 @@ public class Wisielec {
 
     static String[] czytajHasla() {
         try {
-            Scanner skanowanie = new Scanner(new File("aktorzy.txt"));
+            Scanner skanowanie = new Scanner(new File("aktorzy.csv"));
+            int pozycjaWtablicy = 0;
             while (skanowanie.hasNextLine()) {
-                String hasla = skanowanie.nextLine();
-                System.out.println(hasla);
+                String line = skanowanie.nextLine();
+                String haslo = line.substring(0,line.length()-1);
+                haslaZpliku[pozycjaWtablicy] = haslo;
+                pozycjaWtablicy++;
             }
         } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");
@@ -106,14 +112,19 @@ public class Wisielec {
 
     static String[] wybierzKategorie() {
         int kategoria = scanner.nextInt();
-        return switch (kategoria) {
+        if (kategoria < 0 || kategoria >= kategorie.length) {
+            System.out.println("Podaj max " + kategorie.length);
+            return wybierzKategorie();
+        }
+        return kategorie[kategoria - 1];
+       /* return switch (kategoria) {
             case 1 -> polscyAktorzyIAktorki;
             case 2 -> geografiaSwiata;
             case 3 -> jedzenie;
             case 4 -> zwierzeta;
             case 5 -> rosliny;
             default -> new String[0];
-        };
+        };*/
     }
 
     static String losujHaslo(String[] kategoria) {
