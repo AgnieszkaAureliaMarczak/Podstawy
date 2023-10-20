@@ -14,30 +14,24 @@ public class Polski {
                     "5. Zakończ",//3
             "Nie wybrano operacji.\nWciśnij 1, żeby powrócić do wyboru operacji lub 2, żeby zakończyć program.",//4
             "Odbierz kartę",//5
-            "Podano niepoprawną wartość. Program zakończy się. Odbierz kartę.", //6<<<<<<<<<<<
+            "Wypłacam:" ,//6
             "Twoje saldo wynosi: ",//7
-            "Wybierz kwotę, podając liczbę od 1 do 6:\n" +
-                    "1. 20\n" +
-                    "2. 50\n" +
-                    "3. 100\n" +
-                    "4. 150\n" +
-                    "5. 200\n" +
-                    "6. Inna kwota",//8
+            "Wybierz kwotę:\n" +
+                    "20\n" +
+                    "50\n" +
+                    "100\n" +
+                    "150\n" +
+                    "200\n" +
+                    "Inna kwota (podaj kwotę)",//8
             "Brak wystarczających środków na koncie.",//9
             "Maksymalny dzienny limit wypłat to ",//10
-            "Wybierz jedną z ponizszych opcji:\n" +
-                    "1. Wybierz inną kwotę\n" +
-                    "2. Zakończ",//11<<<<<<<<<<<<<<<<<<<
+            "Czy wydrukować potwierdzenie?\n" +
+                    "1. Tak\n" +
+                    "2. Nie",//11
             "Dostępna kwota wypłaty to ",//12
-            "Wybierz jedną z ponizszych opcji:\n" +
-                    "1. Wypłata gotówki\n" +
-                    "2. Wypłata zbliżeniowa\n" +
-                    "3. Wypłata BLIK\n" +
-                    "4. Zakończ", //13<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            "Drukuję potwierdzenie transakcji", //13
             "Odbierz kartę i gotówkę.",//14
-            "Nie można wypłacić danej kwoty.\n" +
-                    "Dostępne kwoty:\n" +
-                    "1. ",
+            "Nie można wypłacić danej kwoty.",//15
     };
 }
 
