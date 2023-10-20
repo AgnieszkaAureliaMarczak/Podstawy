@@ -28,64 +28,33 @@ public class Operacje {
             }
             case 50 -> {
                 if (iloscBanknotow50zl > 0) {
-                    iloscBanknotow50zl -= 1;
-                    wyplacIzakoncz();
+                    wykonajEtapyWyplaty(wybranaKwota);
                 } else {
                     zareagujNaBrakMozliwosciWyplaty();
                 }
             }
             case 100 -> {
-                if (iloscBanknotow100zl > 0) {
-                    iloscBanknotow100zl -= 1;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow50zl > 1) {
-                    iloscBanknotow50zl -= 2;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow20zl > 4) {
-                    iloscBanknotow20zl -= 5;
-                    wyplacIzakoncz();
+                if (iloscBanknotow100zl > 0 || iloscBanknotow50zl > 1 || iloscBanknotow20zl > 4) {
+                    wykonajEtapyWyplaty(wybranaKwota);
                 } else {
                     zareagujNaBrakMozliwosciWyplaty();
                 }
             }
             case 150 -> {
-                if (iloscBanknotow100zl > 0 && iloscBanknotow50zl > 0) {
-                    iloscBanknotow100zl -= 1;
-                    iloscBanknotow50zl -= 1;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow50zl > 2) {
-                    iloscBanknotow50zl -= 3;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow20zl > 4 && iloscBanknotow50zl > 0) {
-                    iloscBanknotow20zl -= 5;
-                    iloscBanknotow50zl -= 1;
-                    wyplacIzakoncz();
+                if ((iloscBanknotow100zl > 0 && iloscBanknotow50zl > 0) || (iloscBanknotow50zl > 2) ||
+                        (iloscBanknotow20zl > 4 && iloscBanknotow50zl > 0)) {
+                    wykonajEtapyWyplaty(wybranaKwota);
                 } else {
                     zareagujNaBrakMozliwosciWyplaty();
                 }
             }
             case 200 -> {
-                if (iloscBanknotow200zl > 0) {
-                    iloscBanknotow200zl -= 1;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow100zl > 1) {
-                    iloscBanknotow100zl -= 2;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow100zl == 1 && iloscBanknotow50zl > 1) {
-                    iloscBanknotow100zl -= 1;
-                    iloscBanknotow50zl -= 2;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow100zl == 1 && iloscBanknotow20zl > 4) {
-                    iloscBanknotow100zl -= 1;
-                    iloscBanknotow20zl -= 5;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow50zl > 3) {
-                    iloscBanknotow50zl -= 4;
-                    wyplacIzakoncz();
-                } else if (iloscBanknotow20zl > 4) {
-                    iloscBanknotow50zl -= 2;
-                    iloscBanknotow20zl -= 5;
-                    wyplacIzakoncz();
+                if ((iloscBanknotow200zl > 0) || (iloscBanknotow100zl > 1) ||
+                        (iloscBanknotow100zl == 1 && iloscBanknotow50zl > 1) ||
+                        (iloscBanknotow100zl == 1 && iloscBanknotow20zl > 4) ||
+                        (iloscBanknotow50zl > 3) || (iloscBanknotow50zl == 2 && iloscBanknotow20zl > 4) ||
+                        (iloscBanknotow20zl > 9)) {
+                    wykonajEtapyWyplaty(wybranaKwota);
                 } else {
                     zareagujNaBrakMozliwosciWyplaty();
                 }
@@ -107,23 +76,62 @@ public class Operacje {
         }
     }
 
-    static void wykonajEtapyWyplaty(int wybranaKwota){
-        wykonajOperacjeNaBanknotach(wybranaKwota);
-        ustalCzyWydrukowacPotwierdzenie();
-        wyplacIzakoncz();
-    }
-    static void wykonajOperacjeNaBanknotach(int wybranaKwota){
+    static void wykonajEtapyWyplaty(int wybranaKwota) {
         ustalIloscBanknotowDoWyplacenia(wybranaKwota);
         zmniejszIloscPrzechowywanychBanknotowDoWyplaty();
         wyswietlIloscWyplacanychBanknotow();
+        ustalCzyWydrukowacPotwierdzenie();
+        wyplacIzakoncz();
     }
+
 
     static void ustalIloscBanknotowDoWyplacenia(int wybranaKwota) {
         switch (wybranaKwota) {
             case 20 -> iloscBanknotowDoWyplacenia[0] = 1;
-
+            case 50 -> iloscBanknotowDoWyplacenia[1] = 1;
+            case 100 -> {
+                if (iloscBanknotow100zl > 0) {
+                    iloscBanknotowDoWyplacenia[2] = 1;
+                } else if (iloscBanknotow50zl > 1) {
+                    iloscBanknotowDoWyplacenia[1] = 2;
+                } else if (iloscBanknotow20zl > 4) {
+                    iloscBanknotowDoWyplacenia[0] = 5;
+                }
+            }
+            case 150 -> {
+                if (iloscBanknotow100zl > 0 && iloscBanknotow50zl > 0) {
+                    iloscBanknotowDoWyplacenia[2] = 1;
+                    iloscBanknotowDoWyplacenia[1] = 1;
+                } else if (iloscBanknotow50zl > 2) {
+                    iloscBanknotowDoWyplacenia[1] = 3;
+                } else if (iloscBanknotow20zl > 4 && iloscBanknotow50zl > 0) {
+                    iloscBanknotowDoWyplacenia[0] = 5;
+                    iloscBanknotowDoWyplacenia[1] = 1;
+                }
+            }
+            case 200 -> {
+                if (iloscBanknotow200zl > 0) {
+                    iloscBanknotowDoWyplacenia[3] = 1;
+                } else if (iloscBanknotow100zl > 1) {
+                    iloscBanknotowDoWyplacenia[2] = 2;
+                } else if (iloscBanknotow100zl == 1 && iloscBanknotow50zl > 1) {
+                    iloscBanknotowDoWyplacenia[2] = 1;
+                    iloscBanknotowDoWyplacenia[1] = 2;
+                } else if (iloscBanknotow100zl == 1 && iloscBanknotow20zl > 4) {
+                    iloscBanknotowDoWyplacenia[2] = 1;
+                    iloscBanknotowDoWyplacenia[0] = 5;
+                } else if (iloscBanknotow50zl > 3) {
+                    iloscBanknotowDoWyplacenia[1] = 4;
+                } else if (iloscBanknotow50zl == 2 && iloscBanknotow20zl > 4) {
+                    iloscBanknotowDoWyplacenia[1] = 2;
+                    iloscBanknotowDoWyplacenia[0] = 5;
+                } else if (iloscBanknotow20zl > 9) {
+                    iloscBanknotowDoWyplacenia[0] = 10;
+                }
+            }
         }
     }
+
 
     static void zmniejszIloscPrzechowywanychBanknotowDoWyplaty() {
         iloscBanknotow20zl -= iloscBanknotowDoWyplacenia[0];
@@ -137,7 +145,7 @@ public class Operacje {
         System.out.println(iloscBanknotowDoWyplacenia[0] + " x 20PLN\n" +
                 iloscBanknotowDoWyplacenia[1] + " x 50PLN\n" +
                 iloscBanknotowDoWyplacenia[2] + " x 100PLN\n" +
-                iloscBanknotowDoWyplacenia[3] + " x 200PLN"); //wyswietlenie ilosci wyplacanych banknotow
+                iloscBanknotowDoWyplacenia[3] + " x 200PLN");
     }
 
     static void ustalCzyWydrukowacPotwierdzenie() {
@@ -179,4 +187,5 @@ public class Operacje {
     static int dajDziennyLimitWyplat() {
         return maksymalnyLimitWyplat;
     }
+
 }
