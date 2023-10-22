@@ -32,6 +32,7 @@ public class Polski {
             "Drukuję potwierdzenie transakcji", //13
             "Odbierz kartę i gotówkę.",//14
             "Nie można wypłacić danej kwoty.",//15
+    "Podana kwota nie jest wielkrotnością 20 lub 50.",//16
     };
 }
 

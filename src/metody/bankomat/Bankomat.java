@@ -15,6 +15,7 @@ public class Bankomat {
     }
 
     static void przygotujBankomatDoObslugi() {
+        Operacje.uzupelnijIloscPrzechowywanychBanknotow();
         wyswietlJezykiDoWyboru();
         tablicaKomunikatow = ustalJezykWyswietlania();
     }
