@@ -55,7 +55,7 @@ public class Bankomat {
         int podanyPin;
         int iloscNiepoprawnychProbPin = 0;
         do {
-            podanyPin = pobierzPinOdUzytkownika();
+            podanyPin = pobierzKodOdUzytkownika();
             if (podanyPin != pinUzytkownika) {
                 iloscNiepoprawnychProbPin++;
                 if (iloscNiepoprawnychProbPin == 3) {
@@ -69,7 +69,7 @@ public class Bankomat {
         return czyPoprawnyPin;
     }
 
-    static int pobierzPinOdUzytkownika() {
+    static int pobierzKodOdUzytkownika() {
         return scanner.nextInt();
     }
 
@@ -86,10 +86,9 @@ public class Bankomat {
             int wyborOperacji = scanner.nextInt();
             switch (wyborOperacji) {
                 case 1 -> Operacje.wyplacGotowke();
-                case 2 -> Operacje.wyplacZblizeniowo();
-                case 3 -> Operacje.wyplacBlikiem();
-                case 4 -> Operacje.sprawdzSaldo();
-                case 5 -> zakoncz();
+                case 2 -> Operacje.wyplacBlikiem();
+                case 3 -> Operacje.sprawdzSaldo();
+                case 4 -> zakoncz();
                 default -> zareagujNaNiewlasciwyWyborOperacji();
             }
         } while (true);

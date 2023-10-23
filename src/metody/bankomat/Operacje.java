@@ -85,7 +85,7 @@ public class Operacje {
             }
             case 100 -> {
                 return czySaBanknotyDla100();
-                }
+            }
             default -> {
                 return czySaBanknotyDlaPozostalejKwoty(wybranaKwota);
             }
@@ -100,7 +100,7 @@ public class Operacje {
         return iloscPrzechowywanychBanknotow[1] > 0;
     }
 
-    static boolean czySaBanknotyDla100(){
+    static boolean czySaBanknotyDla100() {
         return iloscPrzechowywanychBanknotow[2] > 0 || iloscPrzechowywanychBanknotow[1] > 1 ||
                 iloscPrzechowywanychBanknotow[0] > 4;
     }
@@ -138,7 +138,6 @@ public class Operacje {
         }
         return czySaBanknoty;
     }
-
 
     static void wykonajEtapyWyplaty(int wybranaKwota) {
         ustalIloscBanknotowDoWyplacenia(wybranaKwota);
@@ -237,13 +236,35 @@ public class Operacje {
         Bankomat.wybierzIwykonajOperacje();
     }
 
-
-    static void wyplacZblizeniowo() {
-
+    static void wyplacBlikiem() {
+        poprosOkodBlik();
+        Bankomat.pobierzKodOdUzytkownika();
+        wyplacGotowkeBlikiem();
     }
 
-    static void wyplacBlikiem() {
+    static void poprosOkodBlik(){
+        System.out.println(Bankomat.tablicaKomunikatow[16]);//podaj kod blik
+    }
 
+    static void wyplacGotowkeBlikiem() {
+        wyswietlWyborKwoty();
+        int wybranaKwota = pobierzKwoteOdUzytkownika();
+        zareagujGdyZaDuzaKwota(wybranaKwota);
+        zareagujGdyKwotaNiepodzielnaPrzez50lub20(wybranaKwota);
+        boolean czyDostepneBanknoty = sprawdzCzySaDostepneBanknotyDoWyplaty(wybranaKwota);
+        if (czyDostepneBanknoty) {
+            zatwierdzWyplateWaplikacji();
+            wykonajEtapyWyplaty(wybranaKwota);
+        } else {
+            zareagujNaBrakMozliwosciWyplaty();
+        }
+    }
+
+    static void zatwierdzWyplateWaplikacji() {
+        System.out.println(Bankomat.tablicaKomunikatow[17]); //zatwierdz w aplikacji
+        System.out.println(Bankomat.tablicaKomunikatow[18]); //wcisnij enter
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     static void sprawdzSaldo() {
