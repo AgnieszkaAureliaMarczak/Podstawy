@@ -32,7 +32,7 @@ public class Bankomat {
         numerJezyka = scanner.nextInt();
         return tablicaKomunikatow = switch (numerJezyka) {
             case 1 -> Polski.polskieKomunikaty;
-            case 2 -> Angielski.englishMessages;
+            case 2 -> Angielski.angielskieKomunikaty;
             case 3 -> Niemiecki.niemieckieKomunikaty;
             case 4 -> Francuski.francuskieKomunikaty;
             default -> Polski.polskieKomunikaty;

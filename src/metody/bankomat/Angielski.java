@@ -1,7 +1,7 @@
 package metody.bankomat;
 
 public class Angielski {
-    public static String[] englishMessages = {
+    public static String[] angielskieKomunikaty = {
             "Insert card and enter  PIN", //0
             "Entered PIN is incorrect. Please re-enter PIN.",//1
             "Incorrect PIN entered 3 times. The card has been blocked.\n" +
