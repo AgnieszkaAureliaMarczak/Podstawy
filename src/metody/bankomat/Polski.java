@@ -22,7 +22,7 @@ public class Polski {
                     "100\n" +
                     "150\n" +
                     "200\n" +
-                    "Inna kwota (podaj kwotę - wielokrotność 20 lub 50)",//8
+                    "Inna kwota",//8
             "Brak wystarczających środków na koncie.",//9
             "Maksymalny dzienny limit wypłat to ",//10
             "Czy wydrukować potwierdzenie?\n" +
@@ -31,8 +31,8 @@ public class Polski {
             "Dostępna kwota wypłaty to ",//12
             "Drukuję potwierdzenie transakcji", //13
             "Odbierz kartę i gotówkę.",//14
-            "Nie można wypłacić danej kwoty.",//15
-    "Podana kwota nie jest wielkrotnością 20 lub 50.",//16
+            "Nie można wypłacić danej kwoty."//15
+    //16
     };
 }
 

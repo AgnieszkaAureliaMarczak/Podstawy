@@ -11,7 +11,7 @@ public class Bankomat {
     public static void main(String[] args) {
         przygotujBankomatDoObslugi();
         wykonajOperacjeZwiazaneZpinem();
-        wybierzOperacje();
+        wybierzIwykonajOperacje();
     }
 
     static void przygotujBankomatDoObslugi() {
@@ -80,7 +80,7 @@ public class Bankomat {
         }
     }
 
-    static void wybierzOperacje() {
+    static void wybierzIwykonajOperacje() {
         do {
             System.out.println(tablicaKomunikatow[3]); // wybor operacji
             int wyborOperacji = scanner.nextInt();
@@ -99,7 +99,7 @@ public class Bankomat {
         System.out.println(tablicaKomunikatow[4]);// nie wybrano operacji
         int operacjaCzyExit = scanner.nextInt();
         if (operacjaCzyExit == 1) {
-            wybierzOperacje();
+            wybierzIwykonajOperacje();
         } else if (operacjaCzyExit == 2) {
             zakoncz();
         } else {

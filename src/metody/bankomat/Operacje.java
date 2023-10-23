@@ -7,8 +7,8 @@ public class Operacje {
     private static int saldoUzytkownika = 3500;
     private static int maksymalnyLimitWyplat = 3000;
     static int iloscBanknotow20zl = 0;//4tys
-    static int iloscBanknotow50zl = 5;//10 tys
-    static int iloscBanknotow100zl = 0; //10 tys
+    static int iloscBanknotow50zl = 1;//10 tys
+    static int iloscBanknotow100zl = 100; //10 tys
     static int iloscBanknotow200zl = 30; //6tys
     static int[] iloscPrzechowywanychBanknotow = new int[4];
 
@@ -26,8 +26,8 @@ public class Operacje {
     }
 
     static void wyplacGotowke() {
-        System.out.println(Bankomat.tablicaKomunikatow[8]);//wybor kwoty
-        int wybranaKwota = scanner.nextInt();
+        wyswietlWyborKwoty();
+        int wybranaKwota = pobierzKwoteOdUzytkownika();
         zareagujGdyZaDuzaKwota(wybranaKwota);
         zareagujGdyKwotaNiepodzielnaPrzez50lub20(wybranaKwota);
         boolean czyDostepneBanknoty = sprawdzCzySaDostepneBanknotyDoWyplaty(wybranaKwota);
@@ -38,16 +38,24 @@ public class Operacje {
         }
     }
 
+    static void wyswietlWyborKwoty() {
+        System.out.println(Bankomat.tablicaKomunikatow[8]);//wybor kwoty
+    }
+
+    static int pobierzKwoteOdUzytkownika() {
+        return scanner.nextInt();
+    }
+
     static void zareagujGdyZaDuzaKwota(int wybranaKwota) {
         if (wybranaKwota > dajSaldo()) {
             System.out.println(Bankomat.tablicaKomunikatow[9]);//brak srodkow
-            Bankomat.wybierzOperacje();
+            Bankomat.wybierzIwykonajOperacje();
         } else if (wybranaKwota > dajDziennyLimitWyplat()) {
             System.out.println(Bankomat.tablicaKomunikatow[10] + dajDziennyLimitWyplat()); // dzienny limit
-            Bankomat.wybierzOperacje();
+            Bankomat.wybierzIwykonajOperacje();
         } else if (wybranaKwota > dostepnaKwota) {
             System.out.println(Bankomat.tablicaKomunikatow[12] + dostepnaKwota);// dostepna kwota
-            Bankomat.wybierzOperacje();
+            Bankomat.wybierzIwykonajOperacje();
         }
     }
 
@@ -60,60 +68,73 @@ public class Operacje {
     }
 
     static void zareagujGdyKwotaNiepodzielnaPrzez50lub20(int wybranaKwota) {
-        if ((wybranaKwota % 50 != 0) && (wybranaKwota % 20 != 0) && ((wybranaKwota % 50) % 20 != 0)) {
-            System.out.println(Bankomat.tablicaKomunikatow[16]);
+        if ((wybranaKwota % 50 != 0) && (wybranaKwota % 20 != 0) && ((wybranaKwota % 50) % 20 != 0) &&
+                ((wybranaKwota - 50) % 20 != 0)) {
+            System.out.println(Bankomat.tablicaKomunikatow[15]);
             wyplacGotowke();
         }
     }
 
     static boolean sprawdzCzySaDostepneBanknotyDoWyplaty(int wybranaKwota) {
-        boolean czySaBanknoty = false;
         switch (wybranaKwota) {
             case 20 -> {
-                if (iloscPrzechowywanychBanknotow[0] > 0) {
-                    czySaBanknoty = true;
-                }
+                return czyJest20();
             }
             case 50 -> {
-                if (iloscPrzechowywanychBanknotow[1] > 0) {
-                    czySaBanknoty = true;
-                }
+                return czyJest50();
             }
             case 100 -> {
-                if (iloscPrzechowywanychBanknotow[2] > 0 || iloscPrzechowywanychBanknotow[1] > 1 || iloscPrzechowywanychBanknotow[0] > 4) {
-                    czySaBanknoty = true;
+                return czySaBanknotyDla100();
                 }
-            }
             default -> {
-                if (iloscPrzechowywanychBanknotow[3] >= wybranaKwota / 200) {
-                    wybranaKwota = wybranaKwota % 200;
-                } else if (iloscPrzechowywanychBanknotow[3] < wybranaKwota / 200) {
-                    wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[3] * 200);
-                }
-                if (iloscPrzechowywanychBanknotow[2] >= wybranaKwota / 100) {
-                    wybranaKwota = wybranaKwota % 100;
-                } else if (iloscPrzechowywanychBanknotow[2] < wybranaKwota / 100) {
-                    wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[2] * 100);
-                }
-                if (iloscPrzechowywanychBanknotow[1] >= wybranaKwota / 50) {
-                    int tempKwota = wybranaKwota;
-                    int kwotaWypelniona50 = (tempKwota / 50 - 1) * 50;
-                    int kwotaDoWypelnienia20 = tempKwota - kwotaWypelniona50;
-                    if ((kwotaDoWypelnienia20 % 20 == 0) && iloscPrzechowywanychBanknotow[0] >= kwotaDoWypelnienia20 / 20) {
-                        czySaBanknoty =  true;
-                        return czySaBanknoty;
-                    }
-                    wybranaKwota = wybranaKwota % 50;
-                } else if (iloscPrzechowywanychBanknotow[1] < wybranaKwota / 50) {
-                    wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[1] * 50);
-                }
-                if (iloscPrzechowywanychBanknotow[0] >= wybranaKwota / 20){
-                    czySaBanknoty =  true;
-                    return czySaBanknoty;
-                } else if ((wybranaKwota % 20 != 0) || (iloscPrzechowywanychBanknotow[0] < wybranaKwota / 20)) {
-                    return false;
-                }
+                return czySaBanknotyDlaPozostalejKwoty(wybranaKwota);
             }
+        }
+    }
+
+    static boolean czyJest20() {
+        return iloscPrzechowywanychBanknotow[0] > 0;
+    }
+
+    static boolean czyJest50() {
+        return iloscPrzechowywanychBanknotow[1] > 0;
+    }
+
+    static boolean czySaBanknotyDla100(){
+        return iloscPrzechowywanychBanknotow[2] > 0 || iloscPrzechowywanychBanknotow[1] > 1 ||
+                iloscPrzechowywanychBanknotow[0] > 4;
+    }
+
+    static boolean czySaBanknotyDlaPozostalejKwoty(int wybranaKwota) {
+        boolean czySaBanknoty = false;
+        if (iloscPrzechowywanychBanknotow[3] >= wybranaKwota / 200) {
+            wybranaKwota = wybranaKwota % 200;
+        } else if (iloscPrzechowywanychBanknotow[3] < wybranaKwota / 200) {
+            wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[3] * 200);
+        }
+        if (iloscPrzechowywanychBanknotow[2] >= wybranaKwota / 100) {
+            wybranaKwota = wybranaKwota % 100;
+        } else if (iloscPrzechowywanychBanknotow[2] < wybranaKwota / 100) {
+            wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[2] * 100);
+        }
+        if (iloscPrzechowywanychBanknotow[1] >= wybranaKwota / 50) {
+            int tempKwota = wybranaKwota;
+            int kwotaWypelniona50 = (tempKwota / 50 - 1) * 50;
+            int kwotaDoWypelnienia20 = tempKwota - kwotaWypelniona50;
+            if ((kwotaDoWypelnienia20 % 20 == 0) &&
+                    iloscPrzechowywanychBanknotow[0] >= kwotaDoWypelnienia20 / 20) {
+                czySaBanknoty = true;
+                return czySaBanknoty;
+            }
+            wybranaKwota = wybranaKwota % 50;
+        } else if (iloscPrzechowywanychBanknotow[1] < wybranaKwota / 50) {
+            wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[1] * 50);
+        }
+        if ((wybranaKwota % 20 != 0) || (iloscPrzechowywanychBanknotow[0] < wybranaKwota / 20)) {
+            return false;
+        } else if ((iloscPrzechowywanychBanknotow[0] >= wybranaKwota / 20)) {
+            czySaBanknoty = true;
+            return czySaBanknoty;
         }
         return czySaBanknoty;
     }
@@ -132,7 +153,7 @@ public class Operacje {
             case 20 -> iloscBanknotowDoWyplacenia[0] = 1;
             case 50 -> iloscBanknotowDoWyplacenia[1] = 1;
             case 100 -> ustalIloscBanknotowDla100zl();
-            default -> ustalIloscBanknotow(wybranaKwota);
+            default -> ustalIloscBanknotowDlaDowolnejKwoty(wybranaKwota);
         }
     }
 
@@ -146,7 +167,7 @@ public class Operacje {
         }
     }
 
-    static void ustalIloscBanknotow(int wybranaKwota) {
+    static void ustalIloscBanknotowDlaDowolnejKwoty(int wybranaKwota) {
         if (iloscPrzechowywanychBanknotow[3] >= wybranaKwota / 200) {
             iloscBanknotowDoWyplacenia[3] = wybranaKwota / 200;
             wybranaKwota = wybranaKwota % 200;
@@ -213,13 +234,9 @@ public class Operacje {
 
     static void zareagujNaBrakMozliwosciWyplaty() {
         System.out.println(Bankomat.tablicaKomunikatow[15]);
-        Bankomat.wybierzOperacje();
+        Bankomat.wybierzIwykonajOperacje();
     }
 
-
-    static void sprawdzSaldo() {
-        System.out.println(Bankomat.tablicaKomunikatow[7] + dajSaldo());//saldo wynosi
-    }
 
     static void wyplacZblizeniowo() {
 
@@ -229,4 +246,7 @@ public class Operacje {
 
     }
 
+    static void sprawdzSaldo() {
+        System.out.println(Bankomat.tablicaKomunikatow[7] + dajSaldo());//saldo wynosi
+    }
 }
