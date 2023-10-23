@@ -6,7 +6,7 @@ public class Polski {
             "Podano błędny PIN 3 razy. Karta została zablokowana.\n" +
                     "Odbierz kartę i skontaktuj się ze swoim bankiem w celu jej odblokowania.",//2
             "Co chcesz teraz zrobić?\n" +
-                    "Wybierz jedną z poniższych opcji, podając liczbę od 1 do 5:\n" +
+                    "Wybierz jedną z poniższych opcji, podając liczbę od 1 do 4:\n" +
                     "1. Wypłata gotówki\n" +
                     "2. Wypłata BLIK\n" +
                     "3. Sprawdzenie salda\n" +
