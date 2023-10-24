@@ -20,5 +20,24 @@ public class DomDemo {
 
         Pokoj pokoj1 = new Pokoj(tablicaOkien, lozko1);
         System.out.println(pokoj1);
+
+
+        Okno[] sypialnia = new Okno[2];
+        sypialnia[0] = new Okno();
+        sypialnia[1] = new Okno();
+        Lozko lozkoWsypialni = new Lozko(5);
+        Pokoj pokoj2 = new Pokoj();
+        pokoj2.setOkna(sypialnia);
+        pokoj2.setLozko(lozkoWsypialni);
+        System.out.println(pokoj2);
+
+        pokoj2.posprzatajPokoj();
+        System.out.println(pokoj2);
+
+        Pokoj[] pokojeWchacie = new Pokoj[2];
+        pokojeWchacie[0] = new Pokoj();
+        pokojeWchacie[1] = new Pokoj(tablicaOkien,lozko1);
+        Dom chata = new Dom(pokojeWchacie);
+        System.out.println(chata);
     }
 }

@@ -7,6 +7,14 @@ public class Lozko {
         ileDniOdOstatniejWymianyPoscieli = posciel;
     }*/
 
+    public int getIleDniOdOstatniejWymianyPoscieli() {
+        return ileDniOdOstatniejWymianyPoscieli;
+    }
+
+    public void setIleDniOdOstatniejWymianyPoscieli(int ileDniOdOstatniejWymianyPoscieli) {
+        this.ileDniOdOstatniejWymianyPoscieli = ileDniOdOstatniejWymianyPoscieli;
+    }
+
     public Lozko(int ileDniOdOstatniejWymianyPoscieli) {
         this.ileDniOdOstatniejWymianyPoscieli = ileDniOdOstatniejWymianyPoscieli;
     }
