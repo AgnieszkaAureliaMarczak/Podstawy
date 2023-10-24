@@ -44,6 +44,9 @@ public class Samochod {
     }
 
     public int ileKmDoNastepnegoPrzegladu() {
+        if (getPrzebieg() > getPrzebiegDoPrzegladu()){
+            return getPrzebieg() - getPrzebiegDoPrzegladu();
+        }
         return getPrzebiegDoPrzegladu() - getPrzebieg();
     }
 

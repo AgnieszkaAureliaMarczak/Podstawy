@@ -2,12 +2,12 @@ package obiektowosc;
 
 public class SamochodDemo {
     public static void main(String[] args) {
-
         Samochod samochod1 = new Samochod();
         Samochod samochod2 = new Samochod();
         Samochod samochod3 = new Samochod();
         Samochod samochod4 = new Samochod();
         Samochod samochod5 = new Samochod();
+
 
         samochod1.setMarka("Opel");
         samochod1.setPrzebieg(56_000);
@@ -38,15 +38,11 @@ public class SamochodDemo {
             System.out.println("Przebieg do przeglądu: " + komis[i].getPrzebiegDoPrzegladu());
             System.out.println();
         }
-        System.out.println(samochod1);
-        System.out.println();
-        System.out.println(samochod2);
-        System.out.println();
-        System.out.println(samochod3);
-        System.out.println();
-        System.out.println(samochod4);
-        System.out.println();
-        System.out.println(samochod5);
+        for (Samochod samochod : komis) {
+            System.out.println(samochod);
+            System.out.println();
+        }
+
 
     }
 }

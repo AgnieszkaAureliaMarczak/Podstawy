@@ -8,6 +8,9 @@ public class Linia {
         this.wypelnienie = wypelnienie;
     }
 
+    public Linia(){
+    }
+
     public void drukujLinie(){
         for (int i = 0; i < dlugosc; i++) {
             System.out.print(wypelnienie);
@@ -20,14 +23,15 @@ public class Linia {
         Linia linia1 = new Linia(10,'P');
         Linia linia2 = new Linia(5,'u');
         Linia linia3 = new Linia(8,'g');
+        Linia linia4 = new Linia();
 
         linia1.dlugosc = 10;
         linia2.dlugosc = 15;
         linia3.dlugosc = 20;
 
-        linia1.wypelnienie = '*';
+       /* linia1.wypelnienie = '*';
         linia2.wypelnienie = '@';
-        linia3.wypelnienie = '#';
+        linia3.wypelnienie = '#';*/
 
         linia1.drukujLinie();
         System.out.println();
