@@ -36,21 +36,21 @@ public class Samochod {
     }
 
     public void wyswietlMarkeIprzebieg() {
-        System.out.println("Marka samochodu: " + getMarka() + "\nPrzebieg: " + getPrzebieg());
+        System.out.println("Marka samochodu: " + marka + "\nPrzebieg: " + przebieg);
     }
 
     public void wyliczPrzebiegPoPrzejechaniu(int odlegloscDoPrzejechania) {
-        setPrzebieg(getPrzebieg() + odlegloscDoPrzejechania);
+        setPrzebieg(przebieg + odlegloscDoPrzejechania);
     }
 
     public int ileKmDoNastepnegoPrzegladu() {
-        if (getPrzebieg() > getPrzebiegDoPrzegladu()){
-            return getPrzebieg() - getPrzebiegDoPrzegladu();
+        if (przebieg > przebiegDoPrzegladu){
+            return przebieg - przebiegDoPrzegladu;
         }
-        return getPrzebiegDoPrzegladu() - getPrzebieg();
+        return przebiegDoPrzegladu - przebieg;
     }
 
     public String toString() {
-        return "Marka: " + getMarka() + "\nPrzebieg: " + getPrzebieg() + "\nPrzebieg do przeglądu: " + getPrzebiegDoPrzegladu();
+        return "Marka: " + marka + "\nPrzebieg: " + przebieg + "\nPrzebieg do przeglądu: " + przebiegDoPrzegladu;
     }
 }

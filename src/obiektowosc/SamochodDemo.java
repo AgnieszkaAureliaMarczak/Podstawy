@@ -29,13 +29,15 @@ public class SamochodDemo {
         samochod2.wyswietlMarkeIprzebieg();
         samochod1.wyliczPrzebiegPoPrzejechaniu(500);
         System.out.println(samochod1.getPrzebieg());
-        System.out.println("Do następnego przeglądu: \nrenault: " + samochod2.ileKmDoNastepnegoPrzegladu() + "\nopel: " + samochod1.ileKmDoNastepnegoPrzegladu());
+        System.out.println("Do następnego przeglądu: \nrenault: " + samochod2.ileKmDoNastepnegoPrzegladu() +
+                "\nopel: " + samochod1.ileKmDoNastepnegoPrzegladu());
 
         Samochod[] komis = new Samochod[]{samochod1, samochod2, samochod3, samochod4, samochod5};
-        for (int i = 0; i < komis.length; i++) {
-            System.out.println("Marka: " + komis[i].getMarka());
-            System.out.println("Przebieg: " + komis[i].getPrzebieg());
-            System.out.println("Przebieg do przeglądu: " + komis[i].getPrzebiegDoPrzegladu());
+
+        for (Samochod samochod : komis) {
+            System.out.println("Marka: " + samochod.getMarka());
+            System.out.println("Przebieg: " + samochod.getPrzebieg());
+            System.out.println("Przebieg do przeglądu: " + samochod.getPrzebiegDoPrzegladu());
             System.out.println();
         }
         for (Samochod samochod : komis) {
@@ -43,6 +45,15 @@ public class SamochodDemo {
             System.out.println();
         }
 
+        SamochodSerwis samochodSerwis = new SamochodSerwis();
+        samochodSerwis.sprawdzKiedyNastepnyPrzeglad(samochodSerwis.pobierzDaneOsamochodzie());
 
+        Samochod pierwszySamochod = new Samochod("opel", 15_000);
+        Samochod drugiSamochod = new Samochod("renault", 47_000);
+        Samochod trzeciSamochod = new Samochod("fiat", 68_000);
+        Samochod czwartySamochod = new Samochod("ford", 43_000);
+        Samochod[] samochodyDoSerwisu = new Samochod[]{pierwszySamochod, drugiSamochod, trzeciSamochod, czwartySamochod};
+        CarService carService = new CarService();
+        System.out.println("Łączny przebieg wynosi: " + carService.wyliczLacznyPrzebieg(samochodyDoSerwisu));
     }
 }

@@ -1,12 +1,36 @@
 package obiektowosc;
 
 public class Prostokat {
-    int wysokosc;
-    int szerokosc;
-    char wypelnienie;
+    private int wysokosc;
+    private int szerokosc;
+    private char wypelnienie;
     public Prostokat(int wysokosc, int szerokosc, char wypelnienie){
         this.wysokosc = wysokosc;
         this.szerokosc = szerokosc;
+        this.wypelnienie = wypelnienie;
+    }
+
+    public int getWysokosc() {
+        return wysokosc;
+    }
+
+    public void setWysokosc(int wysokosc) {
+        this.wysokosc = wysokosc;
+    }
+
+    public int getSzerokosc(){
+        return szerokosc;
+    }
+
+    public void setSzerokosc(int szerokosc){
+        this.szerokosc = szerokosc;
+    }
+
+    public char getWypelnienie() {
+        return wypelnienie;
+    }
+
+    public void setWypelnienie(char wypelnienie){
         this.wypelnienie = wypelnienie;
     }
 
@@ -25,12 +49,12 @@ public class Prostokat {
     public static void main(String[] args) {
         Prostokat prostokat1 = new Prostokat(9,12,'k');
         Prostokat prostokat2 = new Prostokat(4,8,'h');
-        prostokat1.szerokosc = 8;
-        prostokat1.wysokosc = 5;
-        prostokat1.wypelnienie = '&';
-        prostokat2.szerokosc = 6;
-        prostokat2.wysokosc = 3;
-        prostokat2.wypelnienie = '%';
+        prostokat1.setSzerokosc(8);
+        prostokat1.setWysokosc(5);
+        prostokat1.setWypelnienie('#');
+        prostokat2.setSzerokosc(6);
+        prostokat2.setWysokosc(3);
+        prostokat2.setWypelnienie('%');
         prostokat1.drukujProstokat();
         System.out.println();
         prostokat2.drukujProstokat();

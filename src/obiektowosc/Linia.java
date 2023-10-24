@@ -1,37 +1,55 @@
 package obiektowosc;
 
 public class Linia {
-    int dlugosc;
-    char wypelnienie;
-    public Linia(int dlugosc, char wypelnienie){
+    private int dlugosc;
+    private char wypelnienie;
+
+    public Linia(int dlugosc, char wypelnienie) {
         this.dlugosc = dlugosc;
         this.wypelnienie = wypelnienie;
     }
 
-    public Linia(){
+    public Linia() {
     }
 
-    public void drukujLinie(){
+    public void setDlugosc(int dlugosc) {
+        this.dlugosc = dlugosc;
+    }
+
+    public int getDlugosc() {
+        return dlugosc;
+    }
+
+    public void setWypelnienie(char wypelnienie) {
+        this.wypelnienie = wypelnienie;
+    }
+
+    public char getWypelnienie() {
+        return wypelnienie;
+    }
+
+    public void drukujLinie() {
         for (int i = 0; i < dlugosc; i++) {
             System.out.print(wypelnienie);
         }
     }
-    public String toString(){
+
+    public String toString() {
         return "Długość linii: " + dlugosc + "\nWypełnienie linii: " + wypelnienie;
     }
+
     public static void main(String[] args) {
-        Linia linia1 = new Linia(10,'P');
-        Linia linia2 = new Linia(5,'u');
-        Linia linia3 = new Linia(8,'g');
-        Linia linia4 = new Linia();
+        Linia linia1 = new Linia(10, 'P');
+        Linia linia2 = new Linia(5, 'u');
+        Linia linia3 = new Linia(8, 'g');
 
-        linia1.dlugosc = 10;
-        linia2.dlugosc = 15;
-        linia3.dlugosc = 20;
+        linia1.setDlugosc(10);
+        linia2.setDlugosc(15);
+        linia3.setDlugosc(20);
 
-       /* linia1.wypelnienie = '*';
-        linia2.wypelnienie = '@';
-        linia3.wypelnienie = '#';*/
+        linia1.setWypelnienie('*');
+        linia2.setWypelnienie('@');
+        linia3.setWypelnienie('#');
 
         linia1.drukujLinie();
         System.out.println();

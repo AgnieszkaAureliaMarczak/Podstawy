@@ -12,10 +12,12 @@ public class DomDemo {
             tablicaOkien[i].otworzOkno();
             System.out.println(tablicaOkien[i]);
         }
+
         Lozko lozko1 = new Lozko(6);
         Lozko lozko2 = new Lozko(10);
         System.out.println(lozko1);
         System.out.println(lozko2);
+
         Pokoj pokoj1 = new Pokoj(tablicaOkien, lozko1);
         System.out.println(pokoj1);
     }
