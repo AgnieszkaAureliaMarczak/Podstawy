@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Bankomat {
     static String[] tablicaKomunikatow;
     static int numerJezyka;
-    private static final int pinUzytkownika = 5236;
+    private static final int PIN_UZYTKOWNIKA = 5236;
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -56,7 +56,7 @@ public class Bankomat {
         int iloscNiepoprawnychProbPin = 0;
         do {
             podanyPin = pobierzKodOdUzytkownika();
-            if (podanyPin != pinUzytkownika) {
+            if (podanyPin != PIN_UZYTKOWNIKA) {
                 iloscNiepoprawnychProbPin++;
                 if (iloscNiepoprawnychProbPin == 3) {
                     czyPoprawnyPin = false;
@@ -65,7 +65,7 @@ public class Bankomat {
                 System.out.println(tablicaKomunikatow[1]); // niepoprawny PIN
                 System.out.println("____");
             }
-        } while (podanyPin != pinUzytkownika);
+        } while (podanyPin != PIN_UZYTKOWNIKA);
         return czyPoprawnyPin;
     }
 
@@ -94,6 +94,11 @@ public class Bankomat {
         } while (true);
     }
 
+    static void zakoncz() {
+        System.out.println(tablicaKomunikatow[5]);
+        System.exit(0);
+    }
+
     static void zareagujNaNiewlasciwyWyborOperacji() {
         System.out.println(tablicaKomunikatow[4]);// nie wybrano operacji
         int operacjaCzyExit = scanner.nextInt();
@@ -105,10 +110,5 @@ public class Bankomat {
             System.out.println(tablicaKomunikatow[6]);
             System.exit(0);//niepoprawna wartosc
         }
-    }
-
-    static void zakoncz() {
-        System.out.println(tablicaKomunikatow[5]);
-        System.exit(0);
     }
 }

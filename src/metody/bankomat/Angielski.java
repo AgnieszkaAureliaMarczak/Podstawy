@@ -15,13 +15,13 @@ public class Angielski {
             "Retrieve your card",//5
             "I'm dispensing:",//6
             "Your balance is: ",//7
-            "Select an amount by entering a number from 1 to 6:\n" +
-                    "1. 20\n" +
-                    "2. 50\n" +
-                    "3. 100\n" +
-                    "4. 150\n" +
-                    "5. 200\n" +
-                    "6. Another amount",//8
+            "Select amount:\n" +
+                    "20\n" +
+                    "50\n" +
+                    "100\n" +
+                    "150\n" +
+                    "200\n" +
+                    "Another amount (enter amount)",//8
             "Insufficient funds in the account.", //9
             "The maximum daily withdrawal limit is ", //10
             "Do you want to print a confirmation?\n1. Yes\n2. No", //11

@@ -21,7 +21,7 @@ public class Polski {
                     "100\n" +
                     "150\n" +
                     "200\n" +
-                    "Inna kwota",//8
+                    "Inna kwota (podaj kwotę)",//8
             "Brak wystarczających środków na koncie.",//9
             "Maksymalny dzienny limit wypłat to ",//10
             "Czy wydrukować potwierdzenie?\n" +
