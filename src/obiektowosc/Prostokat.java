@@ -46,6 +46,7 @@ public class Prostokat {
         return "Szerokosc: " + szerokosc +"\nWysokosc: "+ wysokosc + "\nWypełnienie: " + wypelnienie;
     }
 
+
     public static void main(String[] args) {
         Prostokat prostokat1 = new Prostokat(9,12,'k');
         Prostokat prostokat2 = new Prostokat(4,8,'h');

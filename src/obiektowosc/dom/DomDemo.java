@@ -26,17 +26,17 @@ public class DomDemo {
         sypialnia[0] = new Okno();
         sypialnia[1] = new Okno();
         Lozko lozkoWsypialni = new Lozko(5);
-        Pokoj pokoj2 = new Pokoj();
-        pokoj2.setOkna(sypialnia);
-        pokoj2.setLozko(lozkoWsypialni);
-        System.out.println(pokoj2);
+        Pokoj pokojSypialnia = new Pokoj();
+        pokojSypialnia.setOkna(sypialnia);
+        pokojSypialnia.setLozko(lozkoWsypialni);
+        System.out.println(pokojSypialnia);
 
-        pokoj2.posprzatajPokoj();
-        System.out.println(pokoj2);
+        pokojSypialnia.posprzatajPokoj();
+        System.out.println(pokojSypialnia);
 
         Pokoj[] pokojeWchacie = new Pokoj[2];
         pokojeWchacie[0] = new Pokoj();
-        pokojeWchacie[1] = new Pokoj(tablicaOkien,lozko1);
+        pokojeWchacie[1] = new Pokoj(tablicaOkien, lozko1);
         Dom chata = new Dom(pokojeWchacie);
         System.out.println(chata);
     }

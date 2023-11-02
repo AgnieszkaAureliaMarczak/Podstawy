@@ -16,5 +16,6 @@ public class PiesDemo {
                 "Podaj " + pies2.ileJedzeniaDziennieWkg(pies2.getWaga()) + "kg jedzenia.");
         opiekun1.nakarmPsa(pies2);
         System.out.println(pies2.isCzyNakarmiony());
+        System.out.println("Waga Jogurta po nakarmieniu: " + pies2.getWaga() + "kg.");
     }
 }

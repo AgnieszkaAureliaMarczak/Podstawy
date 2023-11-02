@@ -11,19 +11,19 @@ public class SamochodDemo {
 
         samochod1.setMarka("Opel");
         samochod1.setPrzebieg(56_000);
-        samochod1.setPrzebiegDoPrzegladu(70_000);
+        //  samochod1.setPrzebiegDoPrzegladu(70_000);
         samochod2.setMarka("Renault");
         samochod2.setPrzebieg(98_000);
-        samochod2.setPrzebiegDoPrzegladu(100_000);
+        //   samochod2.setPrzebiegDoPrzegladu(100_000);
         samochod3.setMarka("Fiat");
         samochod3.setPrzebieg(44_000);
-        samochod3.setPrzebiegDoPrzegladu(50_000);
+        //   samochod3.setPrzebiegDoPrzegladu(50_000);
         samochod4.setMarka("Volvo");
         samochod4.setPrzebieg(105_000);
-        samochod4.setPrzebiegDoPrzegladu(105_000);
+        //   samochod4.setPrzebiegDoPrzegladu(105_000);
         samochod5.setMarka("Peugeot");
         samochod5.setPrzebieg(45_000);
-        samochod5.setPrzebiegDoPrzegladu(55_000);
+        //   samochod5.setPrzebiegDoPrzegladu(55_000);
 
         samochod1.wyswietlMarkeIprzebieg();
         samochod2.wyswietlMarkeIprzebieg();

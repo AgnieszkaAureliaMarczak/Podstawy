@@ -3,7 +3,7 @@ package obiektowosc;
 public class Samochod {
     private String marka;
     private int przebieg;
-    private int przebiegDoPrzegladu;
+    private int przebiegDoPrzegladu = 40_000;
     public Samochod(){
     }
     public Samochod(String marka, int przebieg) {

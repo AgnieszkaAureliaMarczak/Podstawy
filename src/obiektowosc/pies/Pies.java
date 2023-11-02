@@ -11,6 +11,10 @@ public class Pies {
         return waga;
     }
 
+    public void setWaga(int waga) {
+        this.waga = waga;
+    }
+
     public boolean isCzyNakarmiony() {
         return czyNakarmiony;
     }
@@ -29,6 +33,7 @@ public class Pies {
     public String toString(){
         return "Imie: " + imie + "\nRasa: " + rasa + "\nWaga: " + waga + "\nWiek: " + wiek;
     }
+
 
     public void szczekaj(String odglos){
         System.out.println(odglos);

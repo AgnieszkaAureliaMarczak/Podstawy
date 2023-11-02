@@ -12,7 +12,6 @@ public class SamochodSerwis {
         return new Samochod(modelSamochodu, przebiegSamochodu);
     }
     public void sprawdzKiedyNastepnyPrzeglad(Samochod samochod){
-        samochod.setPrzebiegDoPrzegladu(50_000);
         if (samochod.getPrzebieg() > samochod.getPrzebiegDoPrzegladu()){
             System.out.println("Samochód o marce " + samochod.getMarka() + " powinien zrobić przegląd " +
                     samochod.ileKmDoNastepnegoPrzegladu() + " kilometrów temu.");
