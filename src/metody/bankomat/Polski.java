@@ -22,19 +22,20 @@ public class Polski {
                     "150\n" +
                     "200\n" +
                     "Inna kwota (podaj kwotę)",//8
-            "Brak wystarczających środków na koncie.",//9
+            "Brak wystarczających środków na koncie",//9
             "Maksymalny dzienny limit wypłat to ",//10
             "Czy wydrukować potwierdzenie?\n" +
                     "1. Tak\n" +
                     "2. Nie",//11
             "Dostępna kwota wypłaty to ",//12
             "Drukuję potwierdzenie transakcji", //13
-            "Odbierz kartę i gotówkę.",//14
-            "Nie można wypłacić danej kwoty.",//15
+            "Odbierz kartę i gotówkę",//14
+            "Nie można wypłacić danej kwoty",//15
             "Podaj kod BLIK:\n" +
                     "____",//16
-            "Zatwierdź wypłatę w aplikacji.", //17
-            "Wciśnij 'Enter', żeby kontynuować", //18
+            "Podany kod jest niepoprawny",//17
+            "Zatwierdź wypłatę w aplikacji", //18
+            "Wciśnij 'Enter', żeby kontynuować", //19
     };
 }
 

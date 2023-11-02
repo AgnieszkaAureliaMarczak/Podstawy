@@ -1,6 +1,5 @@
 package metody.bankomat;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Operacje {
@@ -26,16 +25,17 @@ public class Operacje {
         iloscPrzechowywanychBanknotow[3] = STARTOWA_ILOSC_BANKNOTOW_200_ZL;
     }
 
-    static void wyplacGotowke() {
+    static void wyplacGotowke(boolean blik) {
         wyswietlWyborKwoty();
         int wybranaKwota = pobierzKwoteOdUzytkownika();
         zareagujGdyZaDuzaKwota(wybranaKwota);
         zareagujGdyKwotaNiepodzielnaPrzez50lub20(wybranaKwota);
         RaportBanknotow raport = sprawdzCzySaDostepneBanknotyDoWyplaty(wybranaKwota);
         if (raport.isCzySaBanknoty()) {
-            iloscBanknotowDoWyplacenia = raport.getBanknotyDoWyplacenia();
-            System.out.println(Arrays.toString(iloscBanknotowDoWyplacenia));
-            wykonajEtapyWyplaty(wybranaKwota);
+            if (blik) {
+                zatwierdzWyplateWaplikacji();
+            }
+            wykonajEtapyWyplaty(raport);
         } else {
             zareagujNaBrakMozliwosciWyplaty();
         }
@@ -74,7 +74,8 @@ public class Operacje {
         if ((wybranaKwota % 50 != 0) && (wybranaKwota % 20 != 0) && ((wybranaKwota % 50) % 20 != 0) &&
                 ((wybranaKwota - 50) % 20 != 0)) {
             System.out.println(Bankomat.tablicaKomunikatow[15]);
-            wyplacGotowke();
+            boolean czyBlik = false;
+            wyplacGotowke(czyBlik);
         }
     }
 
@@ -135,14 +136,18 @@ public class Operacje {
         return new RaportBanknotow(czySaBanknoty, banknotyDoWyplacenia);
     }
 
-    static void wykonajEtapyWyplaty(int wybranaKwota) {
-
+    static void wykonajEtapyWyplaty(RaportBanknotow raport) {
+        pobierzIloscBanknotowDoWyplacenia(raport);
         zmniejszIloscPrzechowywanychBanknotowDoWyplaty();
         wyswietlIloscWyplacanychBanknotow();
         ustalCzyWydrukowacPotwierdzenie();
         wyswietlKomunikatOwyplacieIzakoncz();
     }
-    
+
+    static void pobierzIloscBanknotowDoWyplacenia(RaportBanknotow raport) {
+        iloscBanknotowDoWyplacenia = raport.getBanknotyDoWyplacenia();
+    }
+
     static void zmniejszIloscPrzechowywanychBanknotowDoWyplaty() {
         iloscPrzechowywanychBanknotow[0] -= iloscBanknotowDoWyplacenia[0];
         iloscPrzechowywanychBanknotow[1] -= iloscBanknotowDoWyplacenia[1];
@@ -178,33 +183,38 @@ public class Operacje {
         Bankomat.wybierzIwykonajOperacje();
     }
 
-    static void wyplacBlikiem() {
+    static void wyplacBlikiem(boolean czyBlik) {
         poprosOkodBlik();
-        Bankomat.pobierzKodOdUzytkownika();
-        wyplacGotowkeBlikiem();
+        String pobranyKodBlik = pobierzBlikOdUzytkownika();
+        boolean poprawnyBlik = zweryfikujPodanyKod(pobranyKodBlik);
+        zareagujNaZweryfikowanyBlik(poprawnyBlik, czyBlik);
     }
 
     static void poprosOkodBlik() {
         System.out.println(Bankomat.tablicaKomunikatow[16]);//podaj kod blik
     }
 
-    static void wyplacGotowkeBlikiem() {
-        wyswietlWyborKwoty();
-        /*int wybranaKwota = pobierzKwoteOdUzytkownika();
-        zareagujGdyZaDuzaKwota(wybranaKwota);
-        zareagujGdyKwotaNiepodzielnaPrzez50lub20(wybranaKwota);
-        boolean czyDostepneBanknoty = sprawdzCzySaDostepneBanknotyDoWyplaty(wybranaKwota);
-        if (czyDostepneBanknoty) {
-            zatwierdzWyplateWaplikacji();
-            wykonajEtapyWyplaty(wybranaKwota);
+    static String pobierzBlikOdUzytkownika() {
+        return scanner.nextLine();
+    }
+
+    static boolean zweryfikujPodanyKod(String blikOdUzytkownika) {
+        return blikOdUzytkownika.length() == 4;
+    }
+
+    static void zareagujNaZweryfikowanyBlik(boolean poprawnyBlik, boolean czyBlik){
+        if (poprawnyBlik){
+            wyplacGotowke(czyBlik);
         } else {
-            zareagujNaBrakMozliwosciWyplaty();
-        }*/
+            System.out.println(Bankomat.tablicaKomunikatow[17]);
+            System.out.println(Bankomat.tablicaKomunikatow[5]);
+            System.exit(0);
+        }
     }
 
     static void zatwierdzWyplateWaplikacji() {
-        System.out.println(Bankomat.tablicaKomunikatow[17]); //zatwierdz w aplikacji
-        System.out.println(Bankomat.tablicaKomunikatow[18]); //wcisnij enter
+        System.out.println(Bankomat.tablicaKomunikatow[18]); //zatwierdz w aplikacji
+        System.out.println(Bankomat.tablicaKomunikatow[19]); //wcisnij enter
         scanner.nextLine();
         scanner.nextLine();
     }

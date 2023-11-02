@@ -12,25 +12,26 @@ public class Francuski {
             "4. Quitter",//3
             "Aucune opération sélectionnée.\nAppuyez sur 1 pour revenir à la sélection de l'opération" +
                     " ou sur 2 pour terminer le programme.",//4
-            "Récupérez votre carte.",//5
-            "Je distribue :",//6
-            "Votre solde est :",//7
-            "Sélectionnez le montant :\n" +
+            "Récupérez votre carte",//5
+            "Je distribue:",//6
+            "Votre solde est:",//7
+            "Sélectionnez le montant:\n" +
             "20\n" +
             "50\n" +
             "100\n" +
             "150\n" +
             "200\n" +
             "Autre montant",//8
-            "Fonds insuffisants sur le compte.",//9
-            "La limite de retrait quotidienne maximale est de ",//10
+            "Fonds insuffisants sur le compte",//9
+            "La limite de retrait quotidienne maximale est de",//10
             "Voulez-vous imprimer une confirmation ?\n1. Oui\n2. Non",//11
-            "Le montant de retrait disponible est de ",//12
-            "Impression de la confirmation de la transaction.",//13
-            "Récupérez votre carte et votre argent.",//14
-            "Impossible de retirer le montant spécifié.",//15
+            "Le montant de retrait disponible est de",//12
+            "Impression de la confirmation de la transaction",//13
+            "Récupérez votre carte et votre argent",//14
+            "Impossible de retirer le montant spécifié",//15
             "Saisissez le code BLIK :\n____",//16
-            "Confirmez le retrait dans l'application.",//17
-            "Appuyez sur 'Entrée' pour continuer.",//18
+            "Le code BLIK a été mal saisi fois",//17
+            "Confirmez le retrait dans l'application",//18
+            "Appuyez sur 'Entrée' pour continuer",//19
     };
 }

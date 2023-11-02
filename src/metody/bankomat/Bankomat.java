@@ -85,8 +85,14 @@ public class Bankomat {
             System.out.println(tablicaKomunikatow[3]); // wybor operacji
             int wyborOperacji = scanner.nextInt();
             switch (wyborOperacji) {
-                case 1 -> Operacje.wyplacGotowke();
-                case 2 -> Operacje.wyplacBlikiem();
+                case 1 -> {
+                    boolean blik = false;
+                    Operacje.wyplacGotowke(blik);
+                }
+                case 2 -> {
+                    boolean blik = true;
+                    Operacje.wyplacBlikiem(blik);
+                }
                 case 3 -> Operacje.sprawdzSaldo();
                 case 4 -> zakoncz();
                 default -> zareagujNaNiewlasciwyWyborOperacji();

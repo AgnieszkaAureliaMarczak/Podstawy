@@ -12,7 +12,7 @@ public class Niemiecki {
                     "4. Beenden",//3
             "Keine Operation ausgewählt.\nDrücken Sie 1, um zur Auswahl der Operation zurückzukehren, oder 2, " +
                     "um das Programm zu beenden.", //4
-            "Karte entnehmen.", //5
+            "Karte entnehmen", //5
             "Ich zahle aus:", //6
             "Ihr Kontostand beträgt: ",//7
             "Wählen Sie den Betrag aus:\n" +
@@ -22,15 +22,16 @@ public class Niemiecki {
                     "150\n" +
                     "200\n" +
                     "Anderer Betrag", //8
-            "Nicht ausreichend Guthaben auf dem Konto.",//9
-            "Das maximale tägliche Abhebungslimit beträgt ",//10
+            "Nicht ausreichend Guthaben auf dem Konto",//9
+            "Das maximale tägliche Abhebungslimit beträgt",//10
             "Möchten Sie eine Bestätigung drucken?\n1. Ja\n2. Nein",//11
-            "Der verfügbare Abhebungsbetrag beträgt ",//12
+            "Der verfügbare Abhebungsbetrag beträgt",//12
             "Drucke Transaktionsbestätigung",//13
-            "Karte und Bargeld entgegennehmen.",//14
-            "Die angeforderte Menge kann nicht abgehoben werden.",//15
+            "Karte und Bargeld entgegennehmen",//14
+            "Die angeforderte Menge kann nicht abgehoben werden",//15
             "Geben Sie den BLIK-Code ein:\n____",//16
-            "Bestätigen Sie die Abhebung in der Anwendung.",//17
-            "Drücken Sie 'Enter', um fortzufahren.",//18
+            "Falsche BLIK eingegeben",//17
+            "Bestätigen Sie die Abhebung in der Anwendung",//18
+            "Drücken Sie 'Enter', um fortzufahren",//19
     };
 }
