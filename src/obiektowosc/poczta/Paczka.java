@@ -1,5 +1,7 @@
 package obiektowosc.poczta;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Paczka {
@@ -7,6 +9,15 @@ public class Paczka {
     private String odbiorca;
     private double waga;
     private boolean czyPriorytetowa;
+    private String status = "utworzona";
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Paczka(String nadawca, String odbiorca, double waga) {
         if (nadawca.equals("")) {
@@ -37,6 +48,25 @@ public class Paczka {
         double[] wagi = daneDoLosowania.getWagaPaczki();
         this.waga = wagi[wylosowanaPozycja];
         this.czyPriorytetowa = losowanie.nextBoolean();
+    }
+
+    public double wyliczCenePaczki(){
+        double cena = 0;
+        if (waga <= 0.5){
+            cena = 5;
+        } else if (waga <= 1) {
+            cena = 8;
+        } else if (waga <= 2) {
+            cena = 12;
+        } else if (waga > 2){
+            cena = 12 + (waga - 2);
+        }
+        if (czyPriorytetowa){
+            cena  = cena + (cena * 0.1);
+        }
+        BigDecimal bigDecimal = new BigDecimal(cena);
+        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal.doubleValue();
     }
 
     @Override
