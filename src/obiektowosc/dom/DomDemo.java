@@ -4,12 +4,12 @@ public class DomDemo {
     public static void main(String[] args) {
         Okno okno = new Okno();
         System.out.println(okno);
-        okno.otworzOkno();
+        okno.otworz();
         System.out.println(okno);
         Okno[] tablicaOkien = new Okno[4];
         for (int i = 0; i < tablicaOkien.length; i++) {
             tablicaOkien[i] = new Okno();
-            tablicaOkien[i].otworzOkno();
+            tablicaOkien[i].otworz();
             System.out.println(tablicaOkien[i]);
         }
 
@@ -31,7 +31,7 @@ public class DomDemo {
         pokojSypialnia.setLozko(lozkoWsypialni);
         System.out.println(pokojSypialnia);
 
-        pokojSypialnia.posprzatajPokoj();
+        pokojSypialnia.posprzataj();
         System.out.println(pokojSypialnia);
 
         Pokoj[] pokojeWchacie = new Pokoj[2];

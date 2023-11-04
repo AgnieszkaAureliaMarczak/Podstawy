@@ -3,7 +3,7 @@ package obiektowosc.dom;
 public class Okno {
     private boolean czyOtwarte;
 
-    public void otworzOkno(){
+    public void otworz(){
         czyOtwarte = true;
     }
     public String toString(){

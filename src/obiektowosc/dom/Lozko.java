@@ -6,6 +6,13 @@ public class Lozko {
     /*public Lozko(int posciel) {
         ileDniOdOstatniejWymianyPoscieli = posciel;
     }*/
+    public Lozko(int ileDniOdOstatniejWymianyPoscieli) {
+        this.ileDniOdOstatniejWymianyPoscieli = ileDniOdOstatniejWymianyPoscieli;
+    }
+
+    public void posciel() {
+        this.ileDniOdOstatniejWymianyPoscieli = 0;
+    }
 
     public int getIleDniOdOstatniejWymianyPoscieli() {
         return ileDniOdOstatniejWymianyPoscieli;
@@ -14,14 +21,6 @@ public class Lozko {
     public void setIleDniOdOstatniejWymianyPoscieli(int ileDniOdOstatniejWymianyPoscieli) {
         this.ileDniOdOstatniejWymianyPoscieli = ileDniOdOstatniejWymianyPoscieli;
     }
-
-    public Lozko(int ileDniOdOstatniejWymianyPoscieli) {
-        this.ileDniOdOstatniejWymianyPoscieli = ileDniOdOstatniejWymianyPoscieli;
-    }
-
- /*   public Lozko() {
-
-    }*/
 
     @Override
     public String toString() {
