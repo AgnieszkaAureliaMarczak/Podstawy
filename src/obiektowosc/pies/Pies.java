@@ -7,47 +7,37 @@ public class Pies {
     private int waga;
     private boolean czyNakarmiony;
 
-    public int getWaga(){
-        return waga;
-    }
-
-    public void setWaga(int waga) {
-        this.waga = waga;
-    }
-
-    public boolean isCzyNakarmiony() {
-        return czyNakarmiony;
-    }
-
-    public void setCzyNakarmiony(boolean czyNakarmiony) {
-        this.czyNakarmiony = czyNakarmiony;
-    }
-
-    public Pies(String imie, String rasa, int waga){
+    public Pies(String imie, String rasa, int waga) {
         this.imie = imie;
         this.rasa = rasa;
         this.waga = waga;
         this.wiek = 0;
     }
 
-    public String toString(){
-        return "Imie: " + imie + "\nRasa: " + rasa + "\nWaga: " + waga + "\nWiek: " + wiek;
-    }
-
-
-    public void szczekaj(String odglos){
+    public void szczekaj(String odglos) {
         System.out.println(odglos);
     }
 
-    public int ileJedzeniaDziennieWkg(int waga) {
-        if (waga <= 3) {
-            return 1;
-        } else if (waga <= 6) {
-            return 2;
-        } else if (waga <= 10) {
-            return 3;
-        } else {
-            return 4;
-        }
+    public void nakarm(int wagaKarmy) {
+        waga += wagaKarmy;
+        czyNakarmiony = true;
+    }
+
+    public Pies nakarmImmutable(int wagaKarmy) { //podejście immutalbe - jak przy String, BigDecimal i LocalDate
+        Pies pies = new Pies(imie, rasa, waga + wagaKarmy);
+        pies.czyNakarmiony = true;
+        return pies;
+    }
+
+    public int getWaga() {
+        return waga;
+    }
+
+    public boolean isCzyNakarmiony() {
+        return czyNakarmiony;
+    }
+
+    public String toString() {
+        return "Imie: " + imie + "\nRasa: " + rasa + "\nWaga: " + waga + "\nWiek: " + wiek;
     }
 }
