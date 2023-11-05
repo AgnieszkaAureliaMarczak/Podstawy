@@ -2,8 +2,8 @@ package obiektowosc.poczta;
 
 public class PaczkaDemo {
     public static void main(String[] args) {
-        Paczka pierwszaPaczka = new Paczka("Kamil Nowak","Jan Kowalski", 7.5);
-       /* System.out.println(pierwszaPaczka);
+        /*Paczka pierwszaPaczka = new Paczka("Kamil Nowak","Jan Kowalski", 7.5);
+        System.out.println(pierwszaPaczka);
 
         Paczka drugaPaczka = new Paczka();
         System.out.println(drugaPaczka);
@@ -35,14 +35,30 @@ public class PaczkaDemo {
         BigDecimal cenaPaczek = new BigDecimal(lacznaCena);
         cenaPaczek = cenaPaczek.setScale(2, RoundingMode.HALF_UP);
         lacznaCena = cenaPaczek.doubleValue();
-        System.out.println("Łączna cena paczek: " + lacznaCena);*/
+        System.out.println("Łączna cena paczek: " + lacznaCena);
 
         Poczta poczta = new Poczta();
         poczta.nadajPaczke(pierwszaPaczka,17.50);
         System.out.println(poczta.getUtarg());
 
-        Paczka nowostworzonaPaczka = poczta.stworzPaczke();
-        poczta.nadajPaczke(nowostworzonaPaczka, 45.50);
+        Paczka paczkaStworzonaNaPoczcie = poczta.stworzPaczke();
+        poczta.nadajPaczke(paczkaStworzonaNaPoczcie, 45.50);
         System.out.println(poczta.getUtarg());
+
+        Paczka[] paczkiNadane = new Paczka[2];
+        paczkiNadane[0] = pierwszaPaczka;
+        paczkiNadane[1] = paczkaStworzonaNaPoczcie;
+
+        poczta.wyswietlOstatniaNadanaPaczke(paczkiNadane);*/
+        List list = new List(new Adres("Rajska", 41, "02-654"),
+                new Adres("Kochanowskiego", 5, "00-125"));
+        System.out.println(list);
+        Poczta nowaPoczta = new Poczta();
+        list.setPriorytetowy(true);
+        nowaPoczta.nadajList(list, 9.50);
+        System.out.println(nowaPoczta);
+        nowaPoczta.wyslijListonosza();
+        System.out.println(nowaPoczta);
+
     }
 }
