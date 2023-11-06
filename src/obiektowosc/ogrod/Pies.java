@@ -1,11 +1,27 @@
 package obiektowosc.ogrod;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Pies {
     private String imie;
-    private String[] tablicaSztuczek;
+    private String[] sztuczki;
 
-    public Pies(String imie, String[] tablicaSztuczek) {
+    public Pies(String imie, String[] sztuczki) {
         this.imie = imie;
-        this.tablicaSztuczek = tablicaSztuczek;
+        this.sztuczki = sztuczki;
+    }
+
+    public void bawSie() {
+        Random random = new Random();
+        System.out.println(sztuczki[random.nextInt(0, sztuczki.length)]);
+    }
+
+    @Override
+    public String toString() {
+        return "Pies{" +
+                "imie='" + imie + '\'' +
+                ", sztuczki=" + Arrays.toString(sztuczki) +
+                '}';
     }
 }
