@@ -83,7 +83,7 @@ public class Ogrod {
     }
 
     public int pracujWogrodzie(int iloscDniPracujacych){
-        int iloscOwocowZebranychPrzezMiesiac = 0;
+        int owoceZebraneWczasiePracy = 0;
         for (int i = 0; i < iloscDniPracujacych; i++) {
             if (pies == null) {
                 wejdzDoOgrodu();
@@ -92,11 +92,11 @@ public class Ogrod {
             }
             podlejKwiaty();
             odpocznij(lawka);
-            iloscOwocowZebranychPrzezMiesiac += zbierajOwoce();
+            owoceZebraneWczasiePracy += zbierajOwoce();
             wyjdzZogrodu();
         }
-        System.out.println(iloscOwocowZebranychPrzezMiesiac);
-        return iloscOwocowZebranychPrzezMiesiac;
+        System.out.println(owoceZebraneWczasiePracy);
+        return owoceZebraneWczasiePracy;
     }
 
     @Override
