@@ -1,4 +1,4 @@
-package obiektowosc;
+package obiektowosc.serwisSamochodowy;
 
 public class CarService {
     public int wyliczLacznyPrzebieg(Samochod[] samochody) {

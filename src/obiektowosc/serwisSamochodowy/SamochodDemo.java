@@ -1,4 +1,4 @@
-package obiektowosc;
+package obiektowosc.serwisSamochodowy;
 
 public class SamochodDemo {
     public static void main(String[] args) {

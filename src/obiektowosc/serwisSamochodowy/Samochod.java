@@ -1,4 +1,4 @@
-package obiektowosc;
+package obiektowosc.serwisSamochodowy;
 
 public class Samochod {
     private String marka;

@@ -1,4 +1,4 @@
-package obiektowosc;
+package obiektowosc.serwisSamochodowy;
 
 import java.util.Scanner;
 

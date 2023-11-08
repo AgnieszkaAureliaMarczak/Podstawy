@@ -3,6 +3,10 @@ package podstawy;
 public class Literaly {
 
     public static void main(String[]args){
+        int asciiCode = 97;
+        char symbol = (char)(asciiCode + 1);
+        System.out.println(symbol);
+
 //      Ćwiczenie 3
     /*    int a = -2, b = 3,c = a+b;
 
@@ -45,7 +49,7 @@ public class Literaly {
 
 
         //pojedyncza liczba rezerwuje miejsce na te dane
-         System.out.printf("%5d %5s\n", 123,"abc");
+        /* System.out.printf("%5d %5s\n", 123,"abc");
          System.out.printf("%5d %5s\n", 1,"ac");
          System.out.printf("%5d %5s\n", 123,"abc");
          System.out.printf("%5d %5s\n", 1234,"abc");
@@ -65,7 +69,7 @@ public class Literaly {
         char symbol = (char)(asciiCode + 1);
         System.out.println(symbol);
 
-       System.out.println(10/6.0);
+       System.out.println(10/6.0);*/
 
 
 
