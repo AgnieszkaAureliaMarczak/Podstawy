@@ -3,6 +3,7 @@ package obiektowosc.fabrykaLinii;
 public class LiniaDemo {
     public static void main(String[] args) {
 
+        //todo review/refactor
         FabrykaLinii fabryka = new FabrykaLinii();
         fabryka.stworzLinieLosowejDlugosciZwybranymZnakiem('*').drukujLinie();
         fabryka.stworzLinieWybranejDlugosciIzLosowymZnakiem(10).drukujLinie();
@@ -17,6 +18,10 @@ public class LiniaDemo {
         fabryka.stworzLinie2razyWiekszaOdPoprzedniej(2).drukujLinie();
         fabryka.stworzLinie2razyWiekszaOdPoprzedniej(4).drukujLinie();
         System.exit(0);
+
+
+
+
 
         Linia linia1 = new Linia(10, 'P');
         Linia linia2 = new Linia(5, 'u');

@@ -7,6 +7,7 @@ public class Poczta {
     private double utarg;
     private List[] listyDoWyslania = new List[10];
     private int licznikNadanychListow = 0;
+    private Paczka ostatniaNadana;
 
     public double nadajPaczke(Paczka paczka, double kwotaPieniedzy) {
         double cena = paczka.wyliczCenePaczki();
@@ -15,6 +16,7 @@ public class Poczta {
             paczka.setStatus("nadana");
             System.out.println("Reszta do zwrotu: " + (kwotaPieniedzy - cena));
             utarg += cena;
+            ostatniaNadana = paczka;
             return kwotaPieniedzy - cena;
         } else {
             System.out.println("Przekazana kwota jest za mała na nadanie tej paczki.");
@@ -26,13 +28,14 @@ public class Poczta {
         double cena = list.wyliczCene();
         System.out.println("Cena nadania listu: " + cena);
         if (kwotaPieniedzy >= cena) {
+            if (licznikNadanychListow == 10) {
+                System.out.println("Przepraszamy, poczta jest w stanie wysyłać tylko 10 listów dziennie, i co nam zrobisz?");
+                return kwotaPieniedzy;
+            }
             list.setStatus("nadany");
             utarg += cena;
             listyDoWyslania[licznikNadanychListow] = list;
             licznikNadanychListow++;
-            if (licznikNadanychListow == 10) {
-                System.out.println("Przepraszamy, poczta jest w stanie wysyłać tylko 10 listów dziennie, i co nam zrobisz?");
-            }
             System.out.println("Reszta do zwrotu: " + (kwotaPieniedzy - cena));
             return kwotaPieniedzy - cena;
         } else {
@@ -41,9 +44,9 @@ public class Poczta {
         }
     }
 
-    public void wyslijListonosza(){
-        for (int i = 0; i < listyDoWyslania.length; i++) {
-            if (listyDoWyslania[i] != null){
+    public void wyslijListonosza() {
+        for (int i = 0; i < listyDoWyslania.length; i++) { //todo mozna wykorzystac licznik z góry
+            if (listyDoWyslania[i] != null) {
                 listyDoWyslania[i].setStatus("wysłany");
             }
         }
@@ -60,12 +63,19 @@ public class Poczta {
         return new Paczka(nadawca, odbiorca, waga);
     }
 
-    public void wyswietlOstatniaNadanaPaczke(Paczka[] nadanePaczki) {
-        for (int i = 0; i < nadanePaczki.length; i++) {
+    public void wyswietlOstatniaNadanaPaczke() {
+        if (ostatniaNadana == null) {
+            System.out.println("Nie nadano zadnej paczki.");
+        } else {
+            System.out.println("Ostatnia nadana paczka: " + ostatniaNadana);
+        }
+
+        // System.out.println(nadanePaczki[nadanePaczki.length-1]);
+       /* for (int i = 0; i < nadanePaczki.length; i++) {
             if (i == nadanePaczki.length - 1) {
                 System.out.println(nadanePaczki[i]);
             }
-        }
+        }*/
     }
 
     public double getUtarg() {

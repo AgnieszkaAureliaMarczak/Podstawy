@@ -9,13 +9,7 @@ public class Ogrod {
     private Kwiat[] kwiaty;
 
     public Ogrod(Lawka lawka,Kwiat[] kwiaty, int iloscDrzew){
-        this.lawka = lawka;
-        this.kwiaty = kwiaty;
-        Drzewo[] drzewa = new Drzewo[iloscDrzew];
-        for (int i = 0; i < iloscDrzew; i++) {
-            drzewa[i] = new Drzewo();
-        }
-        this.drzewa = drzewa;
+        this(lawka, kwiaty, iloscDrzew,null);
     }
 
     public Ogrod(Lawka lawka,Kwiat[] kwiaty, int iloscDrzew, Pies pies){
@@ -29,14 +23,18 @@ public class Ogrod {
         this.pies = pies;
     }
 
-   public void wejdzDoOgrodu(Pies pies){
-       System.out.println("How, how, witaj w ogrodzie. Teraz zrobię dla ciebie sztuczkę:");
-       pies.bawSie();
+   public void wejdzDoOgrodu(){
+        if (pies == null){
+            System.out.println("W ogrodzie nie ma psa. Wita cię szum wiatru.");
+        } else {
+            System.out.println("How, how, witaj w ogrodzie. Teraz zrobię dla ciebie sztuczkę:");
+            pies.bawSie();
+        }
    }
 
-    public void wejdzDoOgrodu(){
+   /* public void wejdzDoOgrodu(){
         System.out.println("W ogrodzie nie ma psa. Wita cię szum wiatru.");
-    }
+    }*/
 
     public void podlejKwiaty(){
         for (Kwiat kwiat : kwiaty) {
@@ -44,7 +42,7 @@ public class Ogrod {
         }
     }
 
-    public void odpocznij(Lawka lawka){
+    public void odpocznij(){
         System.out.println("Siadasz na lawce z materiału: " + lawka.getMaterial());
     }
 
@@ -70,14 +68,10 @@ public class Ogrod {
         }
     }
 
-    public void pracujWogrodzie(){
-        if (pies == null) {
-            wejdzDoOgrodu();
-        } else {
-            wejdzDoOgrodu(pies);
-        }
+    public void   pracujWogrodzie(){
+        wejdzDoOgrodu();
         podlejKwiaty();
-        odpocznij(lawka);
+        odpocznij();
         zbierajOwoce();
         wyjdzZogrodu();
     }
@@ -85,13 +79,10 @@ public class Ogrod {
     public int pracujWogrodzie(int iloscDniPracujacych){
         int owoceZebraneWczasiePracy = 0;
         for (int i = 0; i < iloscDniPracujacych; i++) {
-            if (pies == null) {
-                wejdzDoOgrodu();
-            } else {
-                wejdzDoOgrodu(pies);
-            }
+            //owoceZebraneWczasiePracy += pracujWogrodzie();
+            wejdzDoOgrodu();
             podlejKwiaty();
-            odpocznij(lawka);
+            odpocznij();
             owoceZebraneWczasiePracy += zbierajOwoce();
             wyjdzZogrodu();
         }

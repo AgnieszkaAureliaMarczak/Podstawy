@@ -12,6 +12,9 @@ public class Main {
 
         Samochod samochod = new Samochod(kola);
         samochod.zlapGume();
+        samochod.zlapGume();
+        samochod.zlapGume();
+        samochod.zlapGume();
         System.out.println(samochod);
 
         Warsztat warsztat = new Warsztat(samochod);

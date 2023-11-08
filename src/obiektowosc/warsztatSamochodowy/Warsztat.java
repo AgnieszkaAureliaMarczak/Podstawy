@@ -15,7 +15,7 @@ public class Warsztat {
                 kola[i].naprawKolo();
             }
         }
-        return new Paragon("naprawa koła", 1, 25);
+        return new Paragon("naprawa koła", 1, 25); //todo
     }
 
     @Override

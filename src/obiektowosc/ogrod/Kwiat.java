@@ -11,13 +11,9 @@ public class Kwiat {
     }
 
     public Kwiat(){
-        String[] koloryKwiatow = new String[4];
-        koloryKwiatow[0] = "czerwony";
-        koloryKwiatow[1] = "fioletowy";
-        koloryKwiatow[2] = "żółty";
-        koloryKwiatow[3] = "różowy";
+        String[] koloryKwiatow = {"czerwony", "fioletowy","żółty", "różowy" };
         Random losujKolor = new Random();
-        this.kolor = koloryKwiatow[losujKolor.nextInt(0, 4)];
+        kolor = koloryKwiatow[losujKolor.nextInt(koloryKwiatow.length)];
     }
 
     public void podlejKwiat(){

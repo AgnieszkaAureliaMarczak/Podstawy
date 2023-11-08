@@ -82,26 +82,29 @@ public class Operacje {
         int[] nominaly = {200, 100, 50, 20};
         int[] banknotyDoWyplacenia = new int[nominaly.length];
 
-        for (int i = 0; i < nominaly.length; i++) {
-            if (i == nominaly.length - 1) {
-                if ((wybranaKwota % nominaly[nominaly.length - 1] != 0) ||
-                        (iloscPrzechowywanychBanknotow[i] < wybranaKwota / nominaly[nominaly.length - 1])) {
-                    return new RaportBanknotow(czySaBanknoty);
-                } else if (iloscPrzechowywanychBanknotow[i] >= wybranaKwota / nominaly[nominaly.length - 1]) {
-                    banknotyDoWyplacenia[i] = wybranaKwota / nominaly[nominaly.length - 1];
-                    czySaBanknoty = true;
-                    return new RaportBanknotow(czySaBanknoty, banknotyDoWyplacenia);
-                }
-            }
+        for (int i = 0; i < nominaly.length - 1; i++) {
             if (iloscPrzechowywanychBanknotow[i] >= wybranaKwota / nominaly[i]) { //taki warunek jest wszędzie
                 banknotyDoWyplacenia[i] = wybranaKwota / nominaly[i];
                 wybranaKwota = wybranaKwota % nominaly[i];
+                if (nominaly[i] == 50 && banknotyDoWyplacenia[i] > 0 && wybranaKwota == 10) {
+                    banknotyDoWyplacenia[i] = banknotyDoWyplacenia[i] - 1;
+                    wybranaKwota = 60;
+                }
             } else if (iloscPrzechowywanychBanknotow[i] < wybranaKwota / nominaly[i]) {
                 banknotyDoWyplacenia[i] = iloscPrzechowywanychBanknotow[i];
                 wybranaKwota = wybranaKwota - (iloscPrzechowywanychBanknotow[i] * nominaly[i]);
             }
         }
+        int ostatniIndex = nominaly.length - 1;
+        if (iloscPrzechowywanychBanknotow[ostatniIndex] >= wybranaKwota / nominaly[nominaly.length - 1]) {
+            banknotyDoWyplacenia[ostatniIndex] = wybranaKwota / nominaly[nominaly.length - 1];
+            czySaBanknoty = true;
+        }
         return new RaportBanknotow(czySaBanknoty, banknotyDoWyplacenia);
+
+        // robi to co zwykle +
+        //110 ->
+
 
         /*if (wybranaKwota >= 50) {
             if (iloscPrzechowywanychBanknotow[1] >= wybranaKwota / 50) {

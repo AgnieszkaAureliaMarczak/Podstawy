@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class FabrykaLinii {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     public Linia stworzLinieLosowejDlugosciZwybranymZnakiem(char wypelnienie) {
         return new Linia(random.nextInt(1, 51), wypelnienie);

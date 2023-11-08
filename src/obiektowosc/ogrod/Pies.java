@@ -12,6 +12,12 @@ public class Pies {
         this.sztuczki = sztuczki;
     }
 
+    public Pies(String imie) {
+        this(imie, new String[]{"siad"});
+        /*this.imie = imie;
+        sztuczki = new String[]{"siad"};*/
+    }
+
     public void bawSie() {
         Random random = new Random();
         System.out.println(sztuczki[random.nextInt(0, sztuczki.length)]);

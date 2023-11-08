@@ -13,7 +13,7 @@ public class OgrodDemo {
         String[] tablicaSztuczek = {"Siad", "Stój", "Do mnie", "Daj łapę", "Połóż się",
                 "Zostaw", "Aport", "Pies - miejsce", "Chodź - pies", "Daj glos",
                 "Przynies gazetę", "Podnieś nogę"};
-        Pies pies = new Pies("Azor", tablicaSztuczek);
+        Pies pies = new Pies("Azor");
         pies.bawSie();
 
         Lawka lawka = new Lawka("drewno");
@@ -22,16 +22,15 @@ public class OgrodDemo {
             kwietnik[i] = new Kwiat();
         }
 
-        Ogrod mojOgrod = new Ogrod(lawka, kwietnik, 2, pies);
+        Ogrod mojOgrod = new Ogrod(lawka, kwietnik, 2);
         System.out.println(mojOgrod);
 
         mojOgrod.wejdzDoOgrodu();
-        mojOgrod.wejdzDoOgrodu(pies);
 
         mojOgrod.podlejKwiaty();
         System.out.println(Arrays.toString(kwietnik));
 
-        mojOgrod.odpocznij(lawka);
+        mojOgrod.odpocznij();
         mojOgrod.zbierajOwoce();
         mojOgrod.zbierajOwoce();
 

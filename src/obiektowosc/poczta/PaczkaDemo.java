@@ -1,8 +1,11 @@
 package obiektowosc.poczta;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class PaczkaDemo {
     public static void main(String[] args) {
-        /*Paczka pierwszaPaczka = new Paczka("Kamil Nowak","Jan Kowalski", 7.5);
+        Paczka pierwszaPaczka = new Paczka("Kamil Nowak","Jan Kowalski", 7.5);
         System.out.println(pierwszaPaczka);
 
         Paczka drugaPaczka = new Paczka();
@@ -38,18 +41,21 @@ public class PaczkaDemo {
         System.out.println("Łączna cena paczek: " + lacznaCena);
 
         Poczta poczta = new Poczta();
+        poczta.wyswietlOstatniaNadanaPaczke();
         poczta.nadajPaczke(pierwszaPaczka,17.50);
         System.out.println(poczta.getUtarg());
-
+        poczta.wyswietlOstatniaNadanaPaczke();
         Paczka paczkaStworzonaNaPoczcie = poczta.stworzPaczke();
         poczta.nadajPaczke(paczkaStworzonaNaPoczcie, 45.50);
         System.out.println(poczta.getUtarg());
 
-        Paczka[] paczkiNadane = new Paczka[2];
-        paczkiNadane[0] = pierwszaPaczka;
-        paczkiNadane[1] = paczkaStworzonaNaPoczcie;
+        poczta.wyswietlOstatniaNadanaPaczke();
+//        Paczka[] paczkiNadane = new Paczka[2];
+//        paczkiNadane[0] = pierwszaPaczka;
+//        paczkiNadane[1] = paczkaStworzonaNaPoczcie;
 
-        poczta.wyswietlOstatniaNadanaPaczke(paczkiNadane);*/
+
+
         List list = new List(new Adres("Rajska", 41, "02-654"),
                 new Adres("Kochanowskiego", 5, "00-125"));
         System.out.println(list);
