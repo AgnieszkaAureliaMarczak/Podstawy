@@ -3,12 +3,12 @@ package obiektowosc.warsztatSamochodowy;
 public class Paragon {
 
     private String rodzajUslugi;
-    private int ilosc;
+    private int iloscNapraw;
     private double lacznaCena;
 
     public Paragon(String rodzajUslugi, int ilosc, double lacznaCena) {
         this.rodzajUslugi = rodzajUslugi;
-        this.ilosc = ilosc;
+        this.iloscNapraw = ilosc;
         this.lacznaCena = lacznaCena;
     }
 
@@ -16,7 +16,7 @@ public class Paragon {
     public String toString() {
         return "Paragon{" +
                 "rodzajUslugi='" + rodzajUslugi + '\'' +
-                ", ilosc=" + ilosc +
+                ", ilosc=" + iloscNapraw +
                 ", lacznaCena=" + lacznaCena +
                 '}';
     }

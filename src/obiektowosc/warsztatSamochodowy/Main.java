@@ -17,8 +17,8 @@ public class Main {
         samochod.zlapGume();
         System.out.println(samochod);
 
-        Warsztat warsztat = new Warsztat(samochod);
-        System.out.println(warsztat.naprawSamochod());
+        Warsztat warsztat = new Warsztat();
+        System.out.println(warsztat.naprawSamochod(samochod));
         System.out.println(warsztat);
     }
 }
