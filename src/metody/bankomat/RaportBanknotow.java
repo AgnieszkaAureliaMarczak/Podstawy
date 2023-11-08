@@ -2,14 +2,9 @@ package metody.bankomat;
 
 public class RaportBanknotow {
     private boolean czySaBanknoty;
-
     private int[] banknotyDoWyplacenia;
 
-    public RaportBanknotow(boolean czySaBanknoty) {
-        this.czySaBanknoty = czySaBanknoty;
-    }
-
-    public RaportBanknotow(boolean czySaBanknoty, int[] banknotyDoWyplacenia){
+    public RaportBanknotow(boolean czySaBanknoty, int[] banknotyDoWyplacenia) {
         this.czySaBanknoty = czySaBanknoty;
         this.banknotyDoWyplacenia = banknotyDoWyplacenia;
     }

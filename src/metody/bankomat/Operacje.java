@@ -9,7 +9,7 @@ public class Operacje {
     final static int STARTOWA_ILOSC_BANKNOTOW_200_ZL = 30; //6tys
     final static int STARTOWA_ILOSC_BANKNOTOW_100_ZL = 0; //10 tys
     final static int STARTOWA_ILOSC_BANKNOTOW_50_ZL = 3;//10 tys
-    final static int STARTOWA_ILOSC_BANKNOTOW_20_ZL = 10;//4tys
+    final static int STARTOWA_ILOSC_BANKNOTOW_20_ZL = 0;//4tys
     static int[] iloscPrzechowywanychBanknotow = new int[4];
     final static int STARTOWA_DOSTEPNA_KWOTA = (STARTOWA_ILOSC_BANKNOTOW_20_ZL * 20) + (STARTOWA_ILOSC_BANKNOTOW_50_ZL * 50)
             + (STARTOWA_ILOSC_BANKNOTOW_100_ZL * 100) + (STARTOWA_ILOSC_BANKNOTOW_200_ZL * 200);
@@ -86,9 +86,10 @@ public class Operacje {
             if (iloscPrzechowywanychBanknotow[i] >= wybranaKwota / nominaly[i]) { //taki warunek jest wszędzie
                 banknotyDoWyplacenia[i] = wybranaKwota / nominaly[i];
                 wybranaKwota = wybranaKwota % nominaly[i];
-                if (nominaly[i] == 50 && banknotyDoWyplacenia[i] > 0 && wybranaKwota == 10) {
+                if ((nominaly[i] == 50 && banknotyDoWyplacenia[i] > 0 && wybranaKwota == 10) ||
+                        ((nominaly[i] == 50 && banknotyDoWyplacenia[i] > 0 && wybranaKwota == 30))) {
                     banknotyDoWyplacenia[i] = banknotyDoWyplacenia[i] - 1;
-                    wybranaKwota = 60;
+                    wybranaKwota += 50;
                 }
             } else if (iloscPrzechowywanychBanknotow[i] < wybranaKwota / nominaly[i]) {
                 banknotyDoWyplacenia[i] = iloscPrzechowywanychBanknotow[i];
