@@ -45,10 +45,8 @@ public class Poczta {
     }
 
     public void wyslijListonosza() {
-        for (int i = 0; i < listyDoWyslania.length; i++) { //todo mozna wykorzystac licznik z góry
-            if (listyDoWyslania[i] != null) {
-                listyDoWyslania[i].setStatus("wysłany");
-            }
+        for (int i = 0; i < licznikNadanychListow; i++) { //todo mozna wykorzystac licznik z góry
+            listyDoWyslania[i].setStatus("wysłany");
         }
     }
 

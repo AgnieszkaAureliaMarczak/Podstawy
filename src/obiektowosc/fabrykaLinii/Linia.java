@@ -23,6 +23,10 @@ public class Linia {
         this.dlugosc = dlugosc;
     }
 
+    public int getDlugosc() {
+        return dlugosc;
+    }
+
     public void setWypelnienie(char wypelnienie) {
         this.wypelnienie = wypelnienie;
     }

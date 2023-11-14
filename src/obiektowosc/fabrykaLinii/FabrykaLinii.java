@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class FabrykaLinii {
 
+    private int dlugoscOstaniejLinii;
+
     private Random random = new Random();
 
     public Linia stworzLinieLosowejDlugosciZwybranymZnakiem(char wypelnienie) {
@@ -33,7 +35,6 @@ public class FabrykaLinii {
     public Linia stworzLinie2razyWiekszaOdPoprzedniej(int dlugoscPoprzedniejLinii) {
         int asciiCode = random.nextInt(1, 140_000);
         char symbol = (char) (asciiCode);
-        int dlugosc = dlugoscPoprzedniejLinii * 2;
-        return new Linia(dlugosc, symbol);
+        return new Linia(dlugoscPoprzedniejLinii * 2, symbol);
     }
 }
