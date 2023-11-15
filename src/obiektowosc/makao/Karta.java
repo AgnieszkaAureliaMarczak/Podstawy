@@ -11,9 +11,15 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta{" +
-                "kolor='" + kolor + '\'' +
-                ", nominal=" + nominal +
-                '}';
+        if (nominal == 14){
+            return kolor + ", as";
+        } else if (nominal == 13) {
+            return kolor + ", król";
+        } else if (nominal == 12) {
+            return kolor + ", dama";
+        } else if (nominal == 11) {
+            return kolor + ", walet";
+        }
+        return kolor + ", " + nominal;
     }
 }
