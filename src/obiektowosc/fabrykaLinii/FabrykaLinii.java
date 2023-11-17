@@ -4,24 +4,29 @@ import java.util.Random;
 
 public class FabrykaLinii {
 
-    private int dlugoscOstaniejLinii;
+    private int dlugoscOstaniejLinii = 1;
 
     private Random random = new Random();
 
     public Linia stworzLinieLosowejDlugosciZwybranymZnakiem(char wypelnienie) {
-        return new Linia(random.nextInt(1, 51), wypelnienie);
+        return new Linia(wylosujDlugosc(), wypelnienie);
     }
 
     public Linia stworzLinieWybranejDlugosciIzLosowymZnakiem(int dlugosc) {
-        int asciiCode = random.nextInt(1, 140_000);
-        char symbol = (char) (asciiCode);
-        return new Linia(dlugosc, symbol);
+        return new Linia(dlugosc, wylosujZnak());
     }
 
     public Linia stworzLinieZlosowaDlugosciaIzLosowymZnakiem() {
+        return new Linia(wylosujDlugosc(), wylosujZnak());
+    }
+
+    private char wylosujZnak(){
         int asciiCode = random.nextInt(1, 140_000);
-        char symbol = (char) (asciiCode);
-        return new Linia(random.nextInt(1, 51), symbol);
+        return (char) (asciiCode);
+    }
+
+    private int wylosujDlugosc(){
+     return random.nextInt(1, 51);
     }
 
     public Linia[] stworzOkreslonaIloscLiniiZlosowaDlugosciaIznakiem(int iloscLinii) {
@@ -32,9 +37,9 @@ public class FabrykaLinii {
         return tablicaLinii;
     }
 
-    public Linia stworzLinie2razyWiekszaOdPoprzedniej(int dlugoscPoprzedniejLinii) {
-        int asciiCode = random.nextInt(1, 140_000);
-        char symbol = (char) (asciiCode);
-        return new Linia(dlugoscPoprzedniejLinii * 2, symbol);
+    public Linia stworzLinie2razyWiekszaOdPoprzedniej() {
+        int dlugoscTejLinii = dlugoscOstaniejLinii * 2;
+        dlugoscOstaniejLinii = dlugoscTejLinii;
+        return new Linia(dlugoscTejLinii, wylosujZnak());
     }
 }

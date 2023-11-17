@@ -14,11 +14,11 @@ public class LiniaDemo {
             linia.drukujLinie();
         }
         System.out.println();
-        Linia pierwsza = fabryka.stworzLinie2razyWiekszaOdPoprzedniej(1);
+        Linia pierwsza = fabryka.stworzLinie2razyWiekszaOdPoprzedniej();
         pierwsza.drukujLinie();
-        Linia druga = fabryka.stworzLinie2razyWiekszaOdPoprzedniej(pierwsza.getDlugosc());
+        Linia druga = fabryka.stworzLinie2razyWiekszaOdPoprzedniej();
         druga.drukujLinie();
-        Linia trzecia = fabryka.stworzLinie2razyWiekszaOdPoprzedniej(druga.getDlugosc());
+        Linia trzecia = fabryka.stworzLinie2razyWiekszaOdPoprzedniej();
         trzecia.drukujLinie();
         System.exit(0);
 
