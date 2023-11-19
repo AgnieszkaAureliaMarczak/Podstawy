@@ -19,4 +19,16 @@ public class Gracz {
             System.out.println((i + 1) + ": " + karty.get(i));
         }
     }
+
+    public Karta dajKarteZWybranejPozycji(int index){
+        return karty.get(index);
+    }
+
+    public Karta wylozKarte(int numerKarty){
+     return karty.remove(numerKarty-1);
+    }
+
+    public void wykonajRuch() {
+
+    }
 }

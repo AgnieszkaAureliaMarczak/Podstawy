@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Demo {
     public static void main(String[] args) {
         Nominal nominal1 = Nominal.valueOf("DAMA");
+        Kolor kolor = Kolor.KARO;
         System.out.println(Arrays.toString(Nominal.values()));
         System.out.println(nominal1);
         Nominal nominal = Nominal.DAMA;

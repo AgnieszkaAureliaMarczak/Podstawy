@@ -13,6 +13,9 @@ public class Karta {
         return nominal.getNumerycznaWartosc();
     }
 
+    public Kolor getKolor() {
+        return kolor;
+    }
 
     @Override
     public String toString() {

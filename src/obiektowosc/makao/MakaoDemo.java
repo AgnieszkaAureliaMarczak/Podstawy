@@ -4,11 +4,14 @@ public class MakaoDemo {
     public static void main(String[] args) {
         Gra makao = new Gra();
         makao.powitaj();
-        makao.ustalLiczbeGraczyIprzygotujIchTabliceKart();
-        makao.potasujTalieKart(makao.stworzTalieKart());
+        makao.ustalLiczbeGraczy();
+        makao.potasujKartyDoGry(makao.stworzTalieKart());
         makao.rozdajKarty();
         makao.wyswietlKartyGracza();
-        makao.rozpocznijGre();
-        makao.wykonajRuch();
+        makao.wykonajRuch(makao.odslonPierwszaKarte());
+      //  Czlowiek gracz1 = new Czlowiek();
+      //  gracz1.wykonajRuch();
+
+
     }
 }

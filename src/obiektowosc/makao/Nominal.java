@@ -1,26 +1,28 @@
 package obiektowosc.makao;
 
 public enum Nominal {
-    DWA(2),
-    TRZY(3),
-    CZTERY(4),
-    PIEC(5),
-    SZESC(6),
-    SIEDEM(7),
-    OSIEM(8),
-    DZIEWIEC(9),
-    DZIESIEC(10),
-    WALET(11),
-    DAMA(12),
-    KROL(13),
-    AS(14);
+    DWA(2, "Dwa"),
+    TRZY(3, "Trzy"),
+    CZTERY(4, "Cztery"),
+    PIEC(5, "Pięć"),
+    SZESC(6, "Sześć"),
+    SIEDEM(7, "Siedem"),
+    OSIEM(8, "Osiem"),
+    DZIEWIEC(9, "Dziewięć"),
+    DZIESIEC(10, "Dziesięć"),
+    WALET(11, "Walet"),
+    DAMA(12, "Dama"),
+    KROL(13, "Król"),
+    AS(14, "As");
 
     //pola - cechy
     private int numerycznaWartosc;
+    private String wyswietlanaNazwa;
     //konstruktory
 
-    Nominal(int numerycznaWartosc) {
+    Nominal(int numerycznaWartosc, String wyswietlanaNazwa) {
         this.numerycznaWartosc = numerycznaWartosc;
+        this.wyswietlanaNazwa = wyswietlanaNazwa;
     }
 
     //metody
@@ -34,6 +36,6 @@ public enum Nominal {
 
     @Override
     public String toString() {
-        return name().substring(0,1)+ name().substring(1).toLowerCase();
+        return wyswietlanaNazwa;
     }
 }
