@@ -64,7 +64,6 @@ public class Gra {
     }
 
     public void wyswietlKartyGracza() {
-        System.out.println("Twoje karty:");
         dajPierwszegoGracza().wyswietlKarty();
     }
 
@@ -86,21 +85,45 @@ public class Gra {
         boolean wlasciwyRuch = true;
         int numerKarty;
         do {
-            System.out.println("Twoj ruch. \nWpisz liczbę odpowiadającej karcie, którą chcesz wyłożyć.\n" +
-                    "Jeśli nie masz pasującej karty, wpisz 0.");
-            numerKarty = scanner.nextInt();
+            wyswietlKomunikat();
+            numerKarty = pobierzNumerKarty();
             if (numerKarty > dajPierwszegoGracza().dajIloscKart() || numerKarty < 0) {
-                System.out.println("Podana karta nie istnieje.\nSpróbuj jeszcze raz.");
-                System.out.println();
-                wlasciwyRuch = false;
+                wlasciwyRuch = zareagujGdyKartaPozaZakresem(numerKarty);
             }
         } while (!wlasciwyRuch);
+        if (numerKarty == 0) {
+            zareagujNaBrakPasujacejKarty();
+        } else {
+            zareagujNaWylozonaKarte(numerKarty, odslonietaKarta);
+        }
+    }
 
+    private void wyswietlKomunikat() {
+        System.out.println("Twoj ruch. \nWpisz liczbę odpowiadającej karcie, którą chcesz wyłożyć.\n" +
+                "Jeśli nie masz pasującej karty, wpisz 0.");
+    }
+
+    private int pobierzNumerKarty(){
+       return scanner.nextInt();
+    }
+
+    private boolean zareagujGdyKartaPozaZakresem(int numerKarty) {
+        System.out.println("Podana karta nie istnieje.\nSpróbuj jeszcze raz.");
+        System.out.println();
+        return false;
+    }
+
+    private void zareagujNaBrakPasujacejKarty(){
+        dajPierwszegoGracza().otrzymajKarte(taliaKart.remove(0));
+        System.out.println("Dostajesz dodatkową kartę.");
+        dajPierwszegoGracza().wyswietlKarty();
+    }
+
+    private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta){
         Karta kartaWylozonaPrzezGracza = dajPierwszegoGracza().dajKarteZWybranejPozycji(numerKarty - 1);
-
         if ((kartaWylozonaPrzezGracza.getNumerycznaWartosc() !=
                 odslonietaKarta.getNumerycznaWartosc()) &&
-                (!kartaWylozonaPrzezGracza.getKolor().name().equals(odslonietaKarta.getKolor().name()))) {
+                (kartaWylozonaPrzezGracza.getKolor() != odslonietaKarta.getKolor())) {
             System.out.println("Podana karta nie pasuje. Straciłeś ruch.");
         } else {
             stos.add(dajPierwszegoGracza().wylozKarte(numerKarty));
@@ -110,4 +133,5 @@ public class Gra {
             }*/
         }
     }
+
 }

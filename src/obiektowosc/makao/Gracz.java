@@ -15,6 +15,7 @@ public class Gracz {
     }
 
     public void wyswietlKarty(){
+        System.out.println("Twoje karty:");
         for (int i = 0; i < dajIloscKart(); i++) {
             System.out.println((i + 1) + ": " + karty.get(i));
         }
