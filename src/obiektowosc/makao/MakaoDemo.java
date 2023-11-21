@@ -7,8 +7,10 @@ public class MakaoDemo {
         makao.ustalLiczbeGraczy();
         makao.potasujKartyDoGry(makao.stworzTalieKart());
         makao.rozdajKarty();
-        makao.wyswietlKartyGracza();
+        makao.wyswietlKartyPierwszegoGracza();
         makao.wykonajRuch(makao.odslonPierwszaKarte());
+        System.out.println();
+        makao.wykonajRuch2();
       //  Czlowiek gracz1 = new Czlowiek();
       //  gracz1.wykonajRuch();
 

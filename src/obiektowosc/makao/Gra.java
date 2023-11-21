@@ -29,8 +29,9 @@ public class Gra {
                 wlasciwaLiczbaGraczy = false;
             }
         } while (!wlasciwaLiczbaGraczy);
-        for (int i = 0; i < liczbaGraczy; i++) {
-            gracze.add(new Gracz());
+        gracze.add(new Czlowiek());
+        for (int i = 1; i < liczbaGraczy; i++) {
+            gracze.add(new Komputer());
         }
     }
 
@@ -63,7 +64,7 @@ public class Gra {
         }
     }
 
-    public void wyswietlKartyGracza() {
+    public void wyswietlKartyPierwszegoGracza() {
         dajPierwszegoGracza().wyswietlKarty();
     }
 
@@ -77,18 +78,28 @@ public class Gra {
         Karta kartaNaStole = taliaKart.get(0);
         System.out.println("Karta na stole to: " + kartaNaStole);
         System.out.println();
-        stos.add(taliaKart.remove(0));
+        dolozKarteDoStosu(taliaKart.remove(0));
         return kartaNaStole;
     }
 
+    private void dolozKarteDoStosu(Karta karta) {
+        stos.add(karta);
+    }
+
+    private Karta dajOstatniaKarteZeStosu() {
+        return stos.get(stos.size() - 1);
+    }
+    //metody czlowieka
+
     public void wykonajRuch(Karta odslonietaKarta) {
-        boolean wlasciwyRuch = true;
+        boolean wlasciwyRuch;
         int numerKarty;
         do {
+            wlasciwyRuch = true;
             wyswietlKomunikat();
             numerKarty = pobierzNumerKarty();
             if (numerKarty > dajPierwszegoGracza().dajIloscKart() || numerKarty < 0) {
-                wlasciwyRuch = zareagujGdyKartaPozaZakresem(numerKarty);
+                wlasciwyRuch = zareagujGdyKartaPozaZakresem();
             }
         } while (!wlasciwyRuch);
         if (numerKarty == 0) {
@@ -103,35 +114,66 @@ public class Gra {
                 "Jeśli nie masz pasującej karty, wpisz 0.");
     }
 
-    private int pobierzNumerKarty(){
-       return scanner.nextInt();
+    private int pobierzNumerKarty() {
+        return scanner.nextInt();
     }
 
-    private boolean zareagujGdyKartaPozaZakresem(int numerKarty) {
+    private boolean zareagujGdyKartaPozaZakresem() {
         System.out.println("Podana karta nie istnieje.\nSpróbuj jeszcze raz.");
         System.out.println();
         return false;
     }
 
-    private void zareagujNaBrakPasujacejKarty(){
+    private void zareagujNaBrakPasujacejKarty() {
         dajPierwszegoGracza().otrzymajKarte(taliaKart.remove(0));
         System.out.println("Dostajesz dodatkową kartę.");
         dajPierwszegoGracza().wyswietlKarty();
     }
 
-    private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta){
+    private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta) {
         Karta kartaWylozonaPrzezGracza = dajPierwszegoGracza().dajKarteZWybranejPozycji(numerKarty - 1);
         if ((kartaWylozonaPrzezGracza.getNumerycznaWartosc() !=
                 odslonietaKarta.getNumerycznaWartosc()) &&
                 (kartaWylozonaPrzezGracza.getKolor() != odslonietaKarta.getKolor())) {
             System.out.println("Podana karta nie pasuje. Straciłeś ruch.");
         } else {
-            stos.add(dajPierwszegoGracza().wylozKarte(numerKarty));
-            /*dajPierwszegoGracza().wyswietlKarty();
+            dolozKarteDoStosu(dajPierwszegoGracza().wylozKarteCz(numerKarty));
+            dajPierwszegoGracza().wyswietlKarty();
             for (Karta karta : stos) {
                 System.out.println(karta);
-            }*/
+            }
         }
     }
 
+    /// metody komputera
+    public void wykonajRuch2() {
+        boolean czyPasujacyKolor = porownajKolor(dajOstatniaKarteZeStosu());
+        if (!czyPasujacyKolor) {
+            porownajNominal(dajOstatniaKarteZeStosu());
+        }
+        gracze.get(1).wyswietlKarty();
+        for (Karta karta : stos) {
+            System.out.println(karta);
+        }
+    }
+
+    private boolean porownajKolor(Karta karta) {
+        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
+            if (karta.getKolor() == gracze.get(1).dajKarteZWybranejPozycji(i).getKolor()) {
+                dolozKarteDoStosu(gracze.get(1).wylozKarteKomp(i));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean porownajNominal(Karta karta) {
+        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
+            if (karta.getNumerycznaWartosc() == gracze.get(1).dajKarteZWybranejPozycji(i).getNumerycznaWartosc()) {
+                dolozKarteDoStosu(gracze.get(1).wylozKarteKomp(i));
+                return true;
+            }
+        }
+        return false;
+    }
 }
