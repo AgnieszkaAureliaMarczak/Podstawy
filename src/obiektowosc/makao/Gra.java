@@ -147,33 +147,44 @@ public class Gra {
 
     /// metody komputera
     public void wykonajRuch2() {
-        boolean czyPasujacyKolor = porownajKolor(dajOstatniaKarteZeStosu());
-        if (!czyPasujacyKolor) {
-            porownajNominal(dajOstatniaKarteZeStosu());
+        boolean wylozonaKarta = wylozKarte(sprawdzKolor(dajOstatniaKarteZeStosu()));
+        if (!wylozonaKarta) {
+            wylozonaKarta = wylozKarte(sprawdzNominal(dajOstatniaKarteZeStosu()));
         }
+        if (!wylozonaKarta) {
+            gracze.get(1).otrzymajKarte(taliaKart.remove(0));
+        }
+
         gracze.get(1).wyswietlKarty();
+        System.out.println();
         for (Karta karta : stos) {
             System.out.println(karta);
         }
     }
 
-    private boolean porownajKolor(Karta karta) {
-        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
-            if (karta.getKolor() == gracze.get(1).dajKarteZWybranejPozycji(i).getKolor()) {
-                dolozKarteDoStosu(gracze.get(1).wylozKarteKomp(i));
-                return true;
-            }
+    private boolean wylozKarte(Karta karta) {
+        if (karta != null) {
+            dolozKarteDoStosu(karta);
+            return true;
         }
         return false;
     }
 
-    private boolean porownajNominal(Karta karta) {
+    private Karta sprawdzKolor(Karta karta) {
         for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
-            if (karta.getNumerycznaWartosc() == gracze.get(1).dajKarteZWybranejPozycji(i).getNumerycznaWartosc()) {
-                dolozKarteDoStosu(gracze.get(1).wylozKarteKomp(i));
-                return true;
+            if (karta.getKolor() == gracze.get(1).dajKarteZWybranejPozycji(i).getKolor()) {
+                return gracze.get(1).wylozKarteKomp(i);
             }
         }
-        return false;
+        return null;
+    }
+
+    private Karta sprawdzNominal(Karta karta) {
+        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
+            if (karta.getNumerycznaWartosc() == gracze.get(1).dajKarteZWybranejPozycji(i).getNumerycznaWartosc()) {
+                return gracze.get(1).wylozKarteKomp(i);
+            }
+        }
+        return null;
     }
 }
