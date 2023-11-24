@@ -4,17 +4,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FajniejszyScanner {
-    private Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
-    public int pobierzLiczbe(String komunikat) {
-        try{
-            System.out.println(komunikat);
+    public static int pobierzLiczbe() {
+        try {
             return scanner.nextInt();
-        }catch (InputMismatchException e){
-            System.out.println("Nie podajemy liter");
-//            scanner.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Podano niepoprawną wartość. Podaj liczbę graczy (od 2 do 6).");
             scanner = new Scanner(System.in);
-            return pobierzLiczbe(komunikat);
+            return pobierzLiczbe();
         }
     }
 }

@@ -5,6 +5,4 @@ public class Komputer extends Gracz{
     public Karta wybierzKarte(Karta kartaZeStosu) {
         return dajPasujacaKarteDoZagrania(kartaZeStosu);
     }
-
-
 }

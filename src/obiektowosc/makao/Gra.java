@@ -3,7 +3,7 @@ package obiektowosc.makao;
 import java.util.*;
 
 public class Gra {
-    private List<Karta> taliaKart = new ArrayList<>();
+  //  private List<Karta> taliaKart = new ArrayList<>();
     private List<Karta> stos = new ArrayList<>();
     private List<Gracz> gracze = new ArrayList<>();
     private int liczbaGraczy;
@@ -15,15 +15,11 @@ public class Gra {
     }
 
     public void ustalLiczbeGraczy() {
-        boolean wlasciwaLiczbaGraczy = true;
+        boolean wlasciwaLiczbaGraczy;
         do {
-            System.out.println("Podaj liczbę graczy (od 2 do 6)");
-            // try {
-            liczbaGraczy = scanner.nextInt();
-           /* } catch (InputMismatchException e){
-                System.out.println("Podano niepoprawną wartość.");
-                wlasciwaLiczbaGraczy = false;
-            }*/
+            System.out.println("Podaj liczbę graczy (od 2 do 6).");
+            liczbaGraczy = FajniejszyScanner.pobierzLiczbe();
+            wlasciwaLiczbaGraczy = true;
             if (liczbaGraczy < 2 || liczbaGraczy > 6) {
                 System.out.println("Podana liczba graczy wykracza poza zakres 2-6.");
                 wlasciwaLiczbaGraczy = false;
@@ -36,7 +32,7 @@ public class Gra {
     }
 
 
-    public ArrayList<Karta> stworzTalieKart() {
+   /* public ArrayList<Karta> stworzTalieKart() {
         ArrayList<Karta> talia = new ArrayList<>();
         Kolor[] tablicaKolorow = Kolor.values();
         Nominal[] tablicaNominalow = Nominal.values();
@@ -55,15 +51,16 @@ public class Gra {
             int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
             taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
         }
-    }
+    }*/
 
-    public void rozdajKarty() {
+    public void rozdajKarty(List<Karta> taliaKart) {
         for (int i = 0; i < 5; i++) {
             for (Gracz gracz : gracze) {
                 gracz.otrzymajKarte(taliaKart.remove(0));
             }
         }
     }
+
 
     public void wyswietlKartyPierwszegoGracza() {
         dajPierwszegoGracza().wyswietlKarty();
@@ -73,7 +70,7 @@ public class Gra {
         return gracze.get(0);
     }
 
-    public Karta odslonPierwszaKarte() {
+    /*public Karta odslonPierwszaKarte() {
         System.out.println();
         System.out.println("Zaczynamy grę.");
         Karta kartaNaStole = taliaKart.get(0);
@@ -81,7 +78,7 @@ public class Gra {
         System.out.println();
         dolozKarteDoStosu(taliaKart.remove(0));
         return kartaNaStole;
-    }
+    }*/
 
     private void dolozKarteDoStosu(Karta karta) {
         stos.add(karta);
@@ -92,7 +89,7 @@ public class Gra {
     }
     //metody czlowieka
 
-    public void wykonajRuch(Karta odslonietaKarta) {
+    /*public void wykonajRuch(Karta odslonietaKarta) {
 
         for (Gracz aktualny : gracze) {
            if (!aktualny.czyMozeszZagracNa(odslonietaKarta)){
@@ -102,7 +99,7 @@ public class Gra {
            }
             aktualny.wybierzKarte(odslonietaKarta); // stos, komunikaty, jak gra czlowiek
         }
-    }
+    }*/
 
 /*    public void wykonajRuch() {
         Gracz aktualny = getAktualnyGracz();
@@ -129,11 +126,11 @@ public class Gra {
         return false;
     }
 
-    private void zareagujNaBrakPasujacejKarty() {
+    /*private void zareagujNaBrakPasujacejKarty() {
         dajPierwszegoGracza().otrzymajKarte(taliaKart.remove(0));
         System.out.println("Dostajesz dodatkową kartę.");
         dajPierwszegoGracza().wyswietlKarty();
-    }
+    }*/
 
     private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta) {
         Karta kartaWylozonaPrzezGracza = dajPierwszegoGracza().dajKarteZWybranejPozycji(numerKarty - 1);
@@ -151,7 +148,7 @@ public class Gra {
     }
 
     /// metody komputera
-    public void wykonajRuch2() {
+   /* public void wykonajRuch2() {
         boolean wylozonaKarta = wylozKarte(sprawdzKolor(dajOstatniaKarteZeStosu()));
         if (!wylozonaKarta) {
             wylozonaKarta = wylozKarte(sprawdzNominal(dajOstatniaKarteZeStosu()));
@@ -165,7 +162,7 @@ public class Gra {
         for (Karta karta : stos) {
             System.out.println(karta);
         }
-    }
+    }*/
 
     private boolean wylozKarte(Karta karta) {
         if (karta != null) {

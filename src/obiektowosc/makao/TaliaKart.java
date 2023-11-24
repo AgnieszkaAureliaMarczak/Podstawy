@@ -3,39 +3,49 @@ package obiektowosc.makao;
 import java.util.*;
 
 public class TaliaKart {
-    private List<Karta> taliaKart;
-    Random random = new Random();
-
-    public TaliaKart(){
-        taliaKart = new ArrayList<>();
-        Kolor[] tablicaKolorow = Kolor.values();
-        Nominal[] tablicaNominalow = Nominal.values();
-        List<Karta> taliaDoTasowania = new ArrayList<>();
-        for (Kolor kolor : tablicaKolorow) {
-            for (Nominal nominal : tablicaNominalow) {
-                //    System.out.printf("%s %d\n",nominal,nominal.getNumerycznaWartosc());
-                taliaDoTasowania.add(new Karta(kolor, nominal));
-            }
-        }
-       potasujKartyDoGry(taliaDoTasowania);
-    }
+    List<Karta> taliaKart = new ArrayList<>();
 
     public int dajIloscKartWtalii(){
       return taliaKart.size();
     }
 
-    public void potasujKartyDoGry(List<Karta> taliaDoTasowania) {
+    public List <Karta> dajTalieKart(){
+        return taliaKart;
+    }
+
+    public ArrayList<Karta> stworzTalieKart() {
+        ArrayList<Karta> talia = new ArrayList<>();
+        Kolor[] tablicaKolorow = Kolor.values();
+        Nominal[] tablicaNominalow = Nominal.values();
+        for (Kolor kolor : tablicaKolorow) {
+            for (Nominal nominal : tablicaNominalow) {
+                //    System.out.printf("%s %d\n",nominal,nominal.getNumerycznaWartosc());
+                talia.add(new Karta(kolor, nominal));
+            }
+        }
+        return talia;
+    }
+
+    public void potasujTalie(List<Karta> taliaDoTasowania) {
         Random random = new Random();
-        for (int i = 0; i < dajIloscKartWtalii(); i++) {
-            int wylosowanaKarta = random.nextInt(dajIloscKartWtalii());
+        for (int i = 0; i < 52; i++) {
+            int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
             taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
         }
     }
 
-    public Karta wyciagnijKarte(){
+    public Karta dajPierwszaKarte(){
         if (taliaKart.isEmpty()) {
             return null;
         }
         return taliaKart.remove(0);
+    }
+
+    public void wyswietlTalie(){
+        int indeks = 1;
+        for (Karta karta : taliaKart) {
+            System.out.println(indeks + ": " + karta);
+            indeks++;
+        }
     }
 }
