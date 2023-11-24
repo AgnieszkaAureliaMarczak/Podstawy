@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gracz {
-    private List<Karta> karty = new ArrayList<>();
+     List<Karta> karty = new ArrayList<>();
 
     public void otrzymajKarte(Karta karta) {
         karty.add(karta);
@@ -33,7 +33,23 @@ public class Gracz {
         return karty.remove(indexKarty);
     }
 
-    public void wykonajRuch() {
+    public boolean czyMozeszZagracNa(Karta kartaZeStosu){
+        Karta dopasowanaKarta = dajPasujacaKarteDoZagrania(kartaZeStosu);
+        return dopasowanaKarta != null;
+    }
 
+     Karta dajPasujacaKarteDoZagrania(Karta kartaZeStosu){
+        for (Karta kartaZReki : karty) {
+            if (kartaZReki.getKolor() == kartaZeStosu.getKolor() ||
+                    kartaZReki.getNumerycznaWartosc() == kartaZeStosu.getNumerycznaWartosc()){
+                return kartaZReki;
+            }
+        }
+        return null;
+    }
+
+    public Karta wybierzKarte(Karta kartaZeStosu) {
+        System.out.println("Gracz robi ruch");
+        return null;
     }
 }

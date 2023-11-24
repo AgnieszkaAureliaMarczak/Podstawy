@@ -26,13 +26,13 @@ public enum Nominal {
     }
 
     //metody
-   /* public int getNumerycznaWartosc() {
+   public int getNumerycznaWartosc() {
         return numerycznaWartosc;
-    }*/
-
-    public int getNumerycznaWartosc() {
-        return ordinal()+2;
     }
+
+   /* public int getNumerycznaWartosc() {
+        return ordinal()+2;
+    }*/
 
     @Override
     public String toString() {

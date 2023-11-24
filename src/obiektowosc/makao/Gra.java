@@ -3,8 +3,8 @@ package obiektowosc.makao;
 import java.util.*;
 
 public class Gra {
-    private ArrayList<Karta> taliaKart = new ArrayList<>();
-    private ArrayList<Karta> stos = new ArrayList<>();
+    private List<Karta> taliaKart = new ArrayList<>();
+    private List<Karta> stos = new ArrayList<>();
     private List<Gracz> gracze = new ArrayList<>();
     private int liczbaGraczy;
     static Scanner scanner = new Scanner(System.in);
@@ -34,6 +34,7 @@ public class Gra {
             gracze.add(new Komputer());
         }
     }
+
 
     public ArrayList<Karta> stworzTalieKart() {
         ArrayList<Karta> talia = new ArrayList<>();
@@ -68,7 +69,7 @@ public class Gra {
         dajPierwszegoGracza().wyswietlKarty();
     }
 
-    private Gracz dajPierwszegoGracza() {
+    public Gracz dajPierwszegoGracza() {
         return gracze.get(0);
     }
 
@@ -92,22 +93,26 @@ public class Gra {
     //metody czlowieka
 
     public void wykonajRuch(Karta odslonietaKarta) {
-        boolean wlasciwyRuch;
-        int numerKarty;
-        do {
-            wlasciwyRuch = true;
-            wyswietlKomunikat();
-            numerKarty = pobierzNumerKarty();
-            if (numerKarty > dajPierwszegoGracza().dajIloscKart() || numerKarty < 0) {
-                wlasciwyRuch = zareagujGdyKartaPozaZakresem();
-            }
-        } while (!wlasciwyRuch);
-        if (numerKarty == 0) {
-            zareagujNaBrakPasujacejKarty();
-        } else {
-            zareagujNaWylozonaKarte(numerKarty, odslonietaKarta);
+
+        for (Gracz aktualny : gracze) {
+           if (!aktualny.czyMozeszZagracNa(odslonietaKarta)){
+               System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
+               aktualny.otrzymajKarte(taliaKart.remove(0));
+               continue;
+           }
+            aktualny.wybierzKarte(odslonietaKarta); // stos, komunikaty, jak gra czlowiek
         }
     }
+
+/*    public void wykonajRuch() {
+        Gracz aktualny = getAktualnyGracz();
+        if (!czyMozeCosZagracz(aktualny)) {
+            System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
+            return;
+        }
+        Karta wybrana = aktualny.wybierzKarte();
+        zareagujNaZagranaKarte(wybrana);
+    }*/
 
     private void wyswietlKomunikat() {
         System.out.println("Twoj ruch. \nWpisz liczbę odpowiadającej karcie, którą chcesz wyłożyć.\n" +

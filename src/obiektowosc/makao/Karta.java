@@ -19,7 +19,6 @@ public class Karta {
 
     @Override
     public String toString() {
-
         return kolor + ", " + nominal;
     }
 }
