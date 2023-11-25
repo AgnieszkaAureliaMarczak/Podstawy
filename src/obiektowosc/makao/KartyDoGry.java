@@ -30,7 +30,7 @@ public class KartyDoGry {
         return taliaKart;
     }
 
-    public Karta usunPierwszaKarteZtalii(){
+    public Karta usunKarteZtalii(){
         if (taliaKart.isEmpty()) {
             return null;
         }

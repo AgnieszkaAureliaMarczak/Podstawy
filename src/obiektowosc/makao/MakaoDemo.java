@@ -4,21 +4,10 @@ package obiektowosc.makao;
 public class MakaoDemo {
     public static void main(String[] args) {
         grajWmakao();
-
-
         System.exit(0);
 
         //  List<Gracz> gracze = List.of(new Czlowiek(), new Komputer(), new Komputer());
 
-        //polimorfizm
-        //Gracz aktualny = gracze.get(aktualnyIndex);
-        //aktualny.wykonajRuch();
-       /* for (Gracz aktualny : gracze) {
-            aktualny.wykonajRuch();
-        }*/
-
-
-        System.out.println();
 
     }
 
@@ -33,11 +22,12 @@ public class MakaoDemo {
         makao.rozdajKarty(taliaKart.dajTalieKart());
         makao.wyswietlKartyPierwszegoGracza();
 
+        makao.rozpocznijGre();
+
+        Karta odslonietaKarta = taliaKart.usunKarteZtalii();
+        makao.dolozKarteDoStosu(odslonietaKarta);
         int aktualnyIndex = 0;
         Gracz aktualny = makao.dajGracza(aktualnyIndex);
-        Karta odslonietaKarta = taliaKart.usunPierwszaKarteZtalii();
-        makao.dolozPierwszaKarteDoStosu(odslonietaKarta);
-
         aktualny.wykonajRuch(odslonietaKarta, taliaKart.dajPierwszaKarteZtalii(), makao.dajGraczy());
 
 

@@ -33,6 +33,27 @@ public class Gracz {
         return karty.remove(indexKarty);
     }
 
+    public void wykonajRuch(Karta odslonietaKarta,Karta kartaZtalii, List<Gracz> gracze) {
+        for (Gracz aktualny : gracze) {
+            if (!aktualny.czyMozeszZagracNa(odslonietaKarta)){
+                System.out.println("Gracz nie mogl nic zagrac, dobiera kartę.");
+                aktualny.otrzymajKarte(kartaZtalii);
+                continue;
+            }
+            aktualny.wybierzKarte(odslonietaKarta); // stos, komunikaty, jak gra czlowiek
+        }
+    }
+    //metody czlowieka
+
+    /*    public void wykonajRuch() {
+            Gracz aktualny = getAktualnyGracz();
+            if (!czyMozeCosZagracz(aktualny)) {
+                System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
+                return;
+            }
+            Karta wybrana = aktualny.wybierzKarte();
+            zareagujNaZagranaKarte(wybrana);
+        }*/
     public boolean czyMozeszZagracNa(Karta kartaZeStosu){
         Karta dopasowanaKarta = dajPasujacaKarteDoZagrania(kartaZeStosu);
         return dopasowanaKarta != null;
@@ -52,29 +73,4 @@ public class Gracz {
         System.out.println("Gracz robi ruch");
         return null;
     }
-
-    public void wykonajRuch(Karta odslonietaKarta,Karta kartaZtalii, List<Gracz> gracze) {
-        for (Gracz aktualny : gracze) {
-            if (!aktualny.czyMozeszZagracNa(odslonietaKarta)){
-                System.out.println("Gracz nie mogl nic zagrac, dobiera kartę.");
-                aktualny.otrzymajKarte(kartaZtalii);
-                continue;
-            }
-            aktualny.wybierzKarte(odslonietaKarta); // stos, komunikaty, jak gra czlowiek
-        }
-    }
-
-    //metody czlowieka
-
-
-
-/*    public void wykonajRuch() {
-        Gracz aktualny = getAktualnyGracz();
-        if (!czyMozeCosZagracz(aktualny)) {
-            System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
-            return;
-        }
-        Karta wybrana = aktualny.wybierzKarte();
-        zareagujNaZagranaKarte(wybrana);
-    }*/
 }

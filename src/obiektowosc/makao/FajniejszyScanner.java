@@ -10,7 +10,7 @@ public class FajniejszyScanner {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("Podano niepoprawną wartość. Podaj liczbę graczy (od 2 do 6).");
+            System.out.println("Podana wartość nie jest liczbą. Podaj ponownie.");
             scanner = new Scanner(System.in);
             return pobierzLiczbe();
         }

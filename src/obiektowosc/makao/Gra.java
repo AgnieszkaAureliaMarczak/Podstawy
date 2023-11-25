@@ -45,7 +45,6 @@ public class Gra {
         }
     }
 
-
     public void wyswietlKartyPierwszegoGracza() {
         dajPierwszegoGracza().wyswietlKarty();
     }
@@ -54,16 +53,15 @@ public class Gra {
         return gracze.get(0);
     }
 
-    public void dolozPierwszaKarteDoStosu(Karta pierwszaKarta) {
+    public void rozpocznijGre(){
         System.out.println();
         System.out.println("Zaczynamy grę.");
-        System.out.println("Karta na stole to: " + pierwszaKarta);
-        System.out.println();
-        dolozKarteDoStosu(pierwszaKarta);
     }
 
-    private void dolozKarteDoStosu(Karta karta) {
-        stos.add(karta);
+    public void dolozKarteDoStosu(Karta pierwszaKarta) {
+        System.out.println("Karta na stole to: " + pierwszaKarta);
+        System.out.println();
+        stos.add(pierwszaKarta);
     }
 
     private Karta dajOstatniaKarteZeStosu() {
@@ -71,28 +69,10 @@ public class Gra {
     }
 
 
-    private void wyswietlKomunikat() {
-        System.out.println("Twoj ruch. \nWpisz liczbę odpowiadającej karcie, którą chcesz wyłożyć.\n" +
-                "Jeśli nie masz pasującej karty, wpisz 0.");
-    }
 
-    private int pobierzNumerKarty() {
-        return scanner.nextInt();
-    }
 
-    private boolean zareagujGdyKartaPozaZakresem() {
-        System.out.println("Podana karta nie istnieje.\nSpróbuj jeszcze raz.");
-        System.out.println();
-        return false;
-    }
 
-    /*private void zareagujNaBrakPasujacejKarty() {
-        dajPierwszegoGracza().otrzymajKarte(taliaKart.remove(0));
-        System.out.println("Dostajesz dodatkową kartę.");
-        dajPierwszegoGracza().wyswietlKarty();
-    }*/
-
-    private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta) {
+    /*private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta) {
         Karta kartaWylozonaPrzezGracza = dajPierwszegoGracza().dajKarteZWybranejPozycji(numerKarty - 1);
         if ((kartaWylozonaPrzezGracza.getNumerycznaWartosc() !=
                 odslonietaKarta.getNumerycznaWartosc()) &&
@@ -105,7 +85,7 @@ public class Gra {
                 System.out.println(karta);
             }
         }
-    }
+    }*/
 
     /// metody komputera
    /* public void wykonajRuch2() {
@@ -124,13 +104,13 @@ public class Gra {
         }
     }*/
 
-    private boolean wylozKarte(Karta karta) {
+    /*private boolean wylozKarte(Karta karta) {
         if (karta != null) {
             dolozKarteDoStosu(karta);
             return true;
         }
         return false;
-    }
+    }*/
 
     private Karta sprawdzKolor(Karta karta) {
         for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
