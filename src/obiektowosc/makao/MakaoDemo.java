@@ -18,9 +18,8 @@ public class MakaoDemo {
         }*/
 
 
-        //  makao.wykonajRuch(makao.odslonPierwszaKarte());
         System.out.println();
-        //  makao.wykonajRuch2();
+
     }
 
     public static void grajWmakao() {
@@ -36,9 +35,11 @@ public class MakaoDemo {
 
         int aktualnyIndex = 0;
         Gracz aktualny = makao.dajGracza(aktualnyIndex);
-        makao.odslonPierwszaKarte(taliaKart.dajPierwszaKarte());
+        Karta odslonietaKarta = taliaKart.usunPierwszaKarteZtalii();
+        makao.dolozPierwszaKarteDoStosu(odslonietaKarta);
 
-        //aktualny.wykonajRuch();
+        aktualny.wykonajRuch(odslonietaKarta, taliaKart.dajPierwszaKarteZtalii(), makao.dajGraczy());
+
 
     }
 }

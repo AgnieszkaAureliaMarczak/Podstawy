@@ -12,6 +12,10 @@ public class Gra {
         return gracze.get(indeks);
     }
 
+    public List<Gracz> dajGraczy(){
+        return gracze;
+    }
+
     public void powitaj() {
         System.out.println("Witaj w grze w makao!");
     }
@@ -50,7 +54,7 @@ public class Gra {
         return gracze.get(0);
     }
 
-    public void odslonPierwszaKarte(Karta pierwszaKarta) {
+    public void dolozPierwszaKarteDoStosu(Karta pierwszaKarta) {
         System.out.println();
         System.out.println("Zaczynamy grę.");
         System.out.println("Karta na stole to: " + pierwszaKarta);
@@ -65,29 +69,7 @@ public class Gra {
     private Karta dajOstatniaKarteZeStosu() {
         return stos.get(stos.size() - 1);
     }
-    //metody czlowieka
 
-    /*public void wykonajRuch(Karta odslonietaKarta) {
-
-        for (Gracz aktualny : gracze) {
-           if (!aktualny.czyMozeszZagracNa(odslonietaKarta)){
-               System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
-               aktualny.otrzymajKarte(taliaKart.remove(0));
-               continue;
-           }
-            aktualny.wybierzKarte(odslonietaKarta); // stos, komunikaty, jak gra czlowiek
-        }
-    }*/
-
-/*    public void wykonajRuch() {
-        Gracz aktualny = getAktualnyGracz();
-        if (!czyMozeCosZagracz(aktualny)) {
-            System.out.println("Gracz nie mogl nic zagrac, dobiera karte");
-            return;
-        }
-        Karta wybrana = aktualny.wybierzKarte();
-        zareagujNaZagranaKarte(wybrana);
-    }*/
 
     private void wyswietlKomunikat() {
         System.out.println("Twoj ruch. \nWpisz liczbę odpowiadającej karcie, którą chcesz wyłożyć.\n" +

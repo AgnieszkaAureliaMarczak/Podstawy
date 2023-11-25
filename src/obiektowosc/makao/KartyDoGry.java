@@ -5,21 +5,6 @@ import java.util.*;
 public class KartyDoGry {
     private List<Karta> taliaKart = new ArrayList<>();
 
-    public List <Karta> dajTalieKart(){
-        return taliaKart;
-    }
-
-    public int dajIloscKartWtalii(){
-      return taliaKart.size();
-    }
-
-    public Karta dajPierwszaKarte(){
-        if (taliaKart.isEmpty()) {
-            return null;
-        }
-        return taliaKart.remove(0);
-    }
-
     public ArrayList<Karta> stworzTalieKart() {
         ArrayList<Karta> talia = new ArrayList<>();
         Kolor[] tablicaKolorow = Kolor.values();
@@ -41,11 +26,33 @@ public class KartyDoGry {
         }
     }
 
+    public List <Karta> dajTalieKart(){
+        return taliaKart;
+    }
+
+    public Karta usunPierwszaKarteZtalii(){
+        if (taliaKart.isEmpty()) {
+            return null;
+        }
+        return taliaKart.remove(0);
+    }
+
+    public Karta dajPierwszaKarteZtalii(){
+        if (taliaKart.isEmpty()) {
+            return null;
+        }
+        return taliaKart.get(0);
+    }
+
     public void wyswietlTalie(){
         int indeks = 1;
         for (Karta karta : taliaKart) {
             System.out.println(indeks + ": " + karta);
             indeks++;
         }
+    }
+
+    public int dajIloscKartWtalii(){
+      return taliaKart.size();
     }
 }
