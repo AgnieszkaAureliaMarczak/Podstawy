@@ -2,15 +2,22 @@ package obiektowosc.makao;
 
 import java.util.*;
 
-public class TaliaKart {
-    List<Karta> taliaKart = new ArrayList<>();
+public class KartyDoGry {
+    private List<Karta> taliaKart = new ArrayList<>();
+
+    public List <Karta> dajTalieKart(){
+        return taliaKart;
+    }
 
     public int dajIloscKartWtalii(){
       return taliaKart.size();
     }
 
-    public List <Karta> dajTalieKart(){
-        return taliaKart;
+    public Karta dajPierwszaKarte(){
+        if (taliaKart.isEmpty()) {
+            return null;
+        }
+        return taliaKart.remove(0);
     }
 
     public ArrayList<Karta> stworzTalieKart() {
@@ -32,13 +39,6 @@ public class TaliaKart {
             int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
             taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
         }
-    }
-
-    public Karta dajPierwszaKarte(){
-        if (taliaKart.isEmpty()) {
-            return null;
-        }
-        return taliaKart.remove(0);
     }
 
     public void wyswietlTalie(){

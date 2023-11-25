@@ -3,12 +3,14 @@ package obiektowosc.makao;
 import java.util.*;
 
 public class Gra {
-  //  private List<Karta> taliaKart = new ArrayList<>();
     private List<Karta> stos = new ArrayList<>();
     private List<Gracz> gracze = new ArrayList<>();
     private int liczbaGraczy;
     static Scanner scanner = new Scanner(System.in);
 
+    public Gracz dajGracza(int indeks) {
+        return gracze.get(indeks);
+    }
 
     public void powitaj() {
         System.out.println("Witaj w grze w makao!");
@@ -31,28 +33,6 @@ public class Gra {
         }
     }
 
-
-   /* public ArrayList<Karta> stworzTalieKart() {
-        ArrayList<Karta> talia = new ArrayList<>();
-        Kolor[] tablicaKolorow = Kolor.values();
-        Nominal[] tablicaNominalow = Nominal.values();
-        for (Kolor kolor : tablicaKolorow) {
-            for (Nominal nominal : tablicaNominalow) {
-                //    System.out.printf("%s %d\n",nominal,nominal.getNumerycznaWartosc());
-                talia.add(new Karta(kolor, nominal));
-            }
-        }
-        return talia;
-    }
-
-    public void potasujKartyDoGry(ArrayList<Karta> taliaDoTasowania) {
-        Random random = new Random();
-        for (int i = 0; i < 52; i++) {
-            int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
-            taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
-        }
-    }*/
-
     public void rozdajKarty(List<Karta> taliaKart) {
         for (int i = 0; i < 5; i++) {
             for (Gracz gracz : gracze) {
@@ -70,15 +50,13 @@ public class Gra {
         return gracze.get(0);
     }
 
-    /*public Karta odslonPierwszaKarte() {
+    public void odslonPierwszaKarte(Karta pierwszaKarta) {
         System.out.println();
         System.out.println("Zaczynamy grę.");
-        Karta kartaNaStole = taliaKart.get(0);
-        System.out.println("Karta na stole to: " + kartaNaStole);
+        System.out.println("Karta na stole to: " + pierwszaKarta);
         System.out.println();
-        dolozKarteDoStosu(taliaKart.remove(0));
-        return kartaNaStole;
-    }*/
+        dolozKarteDoStosu(pierwszaKarta);
+    }
 
     private void dolozKarteDoStosu(Karta karta) {
         stos.add(karta);
