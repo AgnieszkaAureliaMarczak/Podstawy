@@ -20,7 +20,8 @@ public class KartyDoGry {
 
     public void potasujTalie(List<Karta> taliaDoTasowania) {
         Random random = new Random();
-        for (int i = 0; i < 52; i++) {
+        int rozmiarTalii = taliaDoTasowania.size();
+        for (int i = 0; i < rozmiarTalii; i++) {
             int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
             taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
         }
@@ -30,21 +31,14 @@ public class KartyDoGry {
         return taliaKart;
     }
 
-    public Karta usunKarteZtalii(){
+    public Karta usunPierwszaKarteZtalii(){
         if (taliaKart.isEmpty()) {
             return null;
         }
         return taliaKart.remove(0);
     }
 
-    public Karta dajPierwszaKarteZtalii(){
-        if (taliaKart.isEmpty()) {
-            return null;
-        }
-        return taliaKart.get(0);
-    }
-
-    public void wyswietlTalie(){
+    private void wyswietlTalie(){
         int indeks = 1;
         for (Karta karta : taliaKart) {
             System.out.println(indeks + ": " + karta);
@@ -52,7 +46,13 @@ public class KartyDoGry {
         }
     }
 
-    public int dajIloscKartWtalii(){
-      return taliaKart.size();
+    public void uzupelnijTalie(List<Karta> stos){
+        int rozmiarStosu = stos.size();
+        List<Karta> taliaDoTasowania = new ArrayList<>();
+        for (int i = 1; i < rozmiarStosu; i++) {
+            taliaDoTasowania.add(stos.remove(i));
+        }
+        potasujTalie(taliaDoTasowania);
+        wyswietlTalie();
     }
 }

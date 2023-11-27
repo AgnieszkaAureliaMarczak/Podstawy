@@ -4,10 +4,9 @@ package obiektowosc.makao;
 public class MakaoDemo {
     public static void main(String[] args) {
         grajWmakao();
-        System.exit(0);
+
 
         //  List<Gracz> gracze = List.of(new Czlowiek(), new Komputer(), new Komputer());
-
 
     }
 
@@ -20,16 +19,17 @@ public class MakaoDemo {
 
         taliaKart.potasujTalie(taliaKart.stworzTalieKart());
         makao.rozdajKarty(taliaKart.dajTalieKart());
-        makao.wyswietlKartyPierwszegoGracza();
+
+        makao.dajGracza(0).wyswietlKarty();
+        makao.dajGracza(1).wyswietlKarty();
+
 
         makao.rozpocznijGre();
-
-        Karta odslonietaKarta = taliaKart.usunKarteZtalii();
+        Karta odslonietaKarta = taliaKart.usunPierwszaKarteZtalii();
         makao.dolozKarteDoStosu(odslonietaKarta);
-        int aktualnyIndex = 0;
-        Gracz aktualny = makao.dajGracza(aktualnyIndex);
-        aktualny.wykonajRuch(odslonietaKarta, taliaKart.dajPierwszaKarteZtalii(), makao.dajGraczy());
 
+
+        makao.wykonajRuch(odslonietaKarta, taliaKart.dajTalieKart());
 
     }
 }

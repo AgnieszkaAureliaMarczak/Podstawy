@@ -6,7 +6,6 @@ public class Gra {
     private List<Karta> stos = new ArrayList<>();
     private List<Gracz> gracze = new ArrayList<>();
     private int liczbaGraczy;
-    static Scanner scanner = new Scanner(System.in);
 
     public Gracz dajGracza(int indeks) {
         return gracze.get(indeks);
@@ -15,6 +14,11 @@ public class Gra {
     public List<Gracz> dajGraczy(){
         return gracze;
     }
+
+    public List<Karta> dajStos(){
+        return stos;
+    }
+
 
     public void powitaj() {
         System.out.println("Witaj w grze w makao!");
@@ -31,10 +35,11 @@ public class Gra {
                 wlasciwaLiczbaGraczy = false;
             }
         } while (!wlasciwaLiczbaGraczy);
-        gracze.add(new Czlowiek());
+        gracze.add(new Czlowiek(1));
         for (int i = 1; i < liczbaGraczy; i++) {
-            gracze.add(new Komputer());
+            gracze.add(new Komputer(i + 1));
         }
+        System.out.println("Jesteś graczem nr 1.");
     }
 
     public void rozdajKarty(List<Karta> taliaKart) {
@@ -43,10 +48,6 @@ public class Gra {
                 gracz.otrzymajKarte(taliaKart.remove(0));
             }
         }
-    }
-
-    public void wyswietlKartyPierwszegoGracza() {
-        dajPierwszegoGracza().wyswietlKarty();
     }
 
     public Gracz dajPierwszegoGracza() {
@@ -58,75 +59,51 @@ public class Gra {
         System.out.println("Zaczynamy grę.");
     }
 
-    public void dolozKarteDoStosu(Karta pierwszaKarta) {
-        System.out.println("Karta na stole to: " + pierwszaKarta);
-        System.out.println();
-        stos.add(pierwszaKarta);
+    public void wyswietlKomunikatJakaKartaNaStosie(Karta kartaNaStole){
+            System.out.println("Twoj ruch. Karta na stole to: " + kartaNaStole);
+            System.out.println();
+    }
+    public void dolozKarteDoStosu(Karta kartaDoWylozenia) {
+        stos.add(kartaDoWylozenia);
     }
 
-    private Karta dajOstatniaKarteZeStosu() {
-        return stos.get(stos.size() - 1);
-    }
-
-
-
-
-
-    /*private void zareagujNaWylozonaKarte(int numerKarty, Karta odslonietaKarta) {
-        Karta kartaWylozonaPrzezGracza = dajPierwszegoGracza().dajKarteZWybranejPozycji(numerKarty - 1);
-        if ((kartaWylozonaPrzezGracza.getNumerycznaWartosc() !=
-                odslonietaKarta.getNumerycznaWartosc()) &&
-                (kartaWylozonaPrzezGracza.getKolor() != odslonietaKarta.getKolor())) {
-            System.out.println("Podana karta nie pasuje. Straciłeś ruch.");
-        } else {
-            dolozKarteDoStosu(dajPierwszegoGracza().wylozKarteCz(numerKarty));
-            dajPierwszegoGracza().wyswietlKarty();
-            for (Karta karta : stos) {
-                System.out.println(karta);
+    public void wykonajRuch(Karta odslonietaKarta, List<Karta> taliaKart) {
+        boolean koniecGry = false;
+        while (!koniecGry){
+            for (Gracz aktualny : gracze) {
+                if (aktualny.equals(dajPierwszegoGracza())){
+                    wyswietlKomunikatJakaKartaNaStosie(odslonietaKarta);
+                }
+                if (!aktualny.czyMozeszZagracNa(odslonietaKarta)) {
+                    ///pusta talia kart
+                    Karta otrzymana = taliaKart.remove(0);// metoda nie wywolana na obiekcie???
+                    aktualny.otrzymajKarte(otrzymana);
+                    System.out.println("Gracz nie mogl nic zagrac, dobiera kartę.\nOtrzymana karta to: " + otrzymana);
+                    continue;
+                }
+                Karta wybranaKarta = aktualny.wybierzKarte(odslonietaKarta);
+                aktualny.dajKarty().remove(wybranaKarta);
+                stos.add(wybranaKarta);
+                odslonietaKarta = wybranaKarta;
+                sprawdzCzyMakao(aktualny);
+                if (sprawdzCzyKoniecGry(aktualny)){
+                    koniecGry = true;
+                }
             }
         }
-    }*/
+    }
 
-    /// metody komputera
-   /* public void wykonajRuch2() {
-        boolean wylozonaKarta = wylozKarte(sprawdzKolor(dajOstatniaKarteZeStosu()));
-        if (!wylozonaKarta) {
-            wylozonaKarta = wylozKarte(sprawdzNominal(dajOstatniaKarteZeStosu()));
+    private void sprawdzCzyMakao(Gracz aktualny) {
+        if (aktualny.dajIloscKart() == 1){
+            System.out.println("Makao!");
         }
-        if (!wylozonaKarta) {
-            gracze.get(1).otrzymajKarte(taliaKart.remove(0));
-        }
+    }
 
-        gracze.get(1).wyswietlKarty();
-        System.out.println();
-        for (Karta karta : stos) {
-            System.out.println(karta);
-        }
-    }*/
-
-    /*private boolean wylozKarte(Karta karta) {
-        if (karta != null) {
-            dolozKarteDoStosu(karta);
+    private boolean sprawdzCzyKoniecGry(Gracz aktualny){
+        if (aktualny.dajIloscKart() == 0){
+            System.out.println("Koniec gry. Wygral " + aktualny);
             return true;
         }
         return false;
-    }*/
-
-    private Karta sprawdzKolor(Karta karta) {
-        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
-            if (karta.getKolor() == gracze.get(1).dajKarteZWybranejPozycji(i).getKolor()) {
-                return gracze.get(1).wylozKarteKomp(i);
-            }
-        }
-        return null;
-    }
-
-    private Karta sprawdzNominal(Karta karta) {
-        for (int i = 0; i < gracze.get(1).dajIloscKart(); i++) {
-            if (karta.getNumerycznaWartosc() == gracze.get(1).dajKarteZWybranejPozycji(i).getNumerycznaWartosc()) {
-                return gracze.get(1).wylozKarteKomp(i);
-            }
-        }
-        return null;
     }
 }

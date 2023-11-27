@@ -5,18 +5,19 @@ import java.util.Scanner;
 public class Czlowiek extends Gracz {
     Scanner scanner = new Scanner(System.in);
 
+    public Czlowiek(int indeks){
+        super(indeks);
+    }
+
     public Karta wybierzKarte(Karta kartaZeStosu) {
-        wyswietlKomunikat();
-
-
-        return null;
+        wyswietlKarty();
+        Karta wybranaKarta = ustalKarte();
+        System.out.println("Wybrana karta to: " + wybranaKarta);
+        System.out.println();
+        return wybranaKarta;
     }
 
-    private void wyswietlKomunikat() {
-        System.out.println("Twoj ruch.");
-    }
-
-    private int ustalIndeksKarty() {
+    private Karta ustalKarte() {
         boolean kartaWzakresie;
         int numerKarty;
         do {
@@ -28,6 +29,7 @@ public class Czlowiek extends Gracz {
                 kartaWzakresie = false;
             }
         } while (!kartaWzakresie);
-        return numerKarty - 1;
+         numerKarty -= 1;
+        return karty.get(numerKarty);
     }
 }
