@@ -27,18 +27,18 @@ public class KartyDoGry {
         }
     }
 
-    public List <Karta> dajTalieKart(){
+    public List<Karta> dajTalieKart() {
         return taliaKart;
     }
 
-    public Karta usunPierwszaKarteZtalii(){
+    public Karta usunPierwszaKarteZtalii() {
         if (taliaKart.isEmpty()) {
             return null;
         }
         return taliaKart.remove(0);
     }
 
-    private void wyswietlTalie(){
+    private void wyswietlTalie() {
         int indeks = 1;
         for (Karta karta : taliaKart) {
             System.out.println(indeks + ": " + karta);
@@ -46,7 +46,7 @@ public class KartyDoGry {
         }
     }
 
-    public void uzupelnijTalie(List<Karta> stos){
+    public void uzupelnijTalie(List<Karta> stos) {
         int rozmiarStosu = stos.size();
         List<Karta> taliaDoTasowania = new ArrayList<>();
         for (int i = 1; i < rozmiarStosu; i++) {

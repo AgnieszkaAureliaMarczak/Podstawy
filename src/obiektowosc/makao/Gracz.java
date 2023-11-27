@@ -5,11 +5,9 @@ import java.util.List;
 
 public class Gracz {
     List<Karta> karty = new ArrayList<>();
-
     private int indeks;
 
-    public Gracz(){
-
+    public Gracz() {
     }
 
     public Gracz(int indeks) {
@@ -57,6 +55,6 @@ public class Gracz {
 
     @Override
     public String toString() {
-        return "gracz nr " + indeks;
+        return "Gracz nr " + indeks;
     }
 }

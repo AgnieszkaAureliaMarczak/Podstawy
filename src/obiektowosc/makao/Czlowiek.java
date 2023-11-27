@@ -1,18 +1,14 @@
 package obiektowosc.makao;
 
-import java.util.Scanner;
-
 public class Czlowiek extends Gracz {
-    Scanner scanner = new Scanner(System.in);
 
-    public Czlowiek(int indeks){
+    public Czlowiek(int indeks) {
         super(indeks);
     }
 
     public Karta wybierzKarte(Karta kartaZeStosu) {
         wyswietlKarty();
         Karta wybranaKarta = ustalKarte();
-        System.out.println("Wybrana karta to: " + wybranaKarta);
         System.out.println();
         return wybranaKarta;
     }
@@ -29,7 +25,7 @@ public class Czlowiek extends Gracz {
                 kartaWzakresie = false;
             }
         } while (!kartaWzakresie);
-         numerKarty -= 1;
+        numerKarty -= 1;
         return karty.get(numerKarty);
     }
 }

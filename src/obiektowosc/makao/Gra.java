@@ -7,18 +7,6 @@ public class Gra {
     private List<Gracz> gracze = new ArrayList<>();
     private int liczbaGraczy;
 
-    public Gracz dajGracza(int indeks) {
-        return gracze.get(indeks);
-    }
-
-    public List<Gracz> dajGraczy(){
-        return gracze;
-    }
-
-    public List<Karta> dajStos(){
-        return stos;
-    }
-
 
     public void powitaj() {
         System.out.println("Witaj w grze w makao!");
@@ -54,54 +42,60 @@ public class Gra {
         return gracze.get(0);
     }
 
-    public void rozpocznijGre(){
+    public void rozpocznijGre() {
         System.out.println();
         System.out.println("Zaczynamy grę.");
     }
 
-    public void wyswietlKomunikatJakaKartaNaStosie(Karta kartaNaStole){
-            System.out.println("Twoj ruch. Karta na stole to: " + kartaNaStole);
-            System.out.println();
+    public void wyswietlKomunikatJakaKartaNaStosie(Karta kartaNaStole) {
+        System.out.println();
+        System.out.println("Twoj ruch. Karta na stole to: " + kartaNaStole);
     }
+
     public void dolozKarteDoStosu(Karta kartaDoWylozenia) {
         stos.add(kartaDoWylozenia);
     }
 
     public void wykonajRuch(Karta odslonietaKarta, List<Karta> taliaKart) {
         boolean koniecGry = false;
-        while (!koniecGry){
+        while (!koniecGry) {
             for (Gracz aktualny : gracze) {
-                if (aktualny.equals(dajPierwszegoGracza())){
+                if (aktualny.equals(dajPierwszegoGracza())) {
                     wyswietlKomunikatJakaKartaNaStosie(odslonietaKarta);
                 }
                 if (!aktualny.czyMozeszZagracNa(odslonietaKarta)) {
                     ///pusta talia kart
                     Karta otrzymana = taliaKart.remove(0);// metoda nie wywolana na obiekcie???
                     aktualny.otrzymajKarte(otrzymana);
-                    System.out.println("Gracz nie mogl nic zagrac, dobiera kartę.\nOtrzymana karta to: " + otrzymana);
+                    System.out.println(aktualny + " nie mogl nic zagrac, dobiera kartę. Otrzymana karta to: " + otrzymana);
                     continue;
                 }
-                Karta wybranaKarta = aktualny.wybierzKarte(odslonietaKarta);
-                aktualny.dajKarty().remove(wybranaKarta);
-                stos.add(wybranaKarta);
-                odslonietaKarta = wybranaKarta;
+                odslonietaKarta = zareagujGdyMoznaZagrac(aktualny, odslonietaKarta);
                 sprawdzCzyMakao(aktualny);
-                if (sprawdzCzyKoniecGry(aktualny)){
+                if (sprawdzCzyKoniecGry(aktualny)) {
                     koniecGry = true;
                 }
             }
         }
     }
 
+    public Karta zareagujGdyMoznaZagrac(Gracz aktualny, Karta odslonietaKarta) {
+        Karta wybranaKarta = aktualny.wybierzKarte(odslonietaKarta);
+        aktualny.dajKarty().remove(wybranaKarta);
+        stos.add(wybranaKarta);
+        System.out.println(aktualny + " zagrał " + wybranaKarta);
+        return wybranaKarta;
+    }
+
     private void sprawdzCzyMakao(Gracz aktualny) {
-        if (aktualny.dajIloscKart() == 1){
+        if (aktualny.dajIloscKart() == 1) {
             System.out.println("Makao!");
         }
     }
 
-    private boolean sprawdzCzyKoniecGry(Gracz aktualny){
-        if (aktualny.dajIloscKart() == 0){
-            System.out.println("Koniec gry. Wygral " + aktualny);
+    private boolean sprawdzCzyKoniecGry(Gracz aktualny) {
+        if (aktualny.dajIloscKart() == 0) {
+            System.out.println("I po makale! Koniec gry. Wygral " + aktualny);
             return true;
         }
         return false;
