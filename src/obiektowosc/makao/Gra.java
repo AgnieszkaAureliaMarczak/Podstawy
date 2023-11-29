@@ -5,8 +5,26 @@ import java.util.*;
 public class Gra {
     private List<Karta> stos = new ArrayList<>();
     private List<Gracz> gracze = new ArrayList<>();
+    private Talia talia = new Talia(stos);
     private int liczbaGraczy;
 
+    public void graj() {
+        przygotuj();
+        uruchom();
+    }
+
+    private void przygotuj(){
+        powitaj();
+        ustalLiczbeGraczy();
+        rozdajKarty();
+        zapowiedzStartGry();
+        przygotujPierwszaKarte();
+    }
+
+    private void przygotujPierwszaKarte(){
+        Karta odslonietaKarta = talia.usunPierwszaKarteZtalii();
+        dolozKarteDoStosu(odslonietaKarta);
+    }
 
     public void powitaj() {
         System.out.println("Witaj w grze w makao!");
@@ -30,10 +48,10 @@ public class Gra {
         System.out.println("Jesteś graczem nr 1.");
     }
 
-    public void rozdajKarty(List<Karta> taliaKart) {
+    public void rozdajKarty() {
         for (int i = 0; i < 5; i++) {
             for (Gracz gracz : gracze) {
-                gracz.otrzymajKarte(taliaKart.remove(0));
+                gracz.otrzymajKarte(talia.usunPierwszaKarteZtalii());
             }
         }
     }
@@ -42,7 +60,7 @@ public class Gra {
         return gracze.get(0);
     }
 
-    public void rozpocznijGre() {
+    public void zapowiedzStartGry() {
         System.out.println();
         System.out.println("Zaczynamy grę.");
     }
@@ -56,7 +74,8 @@ public class Gra {
         stos.add(kartaDoWylozenia);
     }
 
-    public void wykonajRuch(Karta odslonietaKarta, List<Karta> taliaKart) {
+    public void uruchom() {
+        Karta odslonietaKarta = stos.get(0);
         boolean koniecGry = false;
         while (!koniecGry) {
             for (Gracz aktualny : gracze) {
@@ -64,8 +83,7 @@ public class Gra {
                     wyswietlKomunikatJakaKartaNaStosie(odslonietaKarta);
                 }
                 if (!aktualny.czyMozeszZagracNa(odslonietaKarta)) {
-                    ///pusta talia kart
-                    Karta otrzymana = taliaKart.remove(0);// metoda nie wywolana na obiekcie???
+                    Karta otrzymana = talia.usunPierwszaKarteZtalii();
                     aktualny.otrzymajKarte(otrzymana);
                     System.out.println(aktualny + " nie mogl nic zagrac, dobiera kartę. Otrzymana karta to: " + otrzymana);
                     continue;

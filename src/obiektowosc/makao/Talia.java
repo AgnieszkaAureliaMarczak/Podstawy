@@ -2,10 +2,20 @@ package obiektowosc.makao;
 
 import java.util.*;
 
-public class KartyDoGry {
-    private List<Karta> taliaKart = new ArrayList<>();
+public class Talia {
+    private List<Karta> karty = new ArrayList<>();
 
-    public ArrayList<Karta> stworzTalieKart() {
+    private List<Karta> stos;
+
+    public Talia(List<Karta> stos) {
+        this.stos = stos;
+    }
+
+    public List<Karta> przygotujKarty(){
+        potasujTalie(stworzTalieKart());
+        return karty;
+    }
+    private ArrayList<Karta> stworzTalieKart() {
         ArrayList<Karta> talia = new ArrayList<>();
         Kolor[] tablicaKolorow = Kolor.values();
         Nominal[] tablicaNominalow = Nominal.values();
@@ -18,35 +28,32 @@ public class KartyDoGry {
         return talia;
     }
 
-    public void potasujTalie(List<Karta> taliaDoTasowania) {
+    private void potasujTalie(List<Karta> taliaDoTasowania) {
         Random random = new Random();
         int rozmiarTalii = taliaDoTasowania.size();
         for (int i = 0; i < rozmiarTalii; i++) {
             int wylosowanaKarta = random.nextInt(taliaDoTasowania.size());
-            taliaKart.add(taliaDoTasowania.remove(wylosowanaKarta));
+            karty.add(taliaDoTasowania.remove(wylosowanaKarta));
         }
     }
 
-    public List<Karta> dajTalieKart() {
-        return taliaKart;
-    }
 
     public Karta usunPierwszaKarteZtalii() {
-        if (taliaKart.isEmpty()) {
-            return null;
+        if (karty.isEmpty()) {
+             uzupelnijTalie();
         }
-        return taliaKart.remove(0);
+        return karty.remove(0);
     }
 
     private void wyswietlTalie() {
         int indeks = 1;
-        for (Karta karta : taliaKart) {
+        for (Karta karta : karty) {
             System.out.println(indeks + ": " + karta);
             indeks++;
         }
     }
 
-    public void uzupelnijTalie(List<Karta> stos) {
+    public void uzupelnijTalie() {
         int rozmiarStosu = stos.size();
         List<Karta> taliaDoTasowania = new ArrayList<>();
         for (int i = 1; i < rozmiarStosu; i++) {
@@ -54,5 +61,9 @@ public class KartyDoGry {
         }
         potasujTalie(taliaDoTasowania);
         wyswietlTalie();
+    }
+
+    public List<Karta> getKarty() {
+        return karty;
     }
 }
