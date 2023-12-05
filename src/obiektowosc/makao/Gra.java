@@ -13,17 +13,13 @@ public class Gra {
         uruchom();
     }
 
-    private void przygotuj(){
+    private void przygotuj() {
         powitaj();
         ustalLiczbeGraczy();
+        talia.przygotujKarty();
         rozdajKarty();
         zapowiedzStartGry();
         przygotujPierwszaKarte();
-    }
-
-    private void przygotujPierwszaKarte(){
-        Karta odslonietaKarta = talia.usunPierwszaKarteZtalii();
-        dolozKarteDoStosu(odslonietaKarta);
     }
 
     public void powitaj() {
@@ -41,9 +37,9 @@ public class Gra {
                 wlasciwaLiczbaGraczy = false;
             }
         } while (!wlasciwaLiczbaGraczy);
-        gracze.add(new Czlowiek(1));
+        gracze.add(new Czlowiek(0));
         for (int i = 1; i < liczbaGraczy; i++) {
-            gracze.add(new Komputer(i + 1));
+            gracze.add(new Komputer(i));
         }
         System.out.println("Jesteś graczem nr 1.");
     }
@@ -54,6 +50,11 @@ public class Gra {
                 gracz.otrzymajKarte(talia.usunPierwszaKarteZtalii());
             }
         }
+    }
+
+    private void przygotujPierwszaKarte() {
+        Karta odslonietaKarta = talia.usunPierwszaKarteZtalii();
+        dolozKarteDoStosu(odslonietaKarta);
     }
 
     public Gracz dajPierwszegoGracza() {

@@ -55,6 +55,6 @@ public class Gracz {
 
     @Override
     public String toString() {
-        return "Gracz nr " + indeks;
+        return "Gracz nr " + (indeks + 1);
     }
 }
