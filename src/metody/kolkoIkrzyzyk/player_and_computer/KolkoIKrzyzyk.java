@@ -1,6 +1,5 @@
-package metody.kolkoIkrzyzyk;
+package metody.kolkoIkrzyzyk.player_and_computer;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class KolkoIKrzyzyk {
@@ -19,17 +18,8 @@ public class KolkoIKrzyzyk {
         do {
             wydrukujPlansze();
             boolean poprawnyRuch = wykonajRuch();
-
             if (poprawnyRuch) {
                 licznikRuchow++;
-                /*  if (aktualnySymbol == 'X'){
-                aktualnySymbol = 'O';
-            } else {
-                aktualnySymbol = 'X';
-            }
-            troj-argumentowy operator logiczny
-            wyrazenieLogiczne ? wyrazenieGdyPrawda : wyrazenieGdyFalsz
-            */
                 wygrana = czyWygrana();
                 if (wygrana) {
                     System.out.println("Brawo. " + aktualnySymbol + " wygrał.");
@@ -38,7 +28,6 @@ public class KolkoIKrzyzyk {
             } else {
                 System.out.println("Niepoprawny ruch. Spróbuj jeszcze raz.");
             }
-
         } while (licznikRuchow < wielkoscPlanszy * wielkoscPlanszy && !wygrana);
         wydrukujPlansze();
         System.out.println("Koniec gry :)");
@@ -51,6 +40,7 @@ public class KolkoIKrzyzyk {
     }
 
     static void wydrukujPlansze() {
+        System.out.println();
         System.out.print("\t");
         for (int i = 0; i < wielkoscPlanszy; i++) {
             System.out.print(i + " | ");
@@ -65,6 +55,7 @@ public class KolkoIKrzyzyk {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     static boolean wykonajRuch() {
@@ -73,7 +64,6 @@ public class KolkoIKrzyzyk {
             ruchGracza = pobierzRuchCzlowieka();
         } else {
             ruchGracza = AlgorytmKomputera.pobierzRuchKomputera();
-            System.out.println(Arrays.toString(ruchGracza));
         }
         int wierszGracza = ruchGracza[0];
         int kolumnaGracza = ruchGracza[1];
@@ -84,9 +74,10 @@ public class KolkoIKrzyzyk {
         return false;
     }
 
-    static boolean czyPoprawny(int wiersz, int kolumna) {  //todo ja bym to rozdzielil na 2 metody
+    static boolean czyPoprawny(int wiersz, int kolumna) {
         return wiersz >= 0 && wiersz <= wielkoscPlanszy && kolumna >= 0 && kolumna <= wielkoscPlanszy;
     }
+
     static boolean czyPustePole(int wiersz, int kolumna) {
         return planszaUzytkownika[wiersz][kolumna] == 0;
     }
@@ -191,7 +182,6 @@ public class KolkoIKrzyzyk {
                     }
                 }
             }
-
         }
         return wygrana;
     }
@@ -215,11 +205,8 @@ public class KolkoIKrzyzyk {
                         wygrana = true;
                         break;
                     }
-
                 }
-
             }
-
         }
         return wygrana;
     }

@@ -1,4 +1,4 @@
-package metody.kolkoIkrzyzyk;
+package metody.kolkoIkrzyzyk.two_players;
 
 import java.util.Scanner;
 
@@ -7,7 +7,6 @@ public class KolkoIKrzyzykBezKomputera {
     static char[][] planszaUzytkownika;
     static char aktualnySymbol = 'X';
     static int licznikRuchow = 0;
-
 
     public static void main(String[] args) {
         wielkoscPlanszy = ustalRozmiarPlanszy();
@@ -18,14 +17,6 @@ public class KolkoIKrzyzykBezKomputera {
             boolean poprawnyRuch = wykonajRuch();
             if (poprawnyRuch) {
                 licznikRuchow++;
-                /*  if (aktualnySymbol == 'X'){
-                aktualnySymbol = 'O';
-            } else {
-                aktualnySymbol = 'X';
-            }
-            troj-argumentowy operator logiczny
-            wyrazenieLogiczne ? wyrazenieGdyPrawda : wyrazenieGdyFalsz
-            */
                 wygrana = czyWygrana();
                 if (wygrana) {
                     System.out.println("Brawo. " + aktualnySymbol + " wygrał.");
@@ -75,7 +66,7 @@ public class KolkoIKrzyzykBezKomputera {
         return false;
     }
 
-    static boolean czyPoprawny(int wiersz, int kolumna) {  //todo ja bym to rozdzielil na 2 metody
+    static boolean czyPoprawny(int wiersz, int kolumna) {
         return wiersz >= 0 && wiersz <= wielkoscPlanszy && kolumna >= 0 && kolumna <= wielkoscPlanszy;
     }
 
@@ -207,11 +198,8 @@ public class KolkoIKrzyzykBezKomputera {
                         wygrana = true;
                         break;
                     }
-
                 }
-
             }
-
         }
         return wygrana;
     }
